@@ -14,9 +14,10 @@ export const getServerSideProps = handle({
 
 export default function Home({ name, message }:any) {
     
-  const form = useFormSubmit('bernardn');  
+  const form: any = useFormSubmit('bernardn');  
+  const formValues: { name: string} = form.values
   if (form.isSuccess) {
-    return <p>{`Thanks for your submission! ${form.values.name}`}</p>;
+    return <p>{`Thanks for your submission! ${formValues.name}`}</p>;
   }
 
   return (
