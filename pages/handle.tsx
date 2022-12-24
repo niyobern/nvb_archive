@@ -6,13 +6,13 @@ export const getServerSideProps = handle({
     return json({ name: 'Stephan Meijer' });
   },
 
-  async post({ req: { body } }) {
+  async post({ req: { body } }: any) {
     // console.log(body)
     return json({ message: 'Thanks for your submission!', name: body.name });
   },
 });
 
-export default function Home({ name, message }) {
+export default function Home({ name, message }:any) {
     
   const form = useFormSubmit('bernardn');  
   if (form.isSuccess) {
