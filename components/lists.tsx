@@ -2,7 +2,8 @@ import { lstat } from 'fs'
 import Link from 'next/link'
 import { useState } from 'react'
 import AddSingle from './addingSingleItems'
-export default function NiceTable({ items }: any){
+
+export default function ListItem({ items }: any){
     const item = items[0]
     const fields = Object.keys(item)
     const last = fields[fields.length - 1]
@@ -24,16 +25,7 @@ export default function NiceTable({ items }: any){
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
                     <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>
                     <div className="flex flex-col w-full">
-                      <h2 className="text-blue-900 title-font font-medium">{item.name}</h2>
-                      <div className=" flex flex-row justify-between">
-                          <div className="flex flex-col">
-                            <p className="text-gray-900">{item.value1}</p>
-                            <p className="text-gray-900">{item.value2}</p>
-                          </div>
-                          <div className='justify-self-end flex flex-col justify-end'>
-                              <Link href="/" className='text-green-800 font-bold'>Edit</Link>
-                          </div>
-                      </div>
+                      <div>Item</div>
                     </div>
                   </div>
                 </div>

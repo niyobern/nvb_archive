@@ -3,7 +3,7 @@ import NiceTable from "../components/nice_table";
 import SideBar from "../components/sidebar";
 import Table from "../components/table";
 
-export default function Home(){
+export default function Layout({ children }: any){
     return (
   <div className="flex flex-col h-screen">
     {/* The navbar */}
@@ -14,9 +14,8 @@ export default function Home(){
       <div className="hidden md:flex h-full w-2/12 bg-sky-400">
         <SideBar/>
       </div> 
-      <div className="h-screen w-screen md:w-10/12 flex flex-col overflow-scroll bg-sky-200">
-        <Table/>
-      {/* <NiceTable/> */}
+      <div className="h-full w-screen md:w-10/12 flex flex-col overflow-scroll bg-sky-200">
+        <div>{children}</div>
       </div>
     </div>
   </div>
