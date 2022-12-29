@@ -1,4 +1,4 @@
-import { lstat } from 'fs'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import AddSingle from './addingSingleItems'
@@ -23,7 +23,7 @@ export default function ListItem({ items }: any){
         {items.map((item: any) => (
                 <div className="p-2 md:w-1/3 w-full" key={item}>
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
-                    <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>
+                    <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>
                     <div className="flex flex-col w-full">
                       <div>Item</div>
                     </div>
