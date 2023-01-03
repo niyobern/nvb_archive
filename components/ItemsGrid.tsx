@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from 'next/link'
 import { useState } from 'react'
 import AddSingle from './addingSingleItems'
-export default function NiceTable({ items }: any){
+export default function GridItems({ items }: any){
     const item = items[0]
     const fields = Object.keys(item)
     const last = fields[fields.length - 1]
@@ -22,14 +22,17 @@ export default function NiceTable({ items }: any){
         {items.map((item: any) => (
                 <div className="p-2 md:w-1/3 w-full" key={item}>
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
-                    {/* <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/> */}
+                    <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>
                     <div className="flex flex-col w-full">
-                      <h2 className="text-blue-900 title-font font-medium text-center">{item.name}</h2>
+                      <h2 className="text-blue-900 title-font font-medium">{item.name}</h2>
                       <div className=" flex flex-row justify-between">
-                          <div className="flex flex-col w-full">
+                          <div className="flex flex-col">
                             {Object.values(item).map((value: any) => (
-                              <p className="text-gray-900 text-center">{value}</p>
+                              <p className="text-gray-900">{value}</p>
                             ))}
+                          </div>
+                          <div className='justify-self-end flex flex-col justify-end'>
+                              <Link href="/" className='text-green-800 font-bold'>Edit</Link>
                           </div>
                       </div>
                     </div>

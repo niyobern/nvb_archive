@@ -11,17 +11,18 @@ const user = {
 }
     
 const navigation = [
-  { name: 'Administration', href: '#', current: true },
-  { name: 'General', href: '#', current: false },
-  { name: 'Employees', href: '#', current: false },
-  { name: 'Payments', href: '#', current: false },
-  { name: 'Staff Reports', href: '#', current: false },
-  { name: 'Leave Management', href: '#', current: false },
+  { name: 'Administration', href: '/administration', current: false },
+  { name: 'General', href: '/general', current: false },
+  { name: 'Employees', href: '/employees', current: false },
+  { name: 'Payments', href: '/payments', current: false },
+  { name: 'Staff Reports', href: '/reports', current: false },
+  { name: 'Leave Management', href: '/leave', current: false },
+  { name: 'Payrolls', href: '/payroll', current: false},
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Sign out', href: '/logout' },
 ]
 
 function classNames(...classes: any) {

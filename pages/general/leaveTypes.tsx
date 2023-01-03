@@ -3,9 +3,9 @@ import { useFormSubmit, Form } from 'next-runtime/form';
 import axios from 'axios'
 import baseUrl from '../../components/baseUrl';
 import Layout from '../../components/Layout';
-import NiceTable from '../../components/nice_table';
-import ListItem from '../../components/lists';
 import picture from '../../public/images/picture.webp'
+import Table from '../../components/table';
+import NiceTable from '../../components/nice_table';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {
@@ -13,30 +13,23 @@ export const getServerSideProps = handle({
     const leavetypes = await axios.get(`${baseUrl}/general/leave/types`, {headers: {"Authorization": token}})
     return json({data: leavetypes.data})
   },
-  async post({req: { body }}){
-    console.log(body)
-    return json({message: "succesfully received"})
+  async post({req: { body }, cookies}){
+    const token  = cookies.get('token')
+    const result = await axios.post(`${baseUrl}/general/leave/types`, body, {headers: {"Authorization": token}})
+    const data = result.data
+    return json({message: data})
   }
 });
 
 export default function LeaveTypes({ data }: any) {
+
+    const items = ["Fee Structures", "Payment Contracts", "Payment Plans", "service Codes"]
+    const links = ["/administration/feeStructure", "/administration/paymentContacts", "/administration/paymentPlans", "/administration/serviceCodes"]
     const form = useFormSubmit()
-    if (form.isSuccess){
-        console.log("done")
-    }
-    console.log(data)
-    const mockData = [{name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture},
-    {name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture},
-    {name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture},
-    {name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture},
-    {name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture},
-    {name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture},
-    {name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture},
-    {name: "Nernard Niyomugabo", value1: "Software Developer", value2: "Full Time", image: picture}
-]
+    const mockData = [{code: "No Data", name: "No Data", description: "No Data"}]
 return (
-    <Layout>
-        <ListItem items={mockData}/>
+    <Layout items={items} links={links}>
+        <NiceTable items={data ? data : mockData}/>
     </Layout>
 )
 

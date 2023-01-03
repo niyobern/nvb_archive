@@ -1,6 +1,5 @@
 import { handle, json } from 'next-runtime';
 import { useFormSubmit, Form } from 'next-runtime/form';
-import { ContextType } from 'react';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {

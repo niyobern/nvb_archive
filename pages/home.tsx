@@ -1,10 +1,11 @@
-import NavBar from "../../components/Navbar";
-import SideBar from "../../components/sidebar";
-import ListItem from "../../components/lists";
+import NavBar from "../components/Navbar";
+import NiceTable from "../components/nice_table";
+import SideBar from "../components/sidebar";
+import ListItem from "../components/lists";
 
 export default function Home(){
-    const items = ["Fee Structures", "Payment Contracts", "Payment Plans", "service Codes"]
-    const links = ["/administration/feeStructure", "/administration/paymentContacts", "/administration/paymentPlans", "/administration/serviceCodes"]
+    const items = ["Administration", "General", "Employees", "Leave Management", "Payments", "Payroll", "Reports"]
+    const links = ["/administration", "/general", "/employees", "/leave", "/payments", "/payroll", "/reports"]
     return (
   <div className="flex flex-col h-screen">
     <NavBar/>
