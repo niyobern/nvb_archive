@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from 'next/link'
 import { useState } from 'react'
 import AddSingle from './addingSingleItems'
+import FormApply from "./Form"
 export default function GridItems({ items }: any){
     const item = items[0]
     const fields = Object.keys(item)
@@ -16,7 +17,7 @@ export default function GridItems({ items }: any){
     }
     return (
         <section className="text-gray-600 body-font bg-sky-200 w-full">
-  <div className={`${hidden ? "hidden" : "flex" } fixed bg-sky-400 flex-col items-center w-screen md:ml-36 md:mr-36 md:mt-24 md:w-1/2`}><AddSingle fields={fields} clicked={handleHidden}/></div>
+  <div className={`${hidden ? "hidden" : "flex" } fixed bg-sky-400 flex-col items-center w-screen md:mx-36 lg:mx-48 xl:mx-64 md:mt-24 md:w-1/2`}><FormApply fields={fields} fieldnames={fields} clicked={handleHidden}/></div>
   <div className="container px-5 py-5 mx-auto">
     <div className="flex flex-wrap -m-2">
         {items.map((item: any) => (
@@ -28,7 +29,7 @@ export default function GridItems({ items }: any){
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col">
                             {Object.values(item).map((value: any) => (
-                              <p className="text-gray-900">{value}</p>
+                              <p key={value} className="text-gray-900">{value}</p>
                             ))}
                           </div>
                           <div className='justify-self-end flex flex-col justify-end'>

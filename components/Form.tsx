@@ -1,10 +1,9 @@
-import { useFormSubmit, Form } from 'next-runtime/form';
+import { useFormSubmit, Form} from 'next-runtime/form';
 
-export default function LeaveApply({ fields, fieldnames }: any){
+export default function FormApply({ fields, fieldnames, clicked }: any){
     const data: string[] = fields
     return (
-        <div className='h-screen w-screen px-0 flex flex-col md:flex-row justify-center md:px-24 lg:px-36 xl:px-48 md:py-24 bg-sky-900'>
-            <section className="text-gray-600 body-font justify-self-center w-screen lg:w-2/3">
+            <section className="text-gray-600 body-font justify-self-center w-full">
               <Form className="container py-6 mx-auto border-2 border-gray-600 shadow-lg shadow-green-600 bg-white rounded-lg " method='POST'>
                 <div className="flex lg:w-5/6 w-full px-8 flex-col mx-auto sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                   {data.map((item, index) =>(
@@ -15,12 +14,12 @@ export default function LeaveApply({ fields, fieldnames }: any){
                   ))}
                   <div className="relative flex flex-col w-full h-20 justify-end px-2">
                     <div className="flex flex-row justify-between">
-                        <button type="submit" className="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Submit</button>
+                      <button onClick={clicked} type="reset" className="text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">Cancel</button>
+                      <button onClick={clicked} type="submit" className="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Commit</button>
                     </div>
                   </div>
                 </div>
               </Form>
             </section>
-        </div>
     )
 }

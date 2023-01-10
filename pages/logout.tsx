@@ -1,16 +1,13 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { handle, json, redirect } from 'next-runtime';
-import { useFormSubmit, Form } from 'next-runtime/form';
+import { useRouter } from 'next/router';
 import baseUrl from '../components/baseUrl';
 import LoginComponent from '../components/LoginComponent';
-import FormResponse from '../components/formResponse';
 
 export const getServerSideProps = handle({
-  async get() {
-    return json({});
+  async get({ cookies }) {
+    cookies.set("token")
+    return redirect("/", {permanent: true});
   },
   async post({ req: { body }, cookies}: any) {
     const result = await axios.post(`${baseUrl}/login`, body, {headers : {"content-type": "multipart/form-data"}})
@@ -20,27 +17,15 @@ export const getServerSideProps = handle({
     const user_info = user.data
     const role = user_info.role
     cookies.set("role", role)
-    return json({});
+    return redirect("/home", {permanent: true}) ;
   },
 });
 
 export default function Home() {
-  const fields = ["Email or Phone ", "Password"]
-
   const router = useRouter()
-  const [show, setShow] = useState(false)
-  const form = useFormSubmit()
-  useEffect(() => {
-    if (form.isError){
-      setShow(true)
-    };
-    if (form.isSuccess){
-      router.push("/home")
-    }
-  }, [form, router]);
-  function handleShow(){
-    setShow(false)
-  }
+  router.push('/')
+    
+  const fields = ["Email or Phone ", "Password"]
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-[#063970] to-blue-200">
@@ -50,7 +35,6 @@ export default function Home() {
             bg-white rounded-lg shadow-md lg:shadow-lg">
             <div className="text-center mb-4">
                 <h6 className="font-semibold text-[#063970] text-xl">Login</h6>
-                <div onClick={handleShow} className={`${ show ? "inline-block": "hidden"} px-6 text-lg font-bold text-red-600 mt-2 pt-4 rounded-lg`}>You supplied Invalid Credentials</div>
             </div>
             <div className="space-y-5 tex-lg">
               <LoginComponent/>

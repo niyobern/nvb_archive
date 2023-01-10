@@ -27,8 +27,8 @@ export default function NiceTable({ items }: any){
                       <h2 className="text-blue-900 title-font font-medium text-center">{item.name}</h2>
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col w-full">
-                            {Object.values(item).map((value: any) => (
-                              <p className="text-gray-900 text-center">{value}</p>
+                            {Object.values(item).map((value: any, index: number) => (
+                              <p key={index} className="text-gray-900 text-center">{value}</p>
                             ))}
                           </div>
                       </div>
