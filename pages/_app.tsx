@@ -4,15 +4,10 @@ import { withNextRuntime } from 'next-runtime/app';
 import { useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [globLinks, setGlobLinks] = useState([""])
-  const [globPaths, setGlobPaths] = useState([""])
-  function handleLinks(links: string[]){
-    setGlobLinks(links)
-  }
-  function handlePaths(paths: string[]){
-    setGlobPaths(paths)
-  }
-  return <Component {...pageProps} globLinks={globLinks} handleLinks={handleLinks} globPaths={globPaths} handlePaths={handlePaths}/>
+  const globLinks = ["adminitration", "Leave", "Employees"]
+  const globPaths = ["/admin", "/leave", "users"]
+
+  return <Component {...pageProps} links={globLinks} paths={globPaths}/>
 }
 
 export default MyApp;

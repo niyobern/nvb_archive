@@ -11,8 +11,9 @@ export const getServerSideProps = handle({
     return json({});
   },
   async post({ req: { body }, res}: any) {
-    const result = await axios.post(`${baseUrl}/users`, {"name": body.name, "email": body.email, "phone": body.phone, "password": body.password})
-    return json({message: "Try with a different email and phone"});
+    const result = await axios.post(`${baseUrl}/register`, {"email": body.email, "phone": body.phone, "password": body.password})
+    const data = result.data
+    return json({...data});
   },
 });
 

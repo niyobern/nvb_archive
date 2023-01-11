@@ -3,16 +3,22 @@ import Link from 'next/link'
 import { useState } from 'react'
 import FormApply from "./Form"
 import FormResponse from "./formResponse"
-export default function GridItems({ items, fields, fieldnames, showPop, close, formResponse }: any){
+export default function DataGrid({ items, fields, fieldnames, showPop, close, formResponse }: any){
     const item = items[0]
+    const keys = Object.keys(item)
     const [hidden, setHidden] = useState(true)
     function handleHidden(){
         console.log(hidden)
         setHidden(!hidden)
     }
+    const [initial, setInitial] = useState("")
+    function handleEdit(data: any){
+      setInitial(data)
+      setHidden(false)
+    }
     return (
         <section className="text-gray-600 body-font bg-sky-200 w-full">
-  <div className={`${hidden ? "hidden" : "flex" } fixed bg-sky-400 flex-col items-center w-screen md:mx-36 lg:mx-48 xl:mx-64 md:mt-24 md:w-1/2`}><FormApply fields={fields} fieldnames={fieldnames} clicked={handleHidden}/></div>
+  <div className={`${hidden ? "hidden" : "flex" } fixed bg-sky-400 flex-col items-center w-screen md:mx-36 lg:mx-48 xl:mx-64 md:mt-24 md:w-1/2`}><FormApply fields={fields} fieldnames={fieldnames} clicked={handleHidden} initial={initial}/></div>
   <div className={`${showPop ? "flex" : "hidden" } fixed bg-white border border-green-600 flex-col items-center w-screen md:ml-36 md:mr-36 md:mt-24 md:w-1/2`}><FormResponse formResponse={formResponse} clicked={close}/></div>
   <div className="container px-5 py-5 mx-auto">
     <div className="flex flex-wrap -m-2">
@@ -24,12 +30,12 @@ export default function GridItems({ items, fields, fieldnames, showPop, close, f
                       <h2 className="text-blue-900 title-font font-medium">{item.name}</h2>
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col">
-                            {Object.values(item).map((value: any) => (
-                              <p key={value} className="text-gray-900">{value}</p>
+                            {Object.values(item).map((value: any, index: number) => (
+                              <p key={value} className="text-gray-900"><span className="font-bold">{keys[index]}: </span>{value}</p>
                             ))}
                           </div>
                           <div className='justify-self-end flex flex-col justify-end'>
-                              <Link href="/" className='text-green-800 font-bold'>Edit</Link>
+                          <button onClick={() => handleEdit(item)} className='text-green-800 font-bold'>Edit</button>
                           </div>
                       </div>
                     </div>

@@ -1,12 +1,12 @@
 import { handle, json, redirect } from 'next-runtime';
 import axios from 'axios'
-import baseUrl from '../components/baseUrl';
-import Layout from '../components/Layout';
-import ListItem from '../components/lists';
+import baseUrl from '../../components/baseUrl';
+import Layout from '../../components/Layout';
 import { useEffect } from 'react';
 import { useFormSubmit } from 'next-runtime/form';
-import GridItems from '../components/ItemsGrid';
+import GridItems from '../../components/ItemsGrid';
 import { useState } from 'react';
+import DataGrid from '../../components/DataGrid';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {
@@ -14,15 +14,35 @@ export const getServerSideProps = handle({
     if (!token){
       return redirect("/")
     }
-    const leavetypes = await axios.get(`${baseUrl}/admin/new`, {headers: {"Authorization": token}})
+    const leavetypes = await axios.get(`${baseUrl}/users/new`, {headers: {"Authorization": token}})
     const data = leavetypes.data
     return json({...data})
   }
 });
 
-export default function Home({ links, paths }: any) {
-    const fields = [{value: "Null", type: "hidden"}]
-    const fieldnames = [""]
+export default function NewEmployees({ links, paths }: any) {
+    const fields = [{value: "name", type: "text"}, {value: "email", type: "email"}, {value: "phone", type: "tel"}]
+    // name : str
+    // email : str
+    // phone : str
+    // qualification : str
+    // birth_district : str
+    // birth_sector : str
+    // birth_cell : str
+    // birth_village : str
+    // home_district : str
+    // home_sector : str
+    // home_cell : str
+    // home_village : str
+    // father : str
+    // mother : str
+    // salary : Optional[float]
+    // position : Optional[str]
+    // deleted : Optional[str]
+    // type : Optional[str]
+    // department: Optional[str]
+    // head: Optional[bool]
+    const fieldnames = ["Full Name", "Email Adress", "Phone Number"]
     const [formResponse, setFormResponse] = useState("")
     const [show, setShow] = useState(false)
     const form: any = useFormSubmit()
@@ -47,7 +67,7 @@ export default function Home({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home">
-        <GridItems items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
+        <DataGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )
 

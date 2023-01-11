@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import picture from '../public/images/picture.webp'
+import Link from 'next/link'
 
 const user = {
   name: 'Tom Cook',
@@ -10,18 +11,7 @@ const user = {
   imageUrl: picture
 }
     
-const navigation = [
-  { name: 'Administration', href: '/administration', current: false },
-  { name: 'General', href: '/general', current: false },
-  { name: 'Employees', href: '/employees', current: false },
-  { name: 'Payments', href: '/payments', current: false },
-  { name: 'Staff Reports', href: '/reports', current: false },
-  { name: 'Leave Management', href: '/leave', current: false },
-  { name: 'Payrolls', href: '/payroll', current: false},
-]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '/logout' },
 ]
 
@@ -29,34 +19,34 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function NavBar() {
+export default function NavBar({ links, paths, current }: any) {
   return (
     <>
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-800 w-screen">
           {({ open }) => (
             <>
-              <div className="mx-auto my-0 max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
+              <div className="mx-auto my-0 max-w-7xl px-0 w-screen">
+                <div className="flex h-16 items-center justify-between w-full">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <span className='text-white font-bold text-lg'>HR</span>
+                      <span className='text-white font-bold text-lg'>LAVA JAVA</span>
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
+                        {links.map((item: any, index: number) => (
+                          <Link
+                            key={item}
+                            href={paths[index]}
                             className={classNames(
-                              item.current
+                              item == current
                                 ? 'bg-gray-900 text-white'
                                 : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                               'px-3 py-2 rounded-md text-sm font-medium'
                             )}
-                            aria-current={item.current ? 'page' : undefined}
+                            aria-current={item == current ? 'page' : undefined}
                           >
-                            {item.name}
-                          </a>
+                            {item}
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -125,18 +115,18 @@ export default function NavBar() {
 
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-                  {navigation.map((item) => (
+                  {links.map((item: any, index: number) => (
                     <Disclosure.Button
-                      key={item.name}
+                      key={item}
                       as="a"
                       href={item.href}
                       className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                         'block px-3 py-2 rounded-md text-base font-medium'
                       )}
-                      aria-current={item.current ? 'page' : undefined}
+                      aria-current={item == current ? 'page' : undefined}
                     >
-                      {item.name}
+                      {item}
                     </Disclosure.Button>
                   ))}
                 </div>

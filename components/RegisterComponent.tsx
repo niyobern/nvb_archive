@@ -7,6 +7,10 @@ export default function RegisterComponent(){
   <Form className="container py-6 mx-auto" method='POST'>
     <div className="flex lg:w-5/6 w-full  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
         <div className="relative flex-grow w-full">
+          <label htmlFor="username"className="leading-7 text-sm text-gray-600">Full Names</label>
+          <input type="text" id="name" name="name" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+        </div>
+        <div className="relative flex-grow w-full">
           <label htmlFor="username"className="leading-7 text-sm text-gray-600">Email</label>
           <input type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
         </div>

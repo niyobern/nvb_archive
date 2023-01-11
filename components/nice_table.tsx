@@ -1,35 +1,41 @@
-import Image from "next/image"
-import Link from 'next/link'
+import FormResponse from './formResponse'
 import { useState } from 'react'
-import AddSingle from './addingSingleItems'
-export default function NiceTable({ items }: any){
-    const item = items[0]
-    const fields = Object.keys(item)
+import AddSingle from './AddSingle'
+export default function NiceTable({ items, fields, formResponse, showPop, close }: any){
     const last = fields[fields.length - 1]
     if (last === "image"){
         fields.pop()
     }
     const [hidden, setHidden] = useState(true)
     function handleHidden(){
-        console.log(hidden)
         setHidden(!hidden)
+    }
+    const [initial, setInitial] = useState("")
+    function handleEdit(data: any){
+      setInitial(data)
+      setHidden(false)
     }
     return (
         <section className="text-gray-600 body-font bg-sky-200 w-full">
-  <div className={`${hidden ? "hidden" : "flex" } fixed bg-sky-400 flex-col items-center w-screen md:ml-36 md:mr-36 md:mt-24 md:w-1/2`}><AddSingle fields={fields} clicked={handleHidden}/></div>
+  <div className={`${hidden ? "hidden" : "flex" } fixed bg-sky-400 flex-col items-center w-screen md:ml-36 md:mr-36 md:mt-24 md:w-1/2`}><AddSingle fields={fields} clicked={handleHidden} initial={initial}/></div>
+  <div className={`${showPop ? "flex" : "hidden" } fixed bg-white border border-green-600 flex-col items-center w-screen md:ml-36 md:mr-36 md:mt-24 md:w-1/2`}><FormResponse formResponse={formResponse} clicked={close}/></div>
   <div className="container px-5 py-5 mx-auto">
     <div className="flex flex-wrap -m-2">
         {items.map((item: any) => (
-                <div className="p-2 md:w-1/3 w-full" key={item}>
+                <div className="p-2 md:w-1/2 lg:w-1/3 w-full" key={item.email}>
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
+                    <div className="w-0 lg:w-16 md:w-8 md:h-8 h-0 lg:h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" ></div>
                     {/* <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/> */}
                     <div className="flex flex-col w-full">
-                      <h2 className="text-blue-900 title-font font-medium text-center">{item.name}</h2>
+                      <h2 className="text-blue-900 title-font font-medium">{item.Name}</h2>
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col w-full">
-                            {Object.values(item).map((value: any, index: number) => (
-                              <p key={index} className="text-gray-900 text-center">{value}</p>
-                            ))}
+                            <p className="text-gray-900">{item.email}</p>
+                            <p className="text-gray-900">{item.phone}</p>
+                            <p className="text-gray-900">{item.role}</p>
+                          </div>
+                          <div className='justify-self-end flex flex-col justify-end'>
+                              <button onClick={() => handleEdit(item.id)} className='text-green-800 font-bold'>Edit</button>
                           </div>
                       </div>
                     </div>

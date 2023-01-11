@@ -15,11 +15,12 @@ export const getServerSideProps = handle({
   async post({ req: { body }, cookies}: any) {
     const result = await axios.post(`${baseUrl}/login`, body, {headers : {"content-type": "multipart/form-data"}})
     const token = result.data
+    console.log(token)
     cookies.set("token", token)
-    const user = await axios.get(`${baseUrl}/users/current`, {headers: {"Authorization": token}})
-    const user_info = user.data
-    const role = user_info.role
-    cookies.set("role", role)
+    // const user = await axios.get(`${baseUrl}/users/current`, {headers: {"Authorization": token}})
+    // const user_info = user.data
+    // const role = user_info.role
+    // cookies.set("role", role)
     return json({});
   },
 });

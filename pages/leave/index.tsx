@@ -1,12 +1,12 @@
 import { handle, json, redirect } from 'next-runtime';
 import axios from 'axios'
-import baseUrl from '../components/baseUrl';
-import Layout from '../components/Layout';
-import ListItem from '../components/lists';
+import baseUrl from '../../components/baseUrl';
+import Layout from '../../components/Layout';
 import { useEffect } from 'react';
 import { useFormSubmit } from 'next-runtime/form';
-import GridItems from '../components/ItemsGrid';
+import GridItems from '../../components/ItemsGrid';
 import { useState } from 'react';
+import Table from '../../components/table';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {
@@ -14,13 +14,13 @@ export const getServerSideProps = handle({
     if (!token){
       return redirect("/")
     }
-    const leavetypes = await axios.get(`${baseUrl}/admin/new`, {headers: {"Authorization": token}})
+    const leavetypes = await axios.get(`${baseUrl}/leave/given`, {headers: {"Authorization": token}})
     const data = leavetypes.data
     return json({...data})
   }
 });
 
-export default function Home({ links, paths }: any) {
+export default function Employees({ links, paths }: any) {
     const fields = [{value: "Null", type: "hidden"}]
     const fieldnames = [""]
     const [formResponse, setFormResponse] = useState("")
@@ -47,7 +47,7 @@ export default function Home({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home">
-        <GridItems items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
+        <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )
 
