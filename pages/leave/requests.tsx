@@ -69,7 +69,7 @@ export default function Employees({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home">
-      {leader? <DataGrid items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/> : <LeaveAdmin items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>}
+      {!leader? <DataGrid items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/> : <LeaveAdmin items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>}
     </Layout>
 )
 

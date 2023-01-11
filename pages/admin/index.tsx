@@ -7,6 +7,7 @@ import { useFormSubmit } from 'next-runtime/form';
 import GridItems from '../../components/ItemsGrid';
 import { useState } from 'react';
 import Table from '../../components/table';
+import DataGrid from '../../components/DataGrid';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {
@@ -69,7 +70,7 @@ export default function Employees({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home">
-        <Table items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
+        <DataGrid items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )
 
