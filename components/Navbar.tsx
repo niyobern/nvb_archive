@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import Image from 'next/image'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import picture from '../public/images/picture.webp'
+import picture from '../public/images/logo.webp'
 import Link from 'next/link'
 
 const user = {
@@ -29,7 +29,7 @@ export default function NavBar({ links, paths, current }: any) {
                 <div className="flex h-16 items-center justify-between w-full">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <span className='text-white font-bold text-lg'>LAVA JAVA</span>
+                      <span className='text-white font-bold text-lg'>HR</span>
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -58,7 +58,7 @@ export default function NavBar({ links, paths, current }: any) {
                         className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                        <Link href='/home'><BellIcon className="h-6 w-6" aria-hidden="true" /></Link>
                       </button>
 
                       {/* Profile dropdown */}
@@ -144,7 +144,7 @@ export default function NavBar({ links, paths, current }: any) {
                       className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      <Link href='/home'><BellIcon className="h-6 w-6" aria-hidden="true" /></Link>
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">

@@ -42,6 +42,8 @@ export default function NewEmployees({ links, paths }: any) {
     // type : Optional[str]
     // department: Optional[str]
     // head: Optional[bool]
+    const sidelinks = ["User", "New"]
+    const sidepaths = ["/users", "/users/new"]
     const fieldnames = ["Full Name", "Email Adress", "Phone Number"]
     const [formResponse, setFormResponse] = useState("")
     const [show, setShow] = useState(false)
@@ -66,7 +68,7 @@ export default function NewEmployees({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home">
+    <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths}>
         <DataGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )

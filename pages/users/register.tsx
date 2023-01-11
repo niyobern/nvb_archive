@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useFormSubmit, Form } from 'next-runtime/form';
 import baseUrl from '../../components/baseUrl';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Logo from '../../public/images/logo.webp'
 import RegisterComponent from '../../components/RegisterComponent';
 
 export const getServerSideProps = handle({
@@ -18,7 +20,7 @@ export const getServerSideProps = handle({
 });
 
 export default function Home() {
-  const form = useFormSubmit()
+  const form: any = useFormSubmit()
   const [show, setShow] = useState(false)
   const router = useRouter()
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function Home() {
             bg-white rounded-lg shadow-md lg:shadow-lg">
             <div className="text-center mb-4">
                 <h6 className="font-semibold text-[#063970] text-xl">Register</h6>
+                <Image src={Logo} alt="image" className='w-10 md:w-14 h-10 md:h-14 lg:w-20 lg:h-20 justify-self-center mx-auto'/>
                 <div onClick={handleShow} className={`${ show ? "inline-block": "hidden"} px-6 text-lg font-bold text-red-600 mt-2 pt-4 rounded-lg`}>There Was an error</div>
             </div>
             <div className="space-y-5 tex-lg">

@@ -7,7 +7,8 @@ import { useFormSubmit, Form } from 'next-runtime/form';
 import baseUrl from '../components/baseUrl';
 import LoginComponent from '../components/LoginComponent';
 import FormResponse from '../components/formResponse';
-
+import Image from 'next/image';
+import Logo from '../public/images/logo.webp'
 export const getServerSideProps = handle({
   async get() {
     return json({});
@@ -15,7 +16,6 @@ export const getServerSideProps = handle({
   async post({ req: { body }, cookies}: any) {
     const result = await axios.post(`${baseUrl}/login`, body, {headers : {"content-type": "multipart/form-data"}})
     const token = result.data
-    console.log(token)
     cookies.set("token", token)
     // const user = await axios.get(`${baseUrl}/users/current`, {headers: {"Authorization": token}})
     // const user_info = user.data
@@ -51,6 +51,7 @@ export default function Home() {
             bg-white rounded-lg shadow-md lg:shadow-lg">
             <div className="text-center mb-4">
                 <h6 className="font-semibold text-[#063970] text-xl">Login</h6>
+                <Image src={Logo} alt="image" className='w-10 md:w-14 h-10 md:h-14 lg:w-20 lg:h-20 justify-self-center mx-auto'/>
                 <div onClick={handleShow} className={`${ show ? "inline-block": "hidden"} px-6 text-lg font-bold text-red-600 mt-2 pt-4 rounded-lg`}>You supplied Invalid Credentials</div>
             </div>
             <div className="space-y-5 tex-lg">

@@ -21,6 +21,8 @@ export const getServerSideProps = handle({
 });
 
 export default function Employees({ links, paths }: any) {
+    const sidelinks = ["Leaves", "Requests", "Denied"]
+    const sidepaths = ["/leave", "leave/requests", "leave/denied"]
     const fields = [{value: "Null", type: "hidden"}]
     const fieldnames = [""]
     const [formResponse, setFormResponse] = useState("")

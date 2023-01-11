@@ -5,11 +5,11 @@ export default function FormApply({ fields, fieldnames, clicked, initial }: any)
     var initialdata: any = []
     data.map((item, index) => {
       const value: string = item.value
-      if (initial[value]){
+      if (initial && initial[value]){
         initialdata[index] = initial[value]
       } else {
         initialdata[index] = null
-      }
+      };
     })
     return (
             <section className="text-gray-600 body-font justify-self-center w-full">

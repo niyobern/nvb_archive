@@ -46,7 +46,7 @@ export default function Employees({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home">
+    <Layout links={links} paths={paths} current="home" sidelinks={["Payroll"]} sidepaths={["Payroll"]}>
         <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )

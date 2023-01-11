@@ -4,7 +4,7 @@ import { useState } from 'react'
 import FormApply from "./Form"
 import FormResponse from "./formResponse"
 export default function GridItems({ items, fields, fieldnames, showPop, close, formResponse }: any){
-    const item = items[0]
+    const item = items && items[0]
     const [hidden, setHidden] = useState(true)
     function handleHidden(){
         console.log(hidden)
@@ -16,10 +16,9 @@ export default function GridItems({ items, fields, fieldnames, showPop, close, f
   <div className={`${showPop ? "flex" : "hidden" } fixed bg-white border border-green-600 flex-col items-center w-screen md:ml-36 md:mr-36 md:mt-24 md:w-1/2`}><FormResponse formResponse={formResponse} clicked={close}/></div>
   <div className="container px-5 py-5 mx-auto">
     <div className="flex flex-wrap -m-2">
-        {items.map((item: any) => (
+        {items && items.map((item: any) => (
                 <div className="p-2 md:w-1/3 w-full" key={item}>
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
-                    <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>
                     <div className="flex flex-col w-full">
                       <h2 className="text-blue-900 title-font font-medium">{item.name}</h2>
                       <div className=" flex flex-row justify-between">
