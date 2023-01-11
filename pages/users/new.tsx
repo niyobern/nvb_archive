@@ -45,7 +45,7 @@ export default function NewEmployees({ links, paths }: any) {
   {value: "home_district", type: "text"}, {value: "home_sector", type: "text"}, {value: "home_cell", type: "text"}, {value: "home_village", type: "text"},
   {value: "father", type: "text"}, {value: "mother", type: "text"}, {value: "salary", type: "number"}, {value: "position", type: "text"}, {value: "type", type: "text"},
   {value: "department", type: "text"}, {value: "user_id", type: "number"}, {value: "id", type: "number"}]
-  const filednames = ["Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth","Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "User Id", "Employee Id"]
+  const fieldnames = ["Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth","Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "User Id", "Employee Id"]
     // name : str
     // email : str
     // phone : str
@@ -69,7 +69,6 @@ export default function NewEmployees({ links, paths }: any) {
     const sidelinks = ["User", "New"]
     const [leader, setLeader] = useState(false)
     const sidepaths = ["/users", "/users/new"]
-    const fieldnames = ["Full Name", "Email Adress", "Phone Number"]
     const [formResponse, setFormResponse] = useState("")
     const [show, setShow] = useState(false)
     const form: any = useFormSubmit()

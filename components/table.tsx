@@ -9,6 +9,7 @@ import Email from "./Email";
 export default function Table({ items, titles, fields, fieldnames, showPop, close, formResponse }: any){
     const [hidden, setHidden] = useState(true)
     const [report, setreport] = useState(true)
+    console.log(titles)
     const emailFields = [{value: "Email", type: "email"}, {value: "Report", type: "text"}]
     function handleHidden(){
         setHidden(!hidden)
