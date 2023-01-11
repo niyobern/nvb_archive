@@ -37,6 +37,7 @@ export default function Employees({ links, paths }: any) {
     const [show, setShow] = useState(false)
     const form: any = useFormSubmit()
     const [data, setData] = useState([])
+    const filednames = ["Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth","Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "User Id", "Employee Id"]
     useEffect(() => {
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
@@ -57,7 +58,7 @@ export default function Employees({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths}>
-        <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow} titles={[]}/>
+        <Table items={data} titles={fieldnames} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )
 

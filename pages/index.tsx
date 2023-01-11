@@ -21,7 +21,8 @@ export const getServerSideProps = handle({
     const user_info = user.data
     const role = user_info.role
     cookies.set("role", role)
-    cookies.set("userid", user_info.id)
+    console.log(user_info)
+    cookies.set("userid", user_info.Id)
     return json({...user_info});
   },
 });
