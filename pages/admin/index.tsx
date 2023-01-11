@@ -17,12 +17,28 @@ export const getServerSideProps = handle({
     const leavetypes = await axios.get(`${baseUrl}/admin/documents`, {headers: {"Authorization": token}})
     const data = leavetypes.data
     return json({...data})
+  },
+  async post({ cookies, req: {body} }){
+    const token = cookies.get("token")
+    const role = cookies.get("role")
+    if (role == "hr"){
+      const fetch = await axios.get(`${baseUrl}/documents/${body.id}`, {headers: {"Authorization": token}})
+      const data = fetch.data
+      return json({...data})
+    } else {
+      const fetch = await axios.post(`${baseUrl}/documents`, {"document": body.document}, {headers: {"Authorization": token}})
+      const data = fetch.data
+      return json({...data})
+    }
   }
 });
 
 export default function Employees({ links, paths }: any) {
-    const fields = [{value: "Null", type: "hidden"}]
-    const fieldnames = [""]
+    const fields = [{value: "document", type: "text"}]
+    const fieldnames = ["Document"]
+    const fields2 = [{value: "id", type: "text"}]
+    const fieldnames2 = ["Id"]
+    const [leader, setLeader] = useState(false)
     const [formResponse, setFormResponse] = useState("")
     const [show, setShow] = useState(false)
     const form: any = useFormSubmit()
@@ -41,13 +57,19 @@ export default function Employees({ links, paths }: any) {
         setData(res.data.data)
       }).catch(err => {
       })
+      axios.get('/', {headers: {"accept": "application/json"}})
+      .then(res => {
+        if (res.data.role == "hr" || res.data.role.slice(0, 4) == "head"){
+          setLeader(true)
+        } 
+      })
     }, [form]);
     function handleShow(){
       setShow(false)
     }
 return (
     <Layout links={links} paths={paths} current="home">
-        <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
+        <Table items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )
 

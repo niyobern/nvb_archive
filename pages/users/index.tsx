@@ -11,12 +11,20 @@ import Table from '../../components/table';
 export const getServerSideProps = handle({
   async get({ cookies }) {
     const token = cookies.get("token")
+    const userid = cookies.get("userid")
     if (!token){
       return redirect("/")
     }
-    const leavetypes = await axios.get(`${baseUrl}/admin/new`, {headers: {"Authorization": token}})
-    const data = leavetypes.data
-    return json({...data})
+    const role = cookies.get("role")
+    if (role == "hr"){
+      const leavetypes = await axios.get(`${baseUrl}/users`, {headers: {"Authorization": token}})
+      const data = leavetypes.data
+      return json({...data})
+    } else {
+      const user = await axios.get(`${baseUrl}/users/${userid}`, {headers: {"Authorization": token}})
+      const data = user.data
+      return json({...data})
+    }
   }
 });
 
