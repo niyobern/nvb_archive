@@ -17,22 +17,17 @@ export const getServerSideProps = handle({
     }
     const leavetypes = await axios.get(`${baseUrl}/users/new`, {headers: {"Authorization": token}})
     const data = leavetypes.data
-    return json({...data})
+    console.log(data)
+    return json({data: data})
   }, async post({ cookies, req: {body} }){
     const token = cookies.get("token")
     const role = cookies.get("role")
     if (role == "hr"){
-      if (body.head == "true"){
-        const fetch = await axios.patch(`${baseUrl}/users`, {"id": body.id, "user_id": body.user_id, "salary": body.position, "position": body.position, "department": body.department, "head": true}, {headers: {"Authorization": token}})
+        const fetch = await axios.patch(`${baseUrl}/users`, {"id": Number(body.id), "user_id": Number(body.user_id), "salary": Number(body.salary), "position": body.position, "department": body.department, "type": body.type, "head": body.head}, {headers: {"Authorization": token}})
         const data = fetch.data
         return json({...data})
-      } else {
-        const fetch = await axios.patch(`${baseUrl}/users`, {"id": body.id, "user_id": body.user_id, "salary": body.position, "position": body.position, "department": body.department, "head": false})
-        const data = fetch.data
-        return json({...data})
-      }
     } else {
-      const fetch = await axios.post(`${baseUrl}/users`, JSON.stringify(body), {headers: {"Authorization": token}})
+      const fetch = await axios.post(`${baseUrl}/users`, body, {headers: {"Authorization": token}})
       const data = fetch.data
       return json({...data})
     }
@@ -40,32 +35,13 @@ export const getServerSideProps = handle({
 });
 
 export default function NewEmployees({ links, paths }: any) {
-    const fields = [{value: "name", type: "text"}, {value: "email", type: "email"}, {value: "phone", type: "tel"}, {value: "qualification", type: "text"},
+    const fields = [{value: "user_id", type: "number"}, {value: "name", type: "text"}, {value: "email", type: "email"}, {value: "phone", type: "tel"}, {value: "qualification", type: "text"},
   {value: "birth_district", type: "text"}, {value: "birth_sector"}, {value: "birth_cell", type: "text"}, {value: "birth_village", type: "text"},
   {value: "home_district", type: "text"}, {value: "home_sector", type: "text"}, {value: "home_cell", type: "text"}, {value: "home_village", type: "text"},
   {value: "father", type: "text"}, {value: "mother", type: "text"}, {value: "salary", type: "number"}, {value: "position", type: "text"}, {value: "type", type: "text"},
-  {value: "department", type: "text"}, {value: "user_id", type: "number"}, {value: "id", type: "number"}]
-  const fieldnames = ["Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth","Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "User Id", "Employee Id"]
-    // name : str
-    // email : str
-    // phone : str
-    // qualification : str
-    // birth_district : str
-    // birth_sector : str
-    // birth_cell : str
-    // birth_village : str
-    // home_district : str
-    // home_sector : str
-    // home_cell : str
-    // home_village : str
-    // father : str
-    // mother : str
-    // salary : Optional[float]
-    // position : Optional[str]
-    // deleted : Optional[str]
-    // type : Optional[str]
-    // department: Optional[str]
-    // head: Optional[bool]
+  {value: "department", type: "text"}, {value: "id", type: "number"}, {value: "start", type: "date"}]
+  const fieldnames = ["User Id", "Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth", "Home District", "Home Sector", "Home Cell", "Home Village", "Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "Employee Id", "Employment Date"]
+
     const sidelinks = ["User", "New"]
     const [leader, setLeader] = useState(false)
     const sidepaths = ["/users", "/users/new"]
@@ -87,9 +63,9 @@ export default function NewEmployees({ links, paths }: any) {
         setData(res.data.data)
       }).catch(err => {
       })
-      axios.get('/', {headers: {"accept": "application/json"}})
+      axios.get('/role', {headers: {"accept": "application/json"}})
       .then(res => {
-        if (res.data.role == "hr" || res.data.role.slice(0, 4) == "head"){
+        if (res.data.role == "hr" || res.data.role != null && res.data.role.slice(0, 4) == "head"){
           setLeader(true)
         } 
       })
@@ -99,7 +75,7 @@ export default function NewEmployees({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths}>
-      {leader? <EmployeeGrid items={data} fields={leader? fields: fields.slice(0, 9)} fieldnames={leader? fieldnames: fieldnames.slice(0, 9)} formResponse={formResponse} showPop={show} close={handleShow}/>: <DataGrid items={data} fields={leader? fields: fields.slice(0, 9)} fieldnames={leader? fieldnames: fieldnames.slice(0, 9)} formResponse={formResponse} showPop={show} close={handleShow}/>}
+      {leader? <EmployeeGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>: <DataGrid items={data} fields={fields.slice(0, 15)} fieldnames={fieldnames.slice(0, 15)} formResponse={formResponse} showPop={show} close={handleShow}/>}
     </Layout>
 )
 
