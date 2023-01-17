@@ -7,7 +7,7 @@ import FormResponse from "./formResponse"
 export default function EmployeeGrid({ items, fields, fieldnames, showPop, close, formResponse }: any){
     const item = items && items[0]
     const keys = item && Object.keys(item)
-    const excluded = ["deleted", "end"]
+    const excluded = ["deleted", "end", "id", "user_id"]
     const [hidden, setHidden] = useState(true)
     function handleHidden(){
         console.log(hidden)
@@ -29,7 +29,7 @@ export default function EmployeeGrid({ items, fields, fieldnames, showPop, close
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
                     <div className="flex flex-col w-full">
                       <h2 className="text-blue-900 title-font font-medium">{item.name}</h2>
-                        {/* <Image alt="" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/> */}
+                        <Image alt="" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col">
                             {Object.values(item).map((value: any, index: number) => (

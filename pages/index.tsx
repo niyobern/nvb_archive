@@ -31,7 +31,7 @@ export default function Home() {
 
   const router = useRouter()
   const [show, setShow] = useState(false)
-  const form = useFormSubmit()
+  const form = useFormSubmit("login")
   useEffect(() => {
     if (form.isError){
       setShow(true)

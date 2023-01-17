@@ -27,9 +27,11 @@ export const getServerSideProps = handle({
         const data = fetch.data
         return json({...data})
     } else {
-      const fetch = await axios.post(`${baseUrl}/users`, body, {headers: {"Authorization": token}})
-      const data = fetch.data
-      return json({...data})
+      // const fetch = await axios.post(`${baseUrl}/users`, {...body, user_id: Number(body.user_id), image: null}, {headers: {"Authorization": token}})
+      // const data = fetch.data
+      const image = await axios.patch(`${baseUrl}/users/image/${1}`, body.image, {headers: {"Authorization": token, "content-type": "multipart/form-data"}})
+      const output = image.data
+      return json({...output})
     }
   }
 });

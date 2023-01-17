@@ -4,9 +4,8 @@ import baseUrl from '../../components/baseUrl';
 import Layout from '../../components/Layout';
 import { useEffect } from 'react';
 import { useFormSubmit } from 'next-runtime/form';
-import GridItems from '../../components/ItemsGrid';
+import useDownloader from "react-use-downloader";
 import { useState } from 'react';
-import Table from '../../components/table';
 import DataGrid from '../../components/DataGrid';
 
 export const getServerSideProps = handle({

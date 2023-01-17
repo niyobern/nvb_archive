@@ -16,8 +16,9 @@ export const getServerSideProps = handle({
   },
   async post({ req: { body }, cookies}: any) {
     const user_id = cookies.get("user_id")
-    const result = await axios.post(`${baseUrl}/verify`, {"user_id": Number(user_id), "code": Number(body.verify)}, {headers : {"content-type": "multipart/form-data"}})
-    return redirect("/", {permanent: true})
+    console.log(Number(user_id), body.verify)
+    const result = await axios.patch(`${baseUrl}/verify`, {"user_id": Number(user_id), "code": body.verify})
+    return redirect('/', {permanent: true})
   },
 });
 

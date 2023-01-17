@@ -23,6 +23,10 @@ export default function FormApply({ fields, fieldnames, clicked, initial }: any)
                         <option value="female">Female</option>
                       </select>
                     </div>
+                    <div className="relative flex-grow w-full px-2">
+                      <label htmlFor="image" className="leading-7">Profile Image</label>
+                      <input type="file" id="image" name="image" accept="image/png, image/jpeg" className="w-full bg-gray-200 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                    </div>
                   {data.map((item, index) =>(
                     <div className="relative flex-grow w-full px-2" key={item.value}>
                       <label htmlFor={item.value} className="leading-7">{fieldnames[index]}</label>
