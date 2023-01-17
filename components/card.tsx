@@ -32,7 +32,7 @@ export default function Card({ data }: any){
   </div>
   <div>
       <div className="flex flex-col h-full relative justify-between">
-      <div className="mx-0"> <Image alt="Picture" src={data.image} height={128} width={112}/></div>
+      <div className="mx-0 px-0 mt-1"> <Image alt="Picture" src={data.image} height={128} width={112}/></div>
       <div className="mx-0 px-0 mt-1"> <Image alt="qr_code" src={data.qr} height={128} width={112}/></div>
     </div>
   </div>
