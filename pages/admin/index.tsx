@@ -69,7 +69,7 @@ export default function Employees({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home">
+    <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} current="home">
         <DataGrid items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )

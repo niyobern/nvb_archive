@@ -23,7 +23,7 @@ export const getServerSideProps = handle({
     const token = cookies.get("token")
     const role = cookies.get("role")
     if (role == "hr"){
-        const fetch = await axios.patch(`${baseUrl}/users`, {"id": Number(body.id), "user_id": Number(body.user_id), "salary": Number(body.salary), "position": body.position, "department": body.department, "type": body.type, "head": body.head}, {headers: {"Authorization": token}})
+        const fetch = await axios.patch(`${baseUrl}/users`, {"id": Number(body.id), "start": body.start, "user_id": Number(body.user_id), "salary": Number(body.salary), "position": body.position, "department": body.department, "type": body.type, "head": body.head}, {headers: {"Authorization": token}})
         const data = fetch.data
         return json({...data})
     } else {
