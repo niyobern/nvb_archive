@@ -8,18 +8,21 @@ import GridItems from '../../components/ItemsGrid';
 import { useState } from 'react';
 import DataGrid from '../../components/DataGrid';
 import EmployeeGrid from '../../components/EmployeeGrid';
+import { type } from 'os';
+import fs from 'fs';
+import Cookies from 'cookies';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {
     const token = cookies.get("token")
     if (!token){
-      return redirect("/")
+      return redirect("/", {permanent: true})
     }
     const leavetypes = await axios.get(`${baseUrl}/users/new`, {headers: {"Authorization": token}})
     const data = leavetypes.data
     console.log(data)
     return json({data: data})
-  }, async post({ cookies, req: {body} }){
+  }, async post({ cookies, req: {body}}){
     const token = cookies.get("token")
     const role = cookies.get("role")
     if (role == "hr"){
@@ -27,13 +30,21 @@ export const getServerSideProps = handle({
         const data = fetch.data
         return json({...data})
     } else {
-      // const fetch = await axios.post(`${baseUrl}/users`, {...body, user_id: Number(body.user_id), image: null}, {headers: {"Authorization": token}})
-      // const data = fetch.data
-      const image = await axios.patch(`${baseUrl}/users/image/${1}`, body.image, {headers: {"Authorization": token, "content-type": "multipart/form-data"}})
-      const output = image.data
-      return json({...output})
+      const fetch = await axios.post(`${baseUrl}/users`, {...body, user_id: Number(body.user_id), image: null}, {headers: {"Authorization": token}})
+      const data = fetch.data
+      // const data = new FormData()
+      // data.append("image", body.image, "image.png")
+      // const image = await axios.patch(`${baseUrl}/users/image`, data, {headers: {"Authorization": token, "Content-Type": "multipart/form-data"}})
+      // const output = image.data
+      return json({...data})
     }
-  }
+  },
+  // async upload({ file, stream }) {
+  //   console.log(file, "done")
+  //   // stream.pipe(fs.createWriteStream(`/Users/niyob/Downloads/${file.name}`));
+  //   const image = await axios.patch(`${baseUrl}/users/image`, file, {headers: {"Content-Type": "multipart/form-data"}})
+  //   // return json({image: image.data})
+  // },
 });
 
 export default function NewEmployees({ links, paths }: any) {
