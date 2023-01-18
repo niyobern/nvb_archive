@@ -1,6 +1,6 @@
 import { useFormSubmit, Form} from 'next-runtime/form';
 
-export default function FormApply({ fields, fieldnames, clicked, initial }: any){
+export default function FormApply({ fields, fieldnames, clicked, initial, token }: any){
     const data: {value: string, type: string}[] = fields
     var initialdata: any = []
     data.map((item, index) => {

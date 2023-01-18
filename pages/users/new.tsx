@@ -8,9 +8,7 @@ import GridItems from '../../components/ItemsGrid';
 import { useState } from 'react';
 import DataGrid from '../../components/DataGrid';
 import EmployeeGrid from '../../components/EmployeeGrid';
-import { type } from 'os';
 import fs from 'fs';
-import Cookies from 'cookies';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {
@@ -21,7 +19,7 @@ export const getServerSideProps = handle({
     const leavetypes = await axios.get(`${baseUrl}/users/new`, {headers: {"Authorization": token}})
     const data = leavetypes.data
     console.log(data)
-    return json({data: data})
+    return json({data: data, token: token})
   }, async post({ cookies, req: {body}}){
     const token = cookies.get("token")
     const role = cookies.get("role")
@@ -32,19 +30,12 @@ export const getServerSideProps = handle({
     } else {
       const fetch = await axios.post(`${baseUrl}/users`, {...body, user_id: Number(body.user_id), image: null}, {headers: {"Authorization": token}})
       const data = fetch.data
-      // const data = new FormData()
-      // data.append("image", body.image, "image.png")
-      // const image = await axios.patch(`${baseUrl}/users/image`, data, {headers: {"Authorization": token, "Content-Type": "multipart/form-data"}})
+      // const image = await axios.patch(`${baseUrl}/users/image/${4}`, image {headers: {"Authorization": token, "Content-Type": "multipart/form-data"}})
       // const output = image.data
-      return json({...data})
+      return json({})
     }
   },
-  // async upload({ file, stream }) {
-  //   console.log(file, "done")
-  //   // stream.pipe(fs.createWriteStream(`/Users/niyob/Downloads/${file.name}`));
-  //   const image = await axios.patch(`${baseUrl}/users/image`, file, {headers: {"Content-Type": "multipart/form-data"}})
-  //   // return json({image: image.data})
-  // },
+
 });
 
 export default function NewEmployees({ links, paths }: any) {
@@ -60,6 +51,7 @@ export default function NewEmployees({ links, paths }: any) {
     const sidepaths = ["/users", "/users/new"]
     const [formResponse, setFormResponse] = useState("")
     const [show, setShow] = useState(false)
+    const [token, setToken] = useState("")
     const form: any = useFormSubmit()
     const [data, setData] = useState([])
     useEffect(() => {
@@ -74,6 +66,7 @@ export default function NewEmployees({ links, paths }: any) {
       axios.get('', {headers: {"Accept": "application/json"}})
       .then( res => {
         setData(res.data.data)
+        setToken(res.data.token)
       }).catch(err => {
       })
       axios.get('/role', {headers: {"accept": "application/json"}})
@@ -88,7 +81,7 @@ export default function NewEmployees({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths}>
-      {leader? <EmployeeGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>: <DataGrid items={data} fields={fields.slice(0, 15)} fieldnames={fieldnames.slice(0, 15)} formResponse={formResponse} showPop={show} close={handleShow}/>}
+      {leader? <EmployeeGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>: <DataGrid items={data} fields={fields.slice(0, 15)} fieldnames={fieldnames.slice(0, 15)} formResponse={formResponse} showPop={show} close={handleShow} token={token}/>}
     </Layout>
 )
 
