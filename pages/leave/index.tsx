@@ -21,12 +21,15 @@ export const getServerSideProps = handle({
 });
 
 export default function Employees({ links, paths }: any) {
+    const sidelinks = ["Leaves", "Requests", "Denied"]
+    const sidepaths = ["/leave", "leave/requests", "leave/denied"]
     const fields = [{value: "Null", type: "hidden"}]
     const fieldnames = [""]
     const [formResponse, setFormResponse] = useState("")
     const [show, setShow] = useState(false)
     const form: any = useFormSubmit()
     const [data, setData] = useState([])
+    const titles = ["Employee", "Start", "End", "Reason"]
     useEffect(() => {
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
@@ -46,8 +49,8 @@ export default function Employees({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home">
-        <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
+    <Layout links={links} paths={paths} sidelinks={sidelinks} sidepaths={sidepaths} current="home">
+        <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow} titles={titles}/>
     </Layout>
 )
 

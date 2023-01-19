@@ -1,23 +1,12 @@
 import FormResponse from "./formResponse";
 import { useState } from "react";
 import FormApply from "./Form";
-import AddSingle from "./AddSingle";
-import Request from "./Request";
-import axios from "axios";
-import Email from "./Email";
 
 export default function Table({ items, titles, fields, fieldnames, showPop, close, formResponse }: any){
     const [hidden, setHidden] = useState(true)
-    const [report, setreport] = useState(true)
-    console.log(titles)
-    const emailFields = [{value: "Email", type: "email"}, {value: "Report", type: "text"}]
     function handleHidden(){
         setHidden(!hidden)
     }
-    function handleEmail(){
-        setreport(!report)
-		// axios.post("/home", {email: "niyobern@outlook.com"}, {headers: {"Accept": "application/json"}})
-	}
     return (
  <div className="h-screen py-5">
     <div className={`${hidden ? "hidden" : "flex" } fixed bg-sky-400 flex-col items-center w-screen md:mx-36 lg:mx-48 xl:mx-64 md:mt-24 md:w-1/2`}><FormApply fields={fields} fieldnames={fieldnames} clicked={handleHidden} initial={[]}/></div>

@@ -34,6 +34,8 @@ export const getServerSideProps = handle({
 });
 
 export default function Employees({ links, paths }: any) {
+    const sidelinks = ["Leaves", "Requests", "Denied"]
+    const sidepaths = ["/leave", "/leave/requests", "/leave/denied"]
     const fields = [{value: "type", type: "text"}, {value: "start", type: "text"}, {value: "end", type: "text"}, {value: "reason", type: "text"}]
     const fieldnames = ["Type", "Start", "End", "Reason"]
     const fields2 = [{value: "id", type: "number"}, {value: "feedback", type: "text"}]
@@ -57,7 +59,7 @@ export default function Employees({ links, paths }: any) {
         setData(res.data.data)
       }).catch(err => {
       })
-      axios.get('/', {headers: {"accept": "application/json"}})
+      axios.get('/role', {headers: {"accept": "application/json"}})
       .then(res => {
         if (res.data.role == "hr" || res.data.role.slice(0, 4) == "head"){
           setLeader(true)
@@ -68,7 +70,7 @@ export default function Employees({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home">
+    <Layout links={links} paths={paths} sidelinks={sidelinks} sidepaths={sidepaths} current="home">
       {!leader? <DataGrid items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/> : <LeaveAdmin items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>}
     </Layout>
 )

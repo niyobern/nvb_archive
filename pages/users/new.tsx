@@ -20,8 +20,11 @@ export const getServerSideProps = handle({
     }
     const leavetypes = await axios.get(`${baseUrl}/users/new`, {headers: {"Authorization": token}})
     const data = leavetypes.data
-    console.log(data)
     return json({data: data, token: token})
+  },
+  async upload({ file, stream }) {
+    console.log(file)
+    // await axios.patch(`${baseUrl}/users/image`, file)
   }, async post({ cookies, req: {body}}){
     const token = cookies.get("token")
     const role = cookies.get("role")
@@ -32,13 +35,9 @@ export const getServerSideProps = handle({
     } else {
       const fetch = await axios.post(`${baseUrl}/users`, {...body, user_id: Number(body.user_id), image: null}, {headers: {"Authorization": token}})
       const data = fetch.data
-      // const image = await axios.patch(`${baseUrl}/users/image/${4}`, image {headers: {"Authorization": token, "Content-Type": "multipart/form-data"}})
-      // const output = image.data
-      return json({})
+      console.log(data)
+      return json({data: data.id})
     }
-  },
-  async upload( { file }) {
-    await axios.patch(`${baseUrl}/users/image`, file)
   }
 });
 

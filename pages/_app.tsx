@@ -4,8 +4,8 @@ import { withNextRuntime } from 'next-runtime/app';
 import { useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const globLinks = ["Administration", "Leave", "Users"]
-  const globPaths = ["/admin", "/leave", "/users"]
+  const globLinks = ["Administration", "Leave", "Users", "Payroll"]
+  const globPaths = ["/admin", "/leave", "/users", "/payroll"]
 
   return <Component {...pageProps} links={globLinks} paths={globPaths}/>
 }
