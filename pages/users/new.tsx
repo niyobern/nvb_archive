@@ -10,9 +10,11 @@ import DataGrid from '../../components/DataGrid';
 import EmployeeGrid from '../../components/EmployeeGrid';
 import fs from 'fs';
 
+var user = []
 export const getServerSideProps = handle({
   async get({ cookies }) {
     const token = cookies.get("token")
+    user.push(token)
     if (!token){
       return redirect("/", {permanent: true})
     }
@@ -35,7 +37,9 @@ export const getServerSideProps = handle({
       return json({})
     }
   },
-
+  async upload( { file }) {
+    await axios.patch(`${baseUrl}/users/image`, file)
+  }
 });
 
 export default function NewEmployees({ links, paths }: any) {
