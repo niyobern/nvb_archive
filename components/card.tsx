@@ -1,5 +1,7 @@
-import Image from "next/image"
 import { useRouter } from "next/router"
+import Image from "next/image"
+import Logo from '../public/images/logo.webp'
+
 export default function Card({ data }: any){
   const router = useRouter()
   if (!data){
@@ -12,7 +14,7 @@ export default function Card({ data }: any){
   <div className="flex flex-row ">
     <div>
       <div className="flex flex-row w-full h-16 pl-1 mx-0  my-2">
-    <div className="bg-gray-400 w-14 h-14 rounded-full mt-2"></div>
+    <div className="bg-gray-400 w-14 h-14 rounded-full mt-2"><Image alt="Logo" src={Logo} width={56} height={56}/></div>
     <div className="flex flex-col py-2 px-0 h-full">
       <div className="align-middle text-center font-bold tex mx-1 text-lg text-blue-600"> Catholic University of Rwanda</div>
       <div className="text-center font-bold underline text-green-800">Employee Card</div>

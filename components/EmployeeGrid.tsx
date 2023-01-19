@@ -29,7 +29,7 @@ export default function EmployeeGrid({ items, fields, fieldnames, showPop, close
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
                     <div className="flex flex-col w-full">
                       <h2 className="text-blue-900 title-font font-medium">{item && item.name}</h2>
-                        {/* <Image alt="" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/> */}
+                        <Image alt="" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image} width={64} height={64}/>
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col">
                             {item && Object.values(item).map((value: any, index: number) => (
