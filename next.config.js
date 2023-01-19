@@ -3,10 +3,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '*',
+        protocol: "https",
+        hostname: "ntaweli-hr.s3.us-east-2.amazonaws.com",
+        port: "",
+        pathname: "*",
       }
     ],
   },
