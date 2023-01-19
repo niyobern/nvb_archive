@@ -24,7 +24,7 @@ export const getServerSideProps = handle({
   }
 });
 
-export default function Employees({ links, paths }: any) {
+export default function Radiant({ links, paths }: any) {
     const sidelinks = ["Payroll", "Bonuses", "Radiant"]
     const sidepaths = ["/payroll", "/payroll/bonus", "/payroll/radiant"]
     const fields = [{value: "Null", type: "hidden"}]
