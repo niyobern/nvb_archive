@@ -5,7 +5,7 @@ import { useFormSubmit, Form } from 'next-runtime/form';
 import baseUrl from '../../../components/baseUrl';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Logo from '../../public/images/logo.webp'
+import Logo from '../../../public/images/logo.webp'
 import RegisterComponent from '../../../components/RegisterComponent';
 
 export const getServerSideProps = handle({
