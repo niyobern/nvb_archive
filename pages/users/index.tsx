@@ -58,7 +58,8 @@ export default function Employees({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths}>
-        {notleader? <Card data={data}/> : <Table items={data} titles={titles} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>}
+        {data.length == 0 && <div></div>}
+        {data.length > 0 && notleader? <Card data={data}/> : <Table items={data} titles={titles} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>}
     </Layout>
 )
 
