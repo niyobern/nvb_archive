@@ -12,7 +12,7 @@ export default function SideBar({ links, paths }: any){
         <div className="hidden md:flex flex-col h-full p-3 dark:bg-gray-900 dark:text-gray-100">
         	<div className="space-y-3">
         		<div className="flex items-center justify-between">
-        			<h2>Dashboard</h2>
+        			<Link href="/home">Dashboard</Link>
         
         		</div>
         		<div className="relative">

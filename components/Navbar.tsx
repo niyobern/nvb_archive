@@ -28,7 +28,7 @@ export default function NavBar({ links, paths, current, email }: any) {
                 <div className="flex h-16 items-center justify-between w-full">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <span className='text-white font-bold text-lg'>HR</span>
+                      <Link className='text-white font-bold text-lg' href="/home">CUR</Link>
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">

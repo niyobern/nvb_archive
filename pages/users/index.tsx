@@ -15,7 +15,7 @@ export const getServerSideProps = handle({
     if (!token){
       return redirect("/")
     }
-    const leavetypes = await axios.get(`${baseUrl}/users`, {headers: {"Authorization": token}})
+    const leavetypes = await axios.get(`${baseUrl}/users/table`, {headers: {"Authorization": token}})
     const data = leavetypes.data
     return json({data: data})
   }
