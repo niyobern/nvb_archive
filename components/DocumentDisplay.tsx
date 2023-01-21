@@ -40,7 +40,7 @@ export default function DocumentDisplay({ items, fields, fieldnames, showPop, cl
                           </div>
                           <div className='justify-self-end flex flex-col justify-end'>
                           {leader && <button onClick={() => handleEdit(item)} className='text-green-800 font-bold'>Edit</button>}
-                          {!leader && <button onClick={() => download(item.link, "your_file.docx")} className='text-green-800 font-bold'>Download</button>}
+                          {!leader && <a href={item.link} className='text-green-800 font-bold'>Download</a>}
                           </div>
                       </div>
                     </div>
