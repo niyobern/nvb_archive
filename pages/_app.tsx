@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app';
 import { withNextRuntime } from 'next-runtime/app';
 import { useState } from 'react';
+import axios from 'axios';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const globLinks = ["Documents", "Leave", "Users", "Payroll"]
@@ -10,7 +11,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   function handleEmail(mail: any){
     setEmail(mail)
   }
-
   return <Component {...pageProps} links={globLinks} paths={globPaths} email={email} handleEmail={handleEmail}/>
 }
 

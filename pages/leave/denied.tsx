@@ -22,6 +22,7 @@ export const getServerSideProps = handle({
 });
 
 export default function Denied({ links, paths, email }: any) {
+    const [mail, setMail] = useState(email)
     const sidelinks = ["Leaves", "Requests", "Denied"]
     const sidepaths = ["/leave", "/leave/requests", "/leave/denied"]
     const fields = [{value: "Null", type: "hidden"}]
@@ -32,11 +33,17 @@ export default function Denied({ links, paths, email }: any) {
     const [data, setData] = useState([])
     const titles = ["Employee", "Start", "End", "Reason", "Feedback"]
     useEffect(() => {
-      if (data.length > 0 && form.isError){
+      if (mail == ""){
+        axios.get("/home", {headers: {"Accept": "application/json"}})
+        .then(res => {
+          setMail(res.data.emailA)
+        })
+      }
+      if (form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
       };
-      if (data.length > 0 && form.isSuccess){
+      if (form.isSuccess){
         setFormResponse(form.data.message)
         setShow(true)
       }
@@ -50,7 +57,7 @@ export default function Denied({ links, paths, email }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths}  sidelinks={sidelinks} sidepaths={sidepaths} email={email} current="denied">
+    <Layout links={links} paths={paths}  sidelinks={sidelinks} sidepaths={sidepaths} email={mail} current="denied">
         <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} titles={titles} close={handleShow}/>
     </Layout>
 )

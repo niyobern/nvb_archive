@@ -22,6 +22,7 @@ export const getServerSideProps = handle({
 });
 
 export default function Employees({ links, paths, email }: any) {
+    const [mail, setMail] = useState(email)
     const sidelinks = ["User", "New"]
     const sidepaths = ["/users", "/users/new"]
     const fields = [{value: "Null", type: "hidden"}]
@@ -33,6 +34,12 @@ export default function Employees({ links, paths, email }: any) {
     const [notleader, setNotleader] = useState(true)
     const titles = ["Full Name", "Email Adress", "Phone Number", "Qualification", "Salary", "Position", "Type", "Department"]
     useEffect(() => {
+      if (mail == ""){
+        axios.get("/home", {headers: {"Accept": "application/json"}})
+        .then(res => {
+          setMail(res.data.emailA)
+        })
+      }
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
@@ -57,7 +64,7 @@ export default function Employees({ links, paths, email }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home" email={email} sidelinks={sidelinks} sidepaths={sidepaths}>
+    <Layout links={links} paths={paths} current="home" email={mail} sidelinks={sidelinks} sidepaths={sidepaths}>
         { notleader && data.length > 0 ? <Card items={data}/> : <div></div>}
         { notleader == false && data.length > 0 ? <Table items={data} titles={titles} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>: <></>}
     </Layout>

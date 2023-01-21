@@ -33,6 +33,7 @@ export const getServerSideProps = handle({
 });
 
 export default function Employees({ links, paths, email }: any) {
+    const [mail, setMail] = useState(email)
     const fields = [{value: "document", type: "text"}]
     const fieldnames = ["Document"]
     const fields2 = [{value: "id", type: "text"}]
@@ -44,6 +45,12 @@ export default function Employees({ links, paths, email }: any) {
     const [data, setData] = useState([])
 
     useEffect(() => {
+      if (mail == ""){
+        axios.get("/home", {headers: {"Accept": "application/json"}})
+        .then(res => {
+          setMail(res.data.emailA)
+        })
+      }
       if (form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
@@ -69,7 +76,7 @@ export default function Employees({ links, paths, email }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} current="home" email={email}>
+    <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} current="home" email={mail}>
         <DocumentDisplay items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow} leader={leader}/>
     </Layout>
 )

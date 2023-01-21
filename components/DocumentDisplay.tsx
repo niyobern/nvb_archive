@@ -31,15 +31,15 @@ export default function DocumentDisplay({ items, fields, fieldnames, showPop, cl
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
                     <div className="flex flex-col w-full">
                       <h2 className="text-blue-900 title-font font-medium">{item && item.name}</h2>
-                      {item.image && <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>}
+                      {item.image && <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image} width={100} height={100}/>}
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col">
                             {item != null && Object.values(item).map((value: any, index: number) => (
-                              <p key={value} className={`${leader? "flex": "hidden"} text-gray-900 `}><span className="font-bold">{keys[index]}: </span>{value}</p>
+                              <p key={value} className={`${leader && keys[index] !== "image"? "flex": "hidden"} text-gray-900 `}><span className="font-bold">{keys[index]}: </span>{value}</p>
                             ))}
                           </div>
                           <div className='justify-self-end flex flex-col justify-end'>
-                          {leader && <button onClick={() => handleEdit(item)} className='text-green-800 font-bold'>Edit</button>}
+                          {leader && <button onClick={() => handleEdit(item)} className='text-green-800 font-bold'>Issue</button>}
                           {!leader && <a href={item.link} className='text-green-800 font-bold'>Download</a>}
                           </div>
                       </div>

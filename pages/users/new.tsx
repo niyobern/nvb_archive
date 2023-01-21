@@ -48,6 +48,7 @@ export default function NewEmployees({ links, paths, email }: any) {
   const fieldnames = ["User Id", "Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth", "Home District", "Home Sector", "Home Cell", "Home Village", "Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "Employee Id", "Employment Date"]
 
     const sidelinks = ["User", "New"]
+    const [mail, setMail] = useState(email)
     const [leader, setLeader] = useState(false)
     const sidepaths = ["/users", "/users/new"]
     const [formResponse, setFormResponse] = useState("")
@@ -81,7 +82,7 @@ export default function NewEmployees({ links, paths, email }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths} email={email}>
+    <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths} email={mail}>
       {leader? <EmployeeGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>: <Grid items={data} fields={fields.slice(0, 15)} fieldnames={fieldnames.slice(0, 15)} formResponse={formResponse} showPop={show} close={handleShow} token={token}/>}
     </Layout>
 )

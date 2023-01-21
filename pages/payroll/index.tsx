@@ -21,6 +21,7 @@ export const getServerSideProps = handle({
 });
 
 export default function Employees({ links, paths, email }: any) {
+    const [mail, setMail] = useState(email)
     const fields = [{value: "Null", type: "hidden"}]
     const fieldnames = [""]
     const [formResponse, setFormResponse] = useState("")
@@ -47,7 +48,7 @@ export default function Employees({ links, paths, email }: any) {
       setShow(false)
     }
 return (
-    <LayoutPayroll links={links} paths={paths} current="home" email={email}>
+    <LayoutPayroll links={links} paths={paths} current="home" email={mail}>
         <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} titles={titles} close={handleShow}/>
     </LayoutPayroll>
 )
