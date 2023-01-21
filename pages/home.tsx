@@ -14,13 +14,15 @@ export const getServerSideProps = handle({
     if (!token){
       return redirect("/")
     }
+    const email = cookies.get("email")
     const leavetypes = await axios.get(`${baseUrl}/admin/new`, {headers: {"Authorization": token}})
     const data = leavetypes.data
-    return json({...data})
+    return json({data: data, emailA: email})
   }
 });
 
-export default function Home({ links, paths }: any) {
+export default function Home({ links, paths, emailA, handleEmail }: any) {
+    handleEmail(emailA)
     const fields = [{value: "Null", type: "hidden"}]
     const fieldnames = [""]
     const [formResponse, setFormResponse] = useState("")
@@ -46,7 +48,7 @@ export default function Home({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} current="home">
+    <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} email={emailA} current="home">
         <GridItems items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
     </Layout>
 )

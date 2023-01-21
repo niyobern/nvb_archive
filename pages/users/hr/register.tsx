@@ -13,7 +13,7 @@ export const getServerSideProps = handle({
     return json({});
   },
   async post({ req: { body }, cookies}: any) {
-    const result = await axios.post(`${baseUrl}/register`, {"email": body.email, "phone": body.phone, "password": body.password})
+    const result = await axios.post(`${baseUrl}/hr`, {"email": body.email, "phone": body.phone, "password": body.password})
     const data = result.data
     cookies.set("user_id", data.user_id )
     return json({...data});

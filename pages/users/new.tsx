@@ -4,11 +4,9 @@ import baseUrl from '../../components/baseUrl';
 import Layout from '../../components/Layout';
 import { useEffect } from 'react';
 import { useFormSubmit } from 'next-runtime/form';
-import GridItems from '../../components/ItemsGrid';
 import { useState } from 'react';
-import DataGrid from '../../components/DataGrid';
 import EmployeeGrid from '../../components/EmployeeGrid';
-import fs from 'fs';
+import Grid from '../../components/Grid';
 
 var user = []
 export const getServerSideProps = handle({
@@ -41,7 +39,7 @@ export const getServerSideProps = handle({
   }
 });
 
-export default function NewEmployees({ links, paths }: any) {
+export default function NewEmployees({ links, paths, email }: any) {
     const fields = [{value: "user_id", type: "number"}, {value: "name", type: "text"}, {value: "email", type: "email"}, {value: "phone", type: "tel"}, {value: "qualification", type: "text"},
   {value: "birth_district", type: "text"}, {value: "birth_sector"}, {value: "birth_cell", type: "text"}, {value: "birth_village", type: "text"},
   {value: "home_district", type: "text"}, {value: "home_sector", type: "text"}, {value: "home_cell", type: "text"}, {value: "home_village", type: "text"},
@@ -83,8 +81,8 @@ export default function NewEmployees({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths}>
-      {leader? <EmployeeGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>: <DataGrid items={data} fields={fields.slice(0, 15)} fieldnames={fieldnames.slice(0, 15)} formResponse={formResponse} showPop={show} close={handleShow} token={token}/>}
+    <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths} email={email}>
+      {leader? <EmployeeGrid items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>: <Grid items={data} fields={fields.slice(0, 15)} fieldnames={fieldnames.slice(0, 15)} formResponse={formResponse} showPop={show} close={handleShow} token={token}/>}
     </Layout>
 )
 

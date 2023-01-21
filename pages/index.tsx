@@ -19,9 +19,9 @@ export const getServerSideProps = handle({
     cookies.set("token", token)
     const user = await axios.get(`${baseUrl}/current`, {headers: {"Authorization": token}})
     const user_info = user.data
-    const role = user_info.Role
-    cookies.set("role", role)
     cookies.set("userid", user_info.Id)
+    cookies.set("role", user_info.Role)
+    cookies.set("email", user_info.Email)
     return json({...user_info});
   },
 });

@@ -21,7 +21,7 @@ export const getServerSideProps = handle({
   }
 });
 
-export default function Denied({ links, paths }: any) {
+export default function Denied({ links, paths, email }: any) {
     const sidelinks = ["Leaves", "Requests", "Denied"]
     const sidepaths = ["/leave", "/leave/requests", "/leave/denied"]
     const fields = [{value: "Null", type: "hidden"}]
@@ -50,7 +50,7 @@ export default function Denied({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths}  sidelinks={sidelinks} sidepaths={sidepaths} current="home">
+    <Layout links={links} paths={paths}  sidelinks={sidelinks} sidepaths={sidepaths} email={email} current="denied">
         <Table items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} titles={titles} close={handleShow}/>
     </Layout>
 )

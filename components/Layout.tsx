@@ -3,11 +3,11 @@ import NiceTable from "../components/nice_table";
 import SideBar from "../components/sidebar";
 import Table from "../components/table";
 
-export default function Layout({ children, links, paths, sidelinks, sidepaths, current }: any){
+export default function Layout({ children, links, paths, sidelinks, sidepaths, current, email }: any){
     return (
   <div className="flex flex-col h-screen">
     {/* The navbar */}
-    <NavBar links={links} paths={paths} current={current}/>
+    <NavBar links={links} paths={paths} current={current} email={email}/>
     {/* the components below navbar */}
     <div className="flex flex-row h-full w-screen ">
       {/* the SideBar */}

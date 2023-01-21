@@ -5,11 +5,6 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import picture from '../public/images/logo.webp'
 import Link from 'next/link'
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl: picture
-}
     
 const userNavigation = [
   { name: 'Sign out', href: '/logout' },
@@ -19,7 +14,11 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function NavBar({ links, paths, current }: any) {
+export default function NavBar({ links, paths, current, email }: any) {
+  const user = {
+    email: email,
+    imageUrl: picture
+  }
   return (
     <>
         <Disclosure as="nav" className="bg-gray-800 w-screen">
@@ -63,11 +62,12 @@ export default function NavBar({ links, paths, current }: any) {
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
-                        <div>
+                        <div className='flex flex-row'>
                           <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
                             <Image className="h-8 w-8 rounded-full" src={user.imageUrl} alt="picture"/>
                           </Menu.Button>
+                          <div className='text-white px-2 font-semibold'>{email}</div>
                         </div>
                         <Transition
                           as={Fragment}
@@ -136,7 +136,7 @@ export default function NavBar({ links, paths, current }: any) {
                       <Image className="h-10 w-10 rounded-full" src={user.imageUrl} alt="picture"/>
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
+                      {/* <div className="text-base font-medium leading-none text-white">{user.name}</div> */}
                       <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
                     </div>
                     <button

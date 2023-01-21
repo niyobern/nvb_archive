@@ -6,8 +6,12 @@ import { useState } from 'react';
 function MyApp({ Component, pageProps }: AppProps) {
   const globLinks = ["Administration", "Leave", "Users", "Payroll"]
   const globPaths = ["/admin", "/leave", "/users", "/payroll"]
+  const [email, setEmail] = useState("")
+  function handleEmail(mail: any){
+    setEmail(mail)
+  }
 
-  return <Component {...pageProps} links={globLinks} paths={globPaths}/>
+  return <Component {...pageProps} links={globLinks} paths={globPaths} email={email} handleEmail={handleEmail}/>
 }
 
 export default MyApp;

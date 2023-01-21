@@ -24,7 +24,7 @@ export const getServerSideProps = handle({
   }
 });
 
-export default function Radiant({ links, paths }: any) {
+export default function Radiant({ links, paths, email }: any) {
     const sidelinks = ["Payroll", "Bonuses", "Radiant"]
     const sidepaths = ["/payroll", "/payroll/bonus", "/payroll/radiant"]
     const fields = [{value: "Null", type: "hidden"}]
@@ -53,7 +53,7 @@ export default function Radiant({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} sidelinks={sidelinks} sidepaths={sidepaths} current="home">
+    <Layout links={links} paths={paths} sidelinks={sidelinks} sidepaths={sidepaths} current="home" email={email}>
         <TableR items={data} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} titles={titles} close={handleShow} bonus={false}/>
     </Layout>
 )

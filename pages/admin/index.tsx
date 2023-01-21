@@ -32,7 +32,7 @@ export const getServerSideProps = handle({
   }
 });
 
-export default function Employees({ links, paths }: any) {
+export default function Employees({ links, paths, email }: any) {
     const fields = [{value: "document", type: "text"}]
     const fieldnames = ["Document"]
     const fields2 = [{value: "id", type: "text"}]
@@ -69,7 +69,7 @@ export default function Employees({ links, paths }: any) {
       setShow(false)
     }
 return (
-    <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} current="home">
+    <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} current="home" email={email}>
         <DocumentDisplay items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow} leader={leader}/>
     </Layout>
 )
