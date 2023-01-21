@@ -1,16 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports= {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "ntaweli-hr.s3.us-east-2.amazonaws.com",
-        port: "",
-        pathname: "*",
-      }
-    ],
+    domains: ["ntaweli-hr.s3.us-east-2.amazonaws.com"]
   },
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+

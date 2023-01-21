@@ -4,9 +4,8 @@ import baseUrl from '../../components/baseUrl';
 import Layout from '../../components/Layout';
 import { useEffect } from 'react';
 import { useFormSubmit } from 'next-runtime/form';
-import useDownloader from "react-use-downloader";
 import { useState } from 'react';
-import DataGrid from '../../components/DataGrid';
+import DocumentDisplay from '../../components/DocumentDisplay';
 
 export const getServerSideProps = handle({
   async get({ cookies }) {
@@ -16,17 +15,17 @@ export const getServerSideProps = handle({
     }
     const leavetypes = await axios.get(`${baseUrl}/admin/documents`, {headers: {"Authorization": token}})
     const data = leavetypes.data
-    return json({...data})
+    return json({data: data})
   },
   async post({ cookies, req: {body} }){
-    const token = cookies.get("token")
+    const token: any = cookies.get("token")
     const role = cookies.get("role")
     if (role == "hr"){
-      const fetch = await axios.get(`${baseUrl}/documents/${body.id}`, {headers: {"Authorization": token}})
+      const fetch = await axios.get(`${baseUrl}/admin/documents/services/${body.id}`, {headers: {"Authorization": token}})
       const data = fetch.data
       return json({...data})
     } else {
-      const fetch = await axios.post(`${baseUrl}/documents`, {"document": body.document}, {headers: {"Authorization": token}})
+      const fetch = await axios.post(`${baseUrl}/admin/documents`, {"document": body.document}, {headers: {"Authorization": token}})
       const data = fetch.data
       return json({...data})
     }
@@ -43,12 +42,13 @@ export default function Employees({ links, paths }: any) {
     const [show, setShow] = useState(false)
     const form: any = useFormSubmit()
     const [data, setData] = useState([])
+
     useEffect(() => {
-      if (data.length > 0 && form.isError){
+      if (form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
       };
-      if (data.length > 0 && form.isSuccess){
+      if (form.isSuccess){
         setFormResponse(form.data.message)
         setShow(true)
       }
@@ -57,9 +57,10 @@ export default function Employees({ links, paths }: any) {
         setData(res.data.data)
       }).catch(err => {
       })
-      axios.get('/', {headers: {"accept": "application/json"}})
+      axios.get('/role', {headers: {"accept": "application/json"}})
       .then(res => {
-        if (res.data.role == "hr" || res.data.role.slice(0, 4) == "head"){
+        const role = res.data.role
+        if (role == "hr"){
           setLeader(true)
         } 
       })
@@ -69,7 +70,7 @@ export default function Employees({ links, paths }: any) {
     }
 return (
     <Layout links={links} paths={paths} sidelinks={links} sidepaths={paths} current="home">
-        <DataGrid items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>
+        <DocumentDisplay items={data} fields={leader? fields2: fields} fieldnames={leader? fieldnames2: fieldnames} formResponse={formResponse} showPop={show} close={handleShow} leader={leader}/>
     </Layout>
 )
 

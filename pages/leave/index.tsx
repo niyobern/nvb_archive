@@ -16,7 +16,7 @@ export const getServerSideProps = handle({
     }
     const leavetypes = await axios.get(`${baseUrl}/leave/given`, {headers: {"Authorization": token}})
     const data = leavetypes.data
-    return json({...data})
+    return json({data: data})
   }
 });
 

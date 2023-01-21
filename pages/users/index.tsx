@@ -31,7 +31,7 @@ export default function Employees({ links, paths }: any) {
     const form: any = useFormSubmit()
     const [data, setData] = useState([])
     const [notleader, setNotleader] = useState(true)
-    const titles = ["Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth","Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "User Id", "Employee Id"]
+    const titles = ["Full Name", "Email Adress", "Phone Number", "Qualification", "Salary", "Position", "Type", "Department"]
     useEffect(() => {
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
@@ -59,7 +59,7 @@ export default function Employees({ links, paths }: any) {
 return (
     <Layout links={links} paths={paths} current="home" sidelinks={sidelinks} sidepaths={sidepaths}>
         {data.length == 0 && <div></div>}
-        {data.length > 0 && notleader? <Card data={data}/> : <Table items={data} titles={titles} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>}
+        {notleader ? <Card items={data}/> : <Table items={data} titles={titles} fields={fields} fieldnames={fieldnames} formResponse={formResponse} showPop={show} close={handleShow}/>}
     </Layout>
 )
 

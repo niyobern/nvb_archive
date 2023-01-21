@@ -24,9 +24,10 @@ export default function LeaveAccept({ fields, fieldnames, clicked, initial }: an
                       <input type={data[1].type} id={data[1].value} name={data[1].value} defaultValue={initialdata[1]} className="w-full bg-gray-200 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                     </div>
                     <div className="relative flex-grow w-full px-2" key={data[1].value}>
+                      <label htmlFor="accept" className="leading-7">Allow or Decline</label>
                       <select name="accept" id="accept" className="w-full bg-gray-200 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        <option value="accept">Accept</option>
-                        <option value="deny">Deny</option>
+                        <option value="given">Accept</option>
+                        <option value="denied">Deny</option>
                       </select>
                     </div>
                   <div className="relative flex flex-col w-full h-20 justify-end px-2">

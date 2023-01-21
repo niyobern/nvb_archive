@@ -16,7 +16,8 @@ export const getServerSideProps = handle({
     }
     const leavetypes = await axios.get(`${baseUrl}/leave/denied`, {headers: {"Authorization": token}})
     const data = leavetypes.data
-    return json({...data})
+    console.log(data)
+    return json({data: data})
   }
 });
 
@@ -29,7 +30,7 @@ export default function Denied({ links, paths }: any) {
     const [show, setShow] = useState(false)
     const form: any = useFormSubmit()
     const [data, setData] = useState([])
-    const titles = ["Employee", "Start", "End", "Reason"]
+    const titles = ["Employee", "Start", "End", "Reason", "Feedback"]
     useEffect(() => {
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")

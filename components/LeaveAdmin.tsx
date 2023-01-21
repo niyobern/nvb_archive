@@ -25,13 +25,13 @@ export default function LeaveAdmin({ items, fields, fieldnames, showPop, close, 
         {items && items.map((item: any) => (
                 <div className="p-2 md:w-1/3 w-full" key={item}>
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
-                    <Image alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={item.image}/>
                     <div className="flex flex-col w-full">
                       <h2 className="text-blue-900 title-font font-medium">{item.name}</h2>
+                      <div className="w-16 h-16 object-contain overflow-hidden object-center flex-shrink-0 rounded-full mr-4" ><Image alt="team" src={item.image} width={64} height={64}/></div>
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col">
                             {Object.values(item).map((value: any, index: number) => (
-                              <p key={value} className="text-gray-900"><span className="font-bold">{keys[index]}: </span>{value}</p>
+                              <p key={value} className={`${keys[index] !== "image" ? "flex": "hidden"} text-gray-900`}><span className="font-bold">{keys[index]}: </span>{value}</p>
                             ))}
                           </div>
                           <div className='justify-self-end flex flex-col justify-end'>
