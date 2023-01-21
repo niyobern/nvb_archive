@@ -4,7 +4,7 @@ import { withNextRuntime } from 'next-runtime/app';
 import { useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const globLinks = ["Administration", "Leave", "Users", "Payroll"]
+  const globLinks = ["Documents", "Leave", "Users", "Payroll"]
   const globPaths = ["/admin", "/leave", "/users", "/payroll"]
   const [email, setEmail] = useState("")
   function handleEmail(mail: any){
