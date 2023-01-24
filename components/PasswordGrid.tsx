@@ -6,7 +6,7 @@ import useDownloader from "react-use-downloader";
 import Passwordchange from "./PasswordChange";
 
 export default function PasswordGrid({ showPop, close, formResponse }: any){
-    const [hidden, setHidden] = useState(true)
+    const [hidden, setHidden] = useState(false)
     function handleHidden(){
         setHidden(!hidden)
     }
