@@ -10,7 +10,6 @@ export default function EmployeeGrid({ items, fields, fieldnames, showPop, close
     const excluded = ["deleted", "end", "id", "user_id", "image", "salary", "head", "position", "type", "start", "department"]
     const [hidden, setHidden] = useState(true)
     function handleHidden(){
-        console.log(hidden)
         setHidden(!hidden)
     }
     const [initial, setInitial] = useState("")

@@ -3,7 +3,7 @@ import { useFormSubmit, Form} from 'next-runtime/form';
 import { useState, useRef } from 'react';
 import baseUrl from './baseUrl';
 
-export default function Passwordchange(){
+export default function Passwordchange({ clicked }: any){
 
     return (
             <section className="text-gray-600 body-font justify-self-center w-full md:w-2/3 lg:w-1/2 mx-auto h-screen pt-12 md:pt-24 lg:pt-36">
@@ -21,7 +21,7 @@ export default function Passwordchange(){
                   </div>
                   <div className="relative flex flex-col w-full h-20 justify-end pr-5 pl-0 mx-0">
                     <div className="flex flex-row justify-between">
-                      <button type="submit" className="text-white w-full bg-green-500 border-0 py-2 px-12 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Commit</button>
+                      <button onClick={clicked} type="submit" className="text-white w-full bg-green-500 border-0 py-2 px-12 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Commit</button>
                     </div>
                   </div>
                 </div>

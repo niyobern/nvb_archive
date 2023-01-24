@@ -42,7 +42,7 @@ export default function Password({  links, paths, email }: any) {
         setFormResponse(form.data.message)
         setShow(true)
       }
-  }, [form, router]);
+  }, [form, router, mail]);
   function handleShow(){
     setShow(false)
   }
