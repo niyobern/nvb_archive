@@ -20,7 +20,7 @@ export default function GridItems({ items, fields, fieldnames, showPop, close, f
                 <div className="p-2 md:w-1/3 w-full" key={item}>
                   <div className="h-full flex items-center border-sky-300 border z-40 p-4 rounded-lg bg-white">
                     <div className="flex flex-col w-full">
-                      <h2 className="text-blue-900 title-font font-medium">{item.name}</h2>
+                      <h2 className="text-blue-900 title-font font-medium">{item.action}</h2>
                       <div className=" flex flex-row justify-between">
                           <div className="flex flex-col">
                             {Object.values(item).map((value: any) => (
@@ -28,7 +28,7 @@ export default function GridItems({ items, fields, fieldnames, showPop, close, f
                             ))}
                           </div>
                           <div className='justify-self-end flex flex-col justify-end'>
-                              <Link href="/" className='text-green-800 font-bold'>Edit</Link>
+                              {/* <Link href="/" className='text-green-800 font-bold'>Edit</Link> */}
                           </div>
                       </div>
                     </div>
