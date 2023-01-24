@@ -23,8 +23,8 @@ export const getServerSideProps = handle({
 
 export default function Employees({ links, paths, email }: any) {
     const [mail, setMail] = useState(email)
-    const sidelinks = ["User", "New"]
-    const sidepaths = ["/users", "/users/new"]
+    const sidelinks = ["User", "New", "Change Password"]
+    const sidepaths = ["/users", "/users/new", "/users/password"]
     const fields = [{value: "Null", type: "hidden"}]
     const fieldnames = [""]
     const [formResponse, setFormResponse] = useState("")

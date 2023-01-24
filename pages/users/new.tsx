@@ -47,10 +47,10 @@ export default function NewEmployees({ links, paths, email }: any) {
   {value: "department", type: "text"}, {value: "id", type: "number"}, {value: "start", type: "date"}]
   const fieldnames = ["User Id", "Full Names", "Email Adress", "Phone Number", "Highest qualification", "District of Birth", "Sector of Birth", "Cell of Birth", "Village of Birth", "Home District", "Home Sector", "Home Cell", "Home Village", "Father's Name", "Mother's name", "Salary", "Position", "Type", "Department", "Employee Id", "Employment Date"]
 
-    const sidelinks = ["User", "New"]
     const [mail, setMail] = useState(email)
     const [leader, setLeader] = useState(false)
-    const sidepaths = ["/users", "/users/new"]
+    const sidelinks = ["User", "New", "Password"]
+    const sidepaths = ["/users", "/users/new", "/users/password"]
     const [formResponse, setFormResponse] = useState("")
     const [show, setShow] = useState(false)
     const [token, setToken] = useState("")
