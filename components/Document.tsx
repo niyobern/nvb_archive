@@ -23,7 +23,11 @@ export default function Document({ fields, fieldnames, clicked, initial, token }
                   {data.map((item, index) =>(
                     <div className="relative flex-grow w-full px-2" key={item.value}>
                       <label htmlFor={item.value} className="leading-7">{fieldnames[index]}</label>
-                      <input type={item.type} id={item.value} required={true} value={initialdata[index]} name={item.value} className="w-full bg-gray-200 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                      <input type={item.type} list="documentType" id={item.value} required={true} value={initialdata[index]} name={item.value} className="w-full bg-gray-200 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                      <datalist id="documentType">
+                        <option value="salary">Salary</option>
+                        <option value="services">Services</option>
+                      </datalist>
                     </div>
                   ))}
                   </div>
