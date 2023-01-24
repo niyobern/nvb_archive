@@ -14,8 +14,8 @@ export const getServerSideProps = handle({
   },
   async post({ req: { body }, cookies}: any) {
     const token = cookies.get("token")
-    const result = await axios.post(`${baseUrl}/password`, body, {headers : {"Authorization": token}})
-    return json({data: result.data});
+    const result = await axios.patch(`${baseUrl}/password`, body, {headers : {"Authorization": token}})
+    return json({message: result.data});
   },
 });
 
