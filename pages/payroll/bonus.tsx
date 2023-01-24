@@ -42,11 +42,11 @@ export default function Bonus({ links, paths, email }: any) {
           setMail(res.data.emailA)
         })
       }
-      if (form.isError){
+      if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
       };
-      if (form.isSuccess){
+      if (data.length > 0 && form.isSuccess){
         setFormResponse(form.data.message)
         setShow(true)
       }

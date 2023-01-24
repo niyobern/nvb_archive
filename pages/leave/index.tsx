@@ -38,11 +38,11 @@ export default function Employees({ links, paths, email }: any) {
           setMail(res.data.emailA)
         })
       }
-      if (data.length > 0 && form.isError){
+      if (data.length > 0 && data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
       };
-      if (data.length > 0 && form.isSuccess){
+      if (data.length > 0 && data.length > 0 && form.isSuccess){
         setFormResponse(form.data.message)
         setShow(true)
       }

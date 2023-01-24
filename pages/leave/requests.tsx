@@ -47,11 +47,11 @@ export default function Employees({ links, paths, email }: any) {
     const [data, setData] = useState([])
     const [notleader, setNotleader] = useState(false)
     useEffect(() => {
-      if (form.isError){
+      if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
       };
-      if (form.isSuccess){
+      if (data.length > 0 && form.isSuccess){
         setFormResponse("Succesfull")
         setShow(true)
       }
