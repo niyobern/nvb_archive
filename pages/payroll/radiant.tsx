@@ -36,6 +36,12 @@ export default function Radiant({ links, paths, email }: any) {
     const [data, setData] = useState([])
     const titles = ["Employee", "Amount", "Start", "End"]
     useEffect(() => {
+      if (mail == ""){
+        axios.get("/home", {headers: {"Accept": "application/json"}})
+        .then(res => {
+          setMail(res.data.emailA)
+        })
+      }
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)

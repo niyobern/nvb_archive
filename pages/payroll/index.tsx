@@ -35,6 +35,12 @@ export default function Employees({ email }: any) {
     const [leader, setLeader] = useState(false)
     const titles = ["Full Name",'Base Salary', 'Accomodation', 'Transport', 'Bonuses', 'TPR', 'RSSB Base', 'RSSB 3%', 'RSSB 5%', 'Total RSSB', 'Maternity 0.03%', 'Total Maternity', 'Radiant', 'Net Salary', 'CBHI', 'Net Salary to be Paid']
     useEffect(() => {
+      if (mail == ""){
+        axios.get("/home", {headers: {"Accept": "application/json"}})
+        .then(res => {
+          setMail(res.data.emailA)
+        })
+      }
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)

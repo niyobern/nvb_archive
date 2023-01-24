@@ -57,6 +57,12 @@ export default function NewEmployees({ links, paths, email }: any) {
     const form: any = useFormSubmit()
     const [data, setData] = useState([])
     useEffect(() => {
+      if (mail == ""){
+        axios.get("/home", {headers: {"Accept": "application/json"}})
+        .then(res => {
+          setMail(res.data.emailA)
+        })
+      }
       if (data.length > 0 && form.isError){
         setFormResponse("There was an error and the data was not added")
         setShow(true)
