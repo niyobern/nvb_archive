@@ -39,7 +39,7 @@ export default function Password({  links, paths, email }: any) {
         setShow(true)
       };
       if (form.isSuccess){
-        setFormResponse(form.data.message)
+        setFormResponse(form.data.message.message)
         setShow(true)
       }
   }, [form, router, mail]);
