@@ -31,9 +31,11 @@ export default function FormApply({ fields, fieldnames, clicked, initial, token 
       axios.post('', inputs, {headers: {"Accept": "application/json"}})
       .then(res => {
         const a = res.data
-        console.log(a)
         if (a && a.data) {
           axios.patch(`${baseUrl}/users/image/${a.data}`, formData, {headers: {"Content-Type": "multipart/form-data"}})
+          .then(res => {
+            alert(res.data.message)
+          })
         }
       }).catch(err => {
         const response = "Unable To Submit Your Data"
