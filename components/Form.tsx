@@ -38,7 +38,7 @@ export default function FormApply({ fields, fieldnames, clicked, initial, token 
           })
         }
       }).catch(err => {
-        const response = "Unable To Submit Your Data"
+        alert("Unable to Submit your data")
       })
     }
     var initialdata: any = []
