@@ -18,15 +18,9 @@ export const getServerSideProps = handle({
 });
 
 export default function Home({ data }: any) {
-
-  const router = useRouter()
-  const form = useFormSubmit()
-  useEffect(() => {
-    if (form.isSuccess){
-      alert(data.message)
-    }
-  }, [form, router]);
-
+  if (data){
+    alert(data.message)
+  }
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-[#063970] to-blue-200">
     <div className="grid place-items-center mx-2 my-20 sm:my-auto" x-data="{ showPass: true }">
