@@ -16,7 +16,6 @@ export const getServerSideProps = handle({
 });
 
 export default function Home({ data }: any) {
-
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-[#063970] to-blue-200">
     <div className="grid place-items-center mx-2 my-20 sm:my-auto" x-data="{ showPass: true }">
@@ -26,6 +25,7 @@ export default function Home({ data }: any) {
             <div className="text-center mb-4">
                 <h6 className="font-semibold text-[#063970] text-xl">GNC</h6>
                 <Image src={Logo} alt="image" className='w-10 md:w-14 h-10 md:h-14 lg:w-20 lg:h-20 justify-self-center mx-auto'/>
+                <div>{data? data.message}</div>
             </div>
             <div className="space-y-5 tex-lg">
               <LoginComponent/>
