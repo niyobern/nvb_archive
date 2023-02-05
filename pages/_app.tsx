@@ -14,4 +14,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} links={globLinks} paths={globPaths} email={email} handleEmail={handleEmail}/>
 }
 
-export default withNextRuntime(MyApp);
+export default MyApp;

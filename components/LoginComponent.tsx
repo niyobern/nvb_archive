@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function LoginComponent(){
     return (
 <section className="text-gray-600 body-font justify-self-center w-full">
-  <Form className="container pt-0 mx-auto" method='POST' action='/' name="login">
+  <form className="container pt-0 mx-auto" method='POST' action='/'>
     <div className="flex lg:w-5/6 w-full  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
         <div className="relative flex-grow w-full">
           <label htmlFor="number"className="leading-7 text-sm text-gray-600">Your Phone Number</label>
@@ -16,7 +16,7 @@ export default function LoginComponent(){
         </div>
       </div>
     </div>
-  </Form>
+  </form>
 </section>
     )
 }
