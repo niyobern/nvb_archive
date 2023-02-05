@@ -23,7 +23,7 @@ export default function Home({ data }: any) {
   const form = useFormSubmit()
   useEffect(() => {
     if (form.isSuccess){
-      alert(data.data)
+      alert(data.message)
     }
   }, [form, router]);
 
