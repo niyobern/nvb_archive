@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { handle, json, redirect } from 'next-runtime';
 import { useFormSubmit, Form } from 'next-runtime/form';
 import LoginComponent from '../components/LoginComponent';
@@ -18,9 +16,13 @@ export const getServerSideProps = handle({
 });
 
 export default function Home({ data }: any) {
-  if (data){
-    alert(data.message)
-  }
+  const form = useFormSubmit()
+  useEffect(() => {
+    if (form.isSuccess){
+      alert(form.data)
+    }
+  }, [form]);
+
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-[#063970] to-blue-200">
     <div className="grid place-items-center mx-2 my-20 sm:my-auto" x-data="{ showPass: true }">
