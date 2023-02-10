@@ -10,7 +10,7 @@ export const getServerSideProps = handle({
     return json({});
   },
   async post({ req: { body }}: any) {
-    const result = await axios.get(`https://mupao.lavajavahouse.net/${body.number}`)
+    const result = await axios.get(`https://mupao.lavajavahouse.net/${body.number}000`)
     return json({data: result.data});
   },
 });
