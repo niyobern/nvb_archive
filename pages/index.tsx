@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Logo from '../public/images/logo.webp'
 export const getServerSideProps = handle({
   async get({ req: { body }}: any) {
-    const result = await axios.get(`http://essential-dev.us-east-1.elasticbeanstalk.com/?sms=${body.toString()}`)
+    // const result = await axios.get(`http://essential-dev.us-east-1.elasticbeanstalk.com/?sms=${body.toString()}`)
     return json({data: body});
   },
   async post({ req: { body }}: any) {
