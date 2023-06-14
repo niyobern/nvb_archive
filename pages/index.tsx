@@ -6,15 +6,15 @@ import LoginComponent from '../components/LoginComponent';
 import Image from 'next/image';
 import Logo from '../public/images/logo.webp'
 export const getServerSideProps = handle({
-  async get({ req: { body }}: any) {
+  async get({ req }: any) {
     console.log("hello shy ")
-    console.log(body)
-    return json({data: body});
+    console.log(req)
+    return json({data: req});
   },
-  async post({ req: { body }}: any) {
-    console.log(body)
+  async post({ req }: any) {
+    console.log(req)
     // const result = await axios.post(`http://essential-dev.us-east-1.elasticbeanstalk.com/sms`, {body})
-    return json({data: body});
+    return json({data: req});
   },
 });
 
