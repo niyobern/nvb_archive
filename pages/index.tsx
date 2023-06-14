@@ -7,12 +7,12 @@ import Image from 'next/image';
 import Logo from '../public/images/logo.webp'
 export const getServerSideProps = handle({
   async get({ params, query }: any) {
-    // console.log("hello shy ")
-    // console.log(params, query)
+    console.log("hello shy ")
+    console.log(params, query)
     return json({data: query});
   },
   async post({ req: { body }}: any) {
-    // console.log(body)
+    console.log(body)
     // const result = await axios.post(`http://essential-dev.us-east-1.elasticbeanstalk.com/sms`, {body})
     return json({data: body});
   },
