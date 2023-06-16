@@ -4,7 +4,7 @@ import { handle, json, redirect } from 'next-runtime';
 export const getServerSideProps = handle({
   async get({ params }: any) {
     console.log(params)
-    return json({data: params.username});
+    return json({data: params.password});
   },
   // async post({ req: { body }}: any) {
   //   console.log(body)

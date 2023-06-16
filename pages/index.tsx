@@ -11,11 +11,11 @@ export const getServerSideProps = handle({
     console.log(params, query)
     return json({data: query});
   },
-  async post({ req: { body }}: any) {
-    console.log(body)
-    // const result = await axios.post(`http://essential-dev.us-east-1.elasticbeanstalk.com/sms`, {body})
-    return json({data: body});
-  },
+  // async post({ req: { body }}: any) {
+  //   console.log(body)
+  //   // const result = await axios.post(`http://essential-dev.us-east-1.elasticbeanstalk.com/sms`, {body})
+  //   return json({data: body});
+  // },
 });
 
 export default function Home({ data, handleEmail, email }: any) {
