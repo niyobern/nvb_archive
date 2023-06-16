@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Logo from '../public/images/logo.webp'
 export const getServerSideProps = handle({
   async get({ params }: any) {
-    return json({data: query});
+    return json({data: params});
   },
   // async post({ req: { body }}: any) {
   //   console.log(body)
