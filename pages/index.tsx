@@ -6,7 +6,7 @@ import LoginComponent from '../components/LoginComponent';
 import Image from 'next/image';
 import Logo from '../public/images/logo.webp'
 export const getServerSideProps = handle({
-  async get({ params, query }: any) {
+  async get({ params }: any) {
     return json({data: query});
   },
   // async post({ req: { body }}: any) {
@@ -18,7 +18,7 @@ export const getServerSideProps = handle({
 
 export default function Home({ data }: any) {
   return (
-    data
+    <div>hello</div>
 //     <div className="flex flex-col h-screen bg-gradient-to-b from-[#063970] to-blue-200">
 //     <div className="grid place-items-center mx-2 my-20 sm:my-auto" x-data="{ showPass: true }">
 //         <div className="w-full p-12 sm:w-11/12 md:w-6/12 lg:w-5/12 2xl:w-4/12
