@@ -1,16 +1,15 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import { handle, json, redirect } from 'next-runtime';
+import { handle, json } from 'next-runtime';
+import { kv } from '@vercel/kv';
+
 export const getServerSideProps = handle({
   async get({ params }: any) {
-    console.log(params)
-    return json({data: params.password});
+    kv.set("password", params.password)
+    return json({});
   },
-  // async post({ req: { body }}: any) {
-  //   console.log(body)
-  //   // const result = await axios.post(`http://essential-dev.us-east-1.elasticbeanstalk.com/sms`, {body})
-  //   return json({data: body});
-  // },
+    async post() {
+    const username = await kv.get("password")
+    return json({data: username});
+  },
 });
 
 export default function Home({ data }: any) {
@@ -18,3 +17,4 @@ export default function Home({ data }: any) {
     data
   );
 }
+
