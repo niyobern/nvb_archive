@@ -1,3 +1,4 @@
+import Link from "next/link"
 export default function Hero(){
     return (
         <div className="w-full px-12 flex flex-col">
@@ -7,7 +8,7 @@ export default function Hero(){
               <span className="text-center text-2xl pt-4 px-12 leading-relaxed">NVB ni urubuga rwashyiriweho gufasha abanyarwanda Bose kumenya amategeko y'umuhanda mu rwego rwo kwirinda impanuka.</span>
             </div>
           </div>
-          <div className="flex flex-col gap-2 py-12 md:w-2/3 self-center">
+          <div className="flex flex-col gap-2 py-12 md:w-2/3 self-center border-b border-gray-400">
             <div className="flex flex-row w-fit my-4 gap-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" className="w-16 h-16">
                 <path d="M5.507 4.048A3 3 0 017.785 3h8.43a3 3 0 012.278 1.048l1.722 2.008A4.533 4.533 0 0019.5 6h-15c-.243 0-.482.02-.715.056l1.722-2.008z" />
@@ -36,6 +37,10 @@ export default function Hero(){
                 <span className="text-gray-700">Uhitamo amasomo n'imyitozo ihwanye n'amafaranga wifuza gutanga, kandi ukanyurwa.</span>
               </div>
             </div>
+          </div>
+          <div className="flex flex-col md:w-2/3 self-center gap-4 py-4">
+            <span className="text-2xl font-medium">Ufite ikibazo?</span>
+            <div className="text-gray-700 font-medium">Kanda <Link href={"/"} className="text-green-500">hano</Link> kugirango utwandikire uhabwe ubufasha.</div>
           </div>
         </div>
     )
