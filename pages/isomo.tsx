@@ -5,7 +5,7 @@ export default function amasomo(){
     return (
         <div className="flex flex-row">
             <SideBar/>
-            <div className="flex flex-col gap-4 bg-gray-100">
+            <div className="flex flex-col gap-4 bg-gray-100 px-4">
                 <Content/>
                 <Content/>
                 <Content/>
