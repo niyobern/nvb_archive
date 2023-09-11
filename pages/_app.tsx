@@ -5,12 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const globLinks = ["Documents", "Leave", "Users", "Payroll"]
-  const globPaths = ["/admin", "/leave", "/users", "/payroll"]
-  const [email, setEmail] = useState("")
-  function handleEmail(mail: any){
-    setEmail(mail)
-  }
+
   return <Component {...pageProps}/>
 }
 
