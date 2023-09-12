@@ -3,15 +3,11 @@ import SideBar from "../components/sidebar"
 
 export default function amasomo(){
     return (
-        <div className="flex flex-row">
-            <SideBar/>
-            <div className="flex flex-col gap-4 bg-gray-100 px-4">
-                <Content/>
-                <Content/>
-                <Content/>
-                <Content/>
-            </div>
-            <SideBar/>
+        <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
+            <Content/>
+            <Content/>
+            <Content/>
+            <Content/>
         </div>
     )
 }

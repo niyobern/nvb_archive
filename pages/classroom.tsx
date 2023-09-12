@@ -1,11 +1,8 @@
 import Lesson from "../components/lesson"
-import SideBar from "../components/sidebar"
 export default function Class(){
     return (
-        <div className="flex flex-row justify-between">
-            <SideBar/>
+        <div className="p-4 h-full min-h-screen flex flex-col">
             <Lesson/>
-            <SideBar/>
         </div>
     )
 }
