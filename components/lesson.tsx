@@ -1,7 +1,11 @@
 export default function Lesson(){
     return (
-        <div className="flex flex-col w-full">
-            <iframe width="840" height="472" src="https://www.youtube.com/embed/OrEz65gPfJo?si=rpyBnq0e9zxycNiU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div className="flex flex-col">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/qlyUQaz8sH8?si=rao6nb4daE6xA4W3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div>
+                <span>Heading one</span>
+                <p>Contents are here</p>
+            </div>
         </div>
     )
 }
