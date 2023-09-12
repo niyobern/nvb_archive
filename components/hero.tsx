@@ -5,7 +5,7 @@ export default function Hero(){
           <div className="bg-gradient-to-r from-green-600 from-20% via-emerald-600 via-40% to-cyan-600 to-40% px-10">
             <div className="flex flex-col text-white font-medium content-center py-12">
               <span className="text-center text-5xl font-medium leading-relaxed">Urubuga Rwa mbere Mu Rwanda Rufasha Abantu Bose Kubona Provisoire</span>
-              <span className="text-center text-2xl pt-4 px-12 leading-relaxed">NVB ni urubuga rwashyiriweho gufasha abanyarwanda Bose kumenya amategeko y'umuhanda mu rwego rwo kwirinda impanuka.</span>
+              <span className="text-center text-2xl pt-4 px-12 leading-relaxed">NVB ni urubuga rwashyiriweho gufasha abanyarwanda Bose kumenya amategeko y&apos;umuhanda mu rwego rwo kwirinda impanuka.</span>
             </div>
           </div>
           <div className="flex flex-col gap-2 py-12 md:w-2/3 self-center border-b border-gray-400">
@@ -25,7 +25,7 @@ export default function Hero(){
               </svg>
               <div className="flex flex-col mx-auto leading-relaxed">
                 <span className="text-2xl font-medium text-gray-900">Tugutegura gukora ibizamini</span>
-                <span className="text-gray-700">Uru rubuga rufite imyitozo itandukanye igufasha kwitegura ibizamini bikenerwa nk'uruhushya rw'agateganyo rwo gutwara.</span>
+                <span className="text-gray-700">Uru rubuga rufite imyitozo itandukanye igufasha kwitegura ibizamini bikenerwa nk&apos;uruhushya rw&apos;agateganyo rwo gutwara.</span>
               </div>
             </div>
             <div className="flex flex-row w-fit my-4 gap-4">
@@ -34,7 +34,7 @@ export default function Hero(){
               </svg>
               <div className="flex flex-col mx-auto leading-relaxed">
                 <span className="text-2xl font-medium text-gray-900">Ibiciro biboneye</span>
-                <span className="text-gray-700">Uhitamo amasomo n'imyitozo ihwanye n'amafaranga wifuza gutanga, kandi ukanyurwa.</span>
+                <span className="text-gray-700">Uhitamo amasomo n&apos;imyitozo ihwanye n&apos;amafaranga wifuza gutanga, kandi ukanyurwa.</span>
               </div>
             </div>
           </div>
