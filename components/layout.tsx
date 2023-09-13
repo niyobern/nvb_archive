@@ -18,11 +18,11 @@ export default function Layout({children}: any){
     return (
         <div className="flex flex-col">
             <NavBar/>
-            <div className="grid grid-cols-5">
+            <div className="grid grid-cols-5 relative">
                 <div className="col-span-1">
                     <SideBar/>
                 </div>
-                <div className="col-span-3">{children}</div>
+                <div className="col-span-3 h-screen overflow-auto">{children}</div>
                 <div className="col-span-1">
                     <SideBar/>
                 </div>
