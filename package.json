@@ -33,6 +33,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
+    "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "^3.2.4"
   }
 }
