@@ -22,7 +22,7 @@ export default function Layout({children}: any){
                 <div className="col-span-1">
                     <SideBar/>
                 </div>
-                <div className="col-span-3 h-screen overflow-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-300">{children}</div>
+                <div className="col-span-3 h-screen overflow-auto scrollbar scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-teal-700">{children}</div>
                 <div className="col-span-1">
                     <SideBar/>
                 </div>
