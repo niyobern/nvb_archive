@@ -5,6 +5,11 @@ export default function Count(){
         questions.push(false)
     }
     const [qdone, setQdone] = useState(questions)
+    function handleDone(index: any){
+        const prev = qdone
+        prev[index] = true
+        setDone(prev)
+    }
     return (
         <div className="flex flex-row flex-wrap">
             {qdone.map( (value, index) => (
