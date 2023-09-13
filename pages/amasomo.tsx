@@ -2,7 +2,7 @@ import Banner from "../components/lessonbanner"
 
 export default function amasomo(){
     return (
-        <div className="flex flex-row gap-4 flex-wrap mx-auto justify-center bg-gray-100">
+        <div className="grid grid-cols-2 gap-4 bg-gray-100 p-2 shadow-l">
             <Banner/>
             <Banner/>
             <Banner/>
