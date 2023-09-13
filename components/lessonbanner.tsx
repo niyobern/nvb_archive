@@ -1,6 +1,6 @@
 export default function Banner() {
     return (
-        <div className="flex flex-col pt-4 gap-2 rounded-sm bg-white w-full pb-2 shadow-gray-200">
+        <div className="flex flex-col pt-4 gap-2 rounded-sm bg-white w-full pb-2 shadow-lg shadow-gray-200">
             <div className="text-3xl font-semibold px-2 md:px-4 text-green-800">Lorem ipsum dolor sit amet</div>
             <p className="text-md text-gray-700 px-2 md:px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <div className="p-2">
