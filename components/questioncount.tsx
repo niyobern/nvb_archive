@@ -8,7 +8,7 @@ export default function Count(){
     function handleDone(index: any){
         const prev = qdone
         prev[index] = true
-        setDone(prev)
+        setQdone(prev)
     }
     return (
         <div className="flex flex-row flex-wrap">
