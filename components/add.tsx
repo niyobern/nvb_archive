@@ -30,7 +30,7 @@ export default function Add(){
     formData.append("file", file)
 
     axios.post("https://reponv-1-d0312461.deta.app/content", formData)
-      .then((data) => alert(data))
+      .then((data) => console.log(data))
       .catch((err) => console.error(err));
   };
     return (
