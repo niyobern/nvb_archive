@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from 'react';
 
 export default function Add(){
   const [file, setFile] = useState<File>();
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -10,9 +12,14 @@ export default function Add(){
   };
 
   const handleUploadClick = () => {
-    if (!file) {
+    if (!file || title === "" || content === "") {
       return;
     }
+
+    const formata = new FormData()
+    formata.append("title", title)
+    formata.append("content", content)
+    formata.append("file", file)
 
     // 👇 Uploading the file using the fetch API to the server
     fetch('https://httpbin.org/post', {
@@ -32,16 +39,14 @@ export default function Add(){
     <div className="bg-blue-400 h-full w-full rounded shadow shadow-blue-400">
         <form className="flex flex-col gap-2 m-12">
             <label htmlFor="title" className="text-lg font-medium font-teal-800">Section Title</label>
-            <input type="text" id="fname" name="title" className="rounded p-2"/>
-            <label htmlFor="w3review">Review of W3Schools:</label>
-            <textarea id="w3review" name="w3review" className="h-48 w-full"/>
-            <div>
-              <input type="file" onChange={handleFileChange} />
-        
+            <input type="text" id="title" name="title" className="rounded p-2"/>
+            <label htmlFor="content">Section Content:</label>
+            <textarea id="content" name="content" className="h-48 w-full"/>
+            <div className="flex flex-col">
+              <input type="file" onChange={handleFileChange} name="file" id="file"/>
               <div>{file && `${file.name} - ${file.type}`}</div>
-        
-              <button onClick={handleUploadClick}>Upload</button>
             </div>
+            <button onClick={handleUploadClick}>Upload</button>
         </form>
     </div>
     )
