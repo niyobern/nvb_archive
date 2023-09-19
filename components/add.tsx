@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import axios from 'axios';
 
 export default function Add(){
   const [file, setFile] = useState<File>();
@@ -21,17 +22,7 @@ export default function Add(){
     formata.append("content", content)
     formata.append("file", file)
 
-    // 👇 Uploading the file using the fetch API to the server
-    fetch('https://httpbin.org/post', {
-      method: 'POST',
-      body: file,
-      // 👇 Set headers manually for single file upload
-      headers: {
-        'content-type': file.type,
-        'content-length': `${file.size}`, // 👈 Headers need to be a string
-      },
-    })
-      .then((res) => res.json())
+    axios.post("https://reponv-1-d0312461.deta.app", formata)
       .then((data) => console.log(data))
       .catch((err) => console.error(err));
   };
