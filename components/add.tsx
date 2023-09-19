@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 export default function Add(){
   const [file, setFile] = useState<File>();
@@ -35,7 +36,7 @@ export default function Add(){
   };
     return (
     <div className="bg-blue-400 h-full w-full rounded shadow shadow-blue-400">
-        <form className="flex flex-col gap-2 m-12" onSubmit={handleUploadClick}>
+        {/* <form className="flex flex-col gap-2 m-12" onSubmit={handleUploadClick}>
             <label htmlFor="title" className="text-lg font-medium font-teal-800">Section Title</label>
             <input type="text" id="title" name="title" className="rounded p-2" onChange={handleTitleChange} value={title}/>
             <label htmlFor="content">Section Content:</label>
@@ -45,7 +46,8 @@ export default function Add(){
               <div>{file && `${file.name} - ${file.type}`}</div>
             </div>
             <button type='submit' className="bg-gray-200 px-2 py-1 hover:shadow hover:shadow-gray-300">Upload</button>
-        </form>
+        </form> */}
+        <Image alt="Not Available Image" src="https://reponv-1-d0312461.deta.app/drive/get"/>
     </div>
     )
 }

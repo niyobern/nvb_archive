@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports= {
   images: {
-    domains: ["ntaweli-hr.s3.us-east-2.amazonaws.com"]
+    domains: ["https://reponv-1-d0312461.deta.app"]
   },
   reactStrictMode: true,
 }
