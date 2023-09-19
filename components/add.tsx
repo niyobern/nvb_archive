@@ -47,7 +47,7 @@ export default function Add(){
             </div>
             <button type='submit' className="bg-gray-200 px-2 py-1 hover:shadow hover:shadow-gray-300">Upload</button>
         </form> */}
-        <Image alt="Not Available Image" src="https://reponv-1-d0312461.deta.app/drive/get"/>
+        <Image alt="Not Available Image" src="https://reponv-1-d0312461.deta.app/drive/get" height={500} width={500}/>
     </div>
     )
 }
