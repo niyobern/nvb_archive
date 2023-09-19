@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
 
 export default function Add(){
@@ -18,7 +18,8 @@ export default function Add(){
     setContent(e.target.value)
   };
 
-  const handleUploadClick = () => {
+  const handleUploadClick = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (!file || title === "" || content === "") {
       return;
     }
@@ -29,7 +30,7 @@ export default function Add(){
     formData.append("file", file)
 
     axios.post("https://reponv-1-d0312461.deta.app/content", formData)
-      .then((data) => console.log(data))
+      .then((data) => alert(data))
       .catch((err) => console.error(err));
   };
     return (
@@ -43,7 +44,7 @@ export default function Add(){
               <input type="file" onChange={handleFileChange} name="file" id="file"/>
               <div>{file && `${file.name} - ${file.type}`}</div>
             </div>
-            <button onClick={handleUploadClick}>Upload</button>
+            <button onClick={handleUploadClick} className="bg-gray-200 px-2 py-1 hover:shadow hover:shadow-gray-300">Upload</button>
         </form>
     </div>
     )
