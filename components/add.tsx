@@ -17,12 +17,12 @@ export default function Add(){
       return;
     }
 
-    const formata = new FormData()
-    formata.append("title", title)
-    formata.append("content", content)
-    formata.append("file", file)
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("content", content)
+    formData.append("file", file)
 
-    axios.post("https://reponv-1-d0312461.deta.app", formata)
+    axios.post("https://reponv-1-d0312461.deta.app/content", formData)
       .then((data) => console.log(data))
       .catch((err) => console.error(err));
   };
