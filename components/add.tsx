@@ -46,7 +46,10 @@ export default function Add({ lesson_key, lesson_title }: any){
               <input type="file" onChange={handleFileChange} name="file" id="file"/>
               {/* <div>{file && `${file.name} - ${file.type}`}</div> */}
             </div>
-            <button type='submit' className="bg-gray-200 text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Upload</button>
+            <div className="flex flex-row gap-4 ">
+                <button type='submit' className="bg-gray-200 text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Next</button>
+                <button type='submit' className="bg-gray-200 text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Finish</button>
+            </div>
         </form>
     </div>
     )
