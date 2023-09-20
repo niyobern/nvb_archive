@@ -36,17 +36,17 @@ export default function Add(){
   };
     return (
     <div className="bg-blue-400 h-full w-full rounded shadow shadow-blue-400 flex flex-col content-center">
-        <h1 className='text-white text-xl font-bold text-center'>Title of Lesson</h1>
+        <h1 className='text-white text-2xl font-bold text-center mt-2'>Title of Lesson</h1>
         <form className="flex flex-col gap-2 m-12" onSubmit={handleUploadClick}>
-            <label htmlFor="title" className="text-lg font-medium font-teal-800">Section Title</label>
+            <label htmlFor="title" className="text-lg font-medium">Section Title</label>
             <input type="text" id="title" name="title" className="rounded p-2" onChange={handleTitleChange} value={title}/>
-            <label htmlFor="content">Section Content:</label>
-            <textarea id="content" name="content" className="h-48 w-full" onChange={handleContentChange} value={content}/>
-            <div className="flex flex-col">
+            <label htmlFor="content" className="text-lg font-medium">Section Content:</label>
+            <textarea id="content" name="content" className="h-48 w-full rounded" onChange={handleContentChange} value={content}/>
+            <div className="flex flex-col text-white">
               <input type="file" onChange={handleFileChange} name="file" id="file"/>
-              <div>{file && `${file.name} - ${file.type}`}</div>
+              {/* <div>{file && `${file.name} - ${file.type}`}</div> */}
             </div>
-            <button type='submit' className="bg-gray-200 px-2 py-1 hover:shadow hover:shadow-gray-300">Upload</button>
+            <button type='submit' className="bg-gray-200 text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Upload</button>
         </form>
     </div>
     )
