@@ -7,6 +7,7 @@ export default  function Upload(){
     const [title, setLessonTitle] = useState("Title of Lesson")
 
     function handleLesson(data: any){
+        console.log(data)
         setLessonKey(data.lesson_key)
         setLessonTitle(data.title)
     }
