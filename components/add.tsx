@@ -35,7 +35,8 @@ export default function Add(){
       .catch((err) => console.error(err));
   };
     return (
-    <div className="bg-blue-400 h-full w-full rounded shadow shadow-blue-400">
+    <div className="bg-blue-400 h-full w-full rounded shadow shadow-blue-400 flex flex-col content-center">
+        <h1 className='text-white text-xl font-bold text-center'>Title of Lesson</h1>
         <form className="flex flex-col gap-2 m-12" onSubmit={handleUploadClick}>
             <label htmlFor="title" className="text-lg font-medium font-teal-800">Section Title</label>
             <input type="text" id="title" name="title" className="rounded p-2" onChange={handleTitleChange} value={title}/>
