@@ -37,6 +37,7 @@ export default function Add({ lesson_key, lesson_title, handle }: any){
   const handleFinalClick = (e: any) => {
     e.preventDefault()
     if (!file || title === "" || content === "") {
+      alert("Fill every box");
       return;
     }
 
