@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
 
-export default function Add({ lesson_key, lesson_title }: any){
+export default function Add({ lesson_key, lesson_title, handle }: any){
   const [file, setFile] = useState<File>();
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
@@ -34,6 +34,22 @@ export default function Add({ lesson_key, lesson_title }: any){
       .then((data) => console.log(data))
       .catch((err) => console.error(err));
   };
+  const handleFinalClick = (e: any) => {
+    e.preventDefault()
+    if (!file || title === "" || content === "") {
+      return;
+    }
+
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("content", content)
+    formData.append("file", file)
+    formData.append("lesson_key", lesson_key)
+
+    axios.post("https://reponv-1-d0312461.deta.app/content", formData)
+      .then(() => handle())
+      .catch((err) => console.error(err));
+  };
     return (
     <div className="flex flex-col content-center">
         <h1 className='text-white text-2xl font-bold text-center mt-2'>{lesson_title}</h1>
@@ -46,9 +62,9 @@ export default function Add({ lesson_key, lesson_title }: any){
               <input type="file" onChange={handleFileChange} name="file" id="file"/>
               {/* <div>{file && `${file.name} - ${file.type}`}</div> */}
             </div>
-            <div className="flex flex-row gap-4 ">
-                <button type='submit' className="bg-gray-200 text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Next</button>
-                <button type='submit' className="bg-gray-200 text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Finish</button>
+            <div className="flex flex-row gap-4 justify-between">
+                <button type='submit' className="bg-gray-200 w-full text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Next</button>
+                <button onClick={handleFinalClick} className="bg-gray-200 w-full text-xl font-medium rounded p-2 hover:shadow-lg hover:bg-teal-200 hover:shadow-gray-500">Finish</button>
             </div>
         </form>
     </div>

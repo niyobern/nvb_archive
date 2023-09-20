@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 
-export default function Create(){
+export default function Create({ handle }: any){
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
@@ -24,7 +24,7 @@ export default function Create(){
     formData.append("description", description)
 
     axios.post("https://reponv-1-d0312461.deta.app/content", formData)
-      .then((data) => console.log(data))
+      .then((data) => handle(data))
       .catch((err) => console.error(err));
   };
     return (
