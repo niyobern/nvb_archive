@@ -17,17 +17,17 @@ export default function Layout({children}: any){
     }
     return (
         <div className="flex flex-col">
-            <NavBar/>
-            <div className="grid grid-cols-5 relative">
-                <div className="col-span-1">
+            {/* <NavBar/> */}
+            <div className="flex flex-col md:grid grid-cols-5 relative">
+                <div className="hidden md:flex col-span-1">
                     <SideBar/>
                 </div>
-                <div className="col-span-3 h-screen overflow-auto scrollbar scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-teal-700">{children}</div>
-                <div className="col-span-1">
+                <div className="col-span-3 h-screen overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-teal-700">{children}</div>
+                <div className="hidden md:flex col-span-1">
                     <SideBar/>
                 </div>
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     )
 }
