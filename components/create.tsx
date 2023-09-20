@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
-import Image from 'next/image';
 
 export default function Create({ handle }: any){
   const [title, setTitle] = useState("")
@@ -23,7 +22,7 @@ export default function Create({ handle }: any){
     formData.append("title", title)
     formData.append("description", description)
 
-    axios.post("https://reponv-1-d0312461.deta.app/lesson", formData)
+    axios.post("https://nvb_backend-1-z3745144.deta.app/lesson", formData)
       .then((data) => handle(data))
       .catch((err) => console.error(err));
   };
