@@ -1,8 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
-import Image from 'next/image';
 
-export default function Add(){
+export default function Add({ lesson_key, lesson_title }: any){
   const [file, setFile] = useState<File>();
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
@@ -29,14 +28,15 @@ export default function Add(){
     formData.append("title", title)
     formData.append("content", content)
     formData.append("file", file)
+    formData.append("lesson_key", lesson_key)
 
     axios.post("https://reponv-1-d0312461.deta.app/content", formData)
       .then((data) => console.log(data))
       .catch((err) => console.error(err));
   };
     return (
-    <div className="bg-blue-400 h-full w-full rounded shadow shadow-blue-400 flex flex-col content-center">
-        <h1 className='text-white text-2xl font-bold text-center mt-2'>Title of Lesson</h1>
+    <div className="flex flex-col content-center">
+        <h1 className='text-white text-2xl font-bold text-center mt-2'>{lesson_title}</h1>
         <form className="flex flex-col gap-2 m-12" onSubmit={handleUploadClick}>
             <label htmlFor="title" className="text-lg font-medium">Section Title</label>
             <input type="text" id="title" name="title" className="rounded p-2" onChange={handleTitleChange} value={title}/>
