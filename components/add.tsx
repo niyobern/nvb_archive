@@ -30,7 +30,7 @@ export default function Add({ lesson_key, lesson_title, handle }: any){
     formData.append("file", file)
     formData.append("lesson_key", lesson_key)
 
-    axios.post("https://reponv-1-d0312461.deta.app/content", formData)
+    axios.post("https://nvb_backend-1-z3745144.deta.app/content", formData)
       .then((data) => alert("done"))
       .catch((err) => console.error(err));
   };
@@ -46,7 +46,7 @@ export default function Add({ lesson_key, lesson_title, handle }: any){
     formData.append("file", file)
     formData.append("lesson_key", lesson_key)
 
-    axios.post("https://reponv-1-d0312461.deta.app/content", formData)
+    axios.post("https://nvb_backend-1-z3745144.deta.app/content", formData)
       .then(() => handle())
       .catch((err) => console.error(err));
   };
