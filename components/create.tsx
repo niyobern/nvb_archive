@@ -18,7 +18,7 @@ export default function Create({ handle }: any){
       return;
     }
 
-    axios.post("https://nvb_backend-1-z3745144.deta.app/lesson", {"title": title, "description": description}})
+    axios.post("https://nvb_backend-1-z3745144.deta.app/lesson", {"title": title, "description": description})
       .then((data) => handle(data))
       .catch((err) => console.error(err));
   };
