@@ -23,7 +23,7 @@ export default function Create({ handle }: any){
     formData.append("title", title)
     formData.append("description", description)
 
-    axios.post("https://reponv-1-d0312461.deta.app/content", formData)
+    axios.post("https://reponv-1-d0312461.deta.app/lesson", formData)
       .then((data) => handle(data))
       .catch((err) => console.error(err));
   };
