@@ -31,7 +31,7 @@ export default function Add({ lesson_key, lesson_title, handle }: any){
     formData.append("lesson_key", lesson_key)
 
     axios.post("https://reponv-1-d0312461.deta.app/content", formData)
-      .then((data) => console.log(data))
+      .then((data) => alert("done"))
       .catch((err) => console.error(err));
   };
   const handleFinalClick = (e: any) => {
