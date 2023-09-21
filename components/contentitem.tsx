@@ -2,6 +2,7 @@ import Link from "next/link"
 
 export default function Content({ title, description, time, link}: any){
     if (link){
+        console.log(link)
         return (
             <Link href={`/isomo/${link}`}>
                 <div className="border border-gray-500 rounded p-2 md:p-4 flex flex-col bg-white">
