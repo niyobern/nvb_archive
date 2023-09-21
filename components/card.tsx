@@ -18,6 +18,10 @@ export default function Card() {
                         <svg className="h-6 w-6 text-teal-800"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
                         <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
                     </div>
+                    <div className="flex flex-row gap-2 justify-start">
+                        <svg className="h-6 w-6 text-teal-800"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                    </div>
                 </div>
             </div>
         </div>
