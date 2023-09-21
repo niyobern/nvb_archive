@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
+import { useDropzone } from "react-dropzone";
 
 export default function Add({ lesson_key, lesson_title, handle }: any){
   const [file, setFile] = useState<File>();
