@@ -17,7 +17,7 @@ export default function Layout({children}: any){
     }
     return (
         <div className="flex flex-col">
-            {/* <NavBar/> */}
+            <NavBar/>
             <div className="flex flex-col md:grid grid-cols-5 relative">
                 <div className="hidden md:flex col-span-1">
                     <SideBar/>
@@ -27,7 +27,7 @@ export default function Layout({children}: any){
                     <SideBar/>
                 </div>
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
     )
 }
