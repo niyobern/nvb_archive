@@ -6,7 +6,7 @@ export default function Ibazwa(){
     const start = Date.now()
     const duration = 20*60*1000
     return (
-        <div>
+        <div className="bg-teal-100 md:px-10 flex flex-col h-full">
             <Indicator start={start} duration={duration}/>
             <Count/>
             <Question/>

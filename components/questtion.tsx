@@ -1,6 +1,6 @@
 export default function Question() {
     return (
-        <div className="bg-teal-100 h-screen flex flex-col justify-center content-center px-10">
+        <div className="py-2 md:py-8 flex flex-col justify-center content-center">
             <div className="rounded bg-white shadow-lg shadow-gray-400 p-4 mx-auto flex flex-col">
                 <span className="text-2xl font-medium text-teal-900 text-center">Question 1</span>
                 <p className="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>

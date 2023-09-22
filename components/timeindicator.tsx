@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 export default function Indicator({ start, duration }: any){
     function msToTime(s: any) {
 
-        // Pad to 2 or 3 digits, default is 2
         function pad(n: any, z: any) {
           z = z || 2;
           return ('00' + n).slice(-z);
@@ -18,7 +17,6 @@ export default function Indicator({ start, duration }: any){
         return pad(hrs, 2) + ':' + pad(mins, 2) + ':' + pad(secs, 2);
       }
       
-      console.log(msToTime(55018))
     const [percentage, setPercentage] = useState(0)
     useEffect(
         () => {
