@@ -5,9 +5,10 @@ export default function Count(){
         questions.push(false)
     }
     const [qdone, setQdone] = useState(questions)
-    console.log(qdone)
     function handleDone(index: any){
-        setQdone(...qdone)
+        const prev = [...qdone]
+        prev[index] = true
+        setQdone(prev)
     }
     return (
         <div className="w-full grid grid-rows-4 grid-cols-5 md:grid-rows-2 md:grid-cols-10 gap-0">
