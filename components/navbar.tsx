@@ -3,15 +3,16 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export default function NavBar({ language }: any){
+export default function NavBar(){
     const menu = ["", "Isubukura", "Isuzumabumenyi", "Ikofi", "Konti Yanjye"]
     const router = useRouter()
     const route = router.pathname.slice(1)
+    const language = "gb"
     const [lang, setLang] = useState(language)
 
     useEffect(() => {
       if (!language){
-        setLang(window.localStorage.getItem("lang") || ("gb" && window.localStorage.setItem("lang", "gb")))
+        setLang(window.localStorage.getItem("lang") || ("gb"))
       } else {
         window.localStorage.setItem("lang", language)
       }
@@ -43,7 +44,7 @@ export default function NavBar({ language }: any){
             )))}
             <div onClick={changeLang} className="group flex gap-2 rounded">
               <span className="hidden text-blue-900 group-hover:flex">{lang == "gb" ? "English" : "Kinyarwanda"}</span>
-              <span className={`fi fi-${lang} text-2xl`}/>
+              <span className={`fi fi-gb text-2xl`}/>
             </div>
         </div>
         <div className="px-4 flex md:hidden justify-between h-12 w-full">
