@@ -1,7 +1,7 @@
 import Image from "next/image"
 export default function Card() {
     return (
-        <div className="bg-teal-100 h-screen flex flex-col justify-center content-center px-10">
+        <div className="flex flex-col justify-center content-center">
             <div className="rounded bg-white shadow-lg shadow-gray-400 p-4 mx-auto flex flex-col">
                 <p className="text-justify text-lg text-gray-800 md:py-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <Image src="https://nvb_backend-1-z3745144.deta.app/image" alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center"/>
