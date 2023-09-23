@@ -3,6 +3,7 @@ import SideBar from "./sidebar"
 import HomeNavBar from "./homenavbar"
 import Footer from "./footer"
 import AppBar from "./appbar"
+import NavBar from "./navbar"
 
 export default function Layout({children}: any){
     const router = useRouter()
@@ -10,7 +11,7 @@ export default function Layout({children}: any){
     console.log(route)
     if (route === "/"){
         return (
-            <div>
+            <div className="w-full">
                 <HomeNavBar/>
                 {children}
                 <Footer/>

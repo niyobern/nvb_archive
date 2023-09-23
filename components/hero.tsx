@@ -1,7 +1,7 @@
 import Link from "next/link"
 export default function Hero(){
     return (
-        <div className="w-full px-12 flex flex-col">
+        <div className="w-full md:px-12 flex flex-col">
           <div className="bg-gradient-to-r from-green-600 from-20% via-emerald-600 via-40% to-cyan-600 to-40% px-10">
             <div className="flex flex-col text-white font-medium content-center py-12">
               <span className="text-center text-5xl font-medium leading-relaxed">Urubuga Rwa mbere Mu Rwanda Rufasha Abantu Bose Kubona Provisoire</span>
