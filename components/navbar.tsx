@@ -44,7 +44,7 @@ export default function NavBar(){
             )))}
             <div onClick={changeLang} className="group flex gap-2 rounded">
               <span className="hidden text-blue-900 group-hover:flex">{lang == "gb" ? "English" : "Kinyarwanda"}</span>
-              <span className={`fi fi-gb text-2xl`}/>
+              <span className={`fi fi-${lang} text-2xl`}/>
             </div>
         </div>
         <div className="px-4 flex md:hidden justify-between h-12 w-full">
