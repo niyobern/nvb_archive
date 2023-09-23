@@ -32,7 +32,7 @@ export default function NavBar(){
       }
     }
 
-    return (<div className="mb-0 md:py-2 flex flex-row items-center justify-between fixed md:sticky z-50 order-last md:order-first bottom-0 md:top-0 w-full bg-white shadow-inner shadow-white">
+    return (<div className="mb-0 md:py-2 px-10 flex flex-row items-center justify-between fixed md:sticky z-50 order-last md:order-first bottom-0 md:top-0 w-full bg-white shadow-inner shadow-white">
         <div className="flex flex-row justify-start items-center">
             <span className="text-4xl font-bold text-teal-800">NVB</span>
         </div>
