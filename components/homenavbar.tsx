@@ -6,7 +6,7 @@ export default function HomeNavBar(){
         show? document.getElementById("pointerIcon")?.classList.remove("hidden"): document.getElementById("pointerIcon")?.classList.add("hidden")
     }
     return (
-        <div className="border-b border-gray-200 py-2 flex flex-row justify-between px-12">
+        <div className="border-b border-gray-200 py-2 flex flex-row justify-between md:px-12 sticky">
             <span className="text-4xl font-bold text-teal-800">NVB</span>
             <div></div>
             <div className="gap-4 justify-between flex flex-row text-xl">
