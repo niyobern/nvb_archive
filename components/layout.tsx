@@ -11,15 +11,15 @@ export default function Layout({children}: any){
     if (route === "/"){
         return (
             <div>
-                <AppBar/>
-                {/* <NavBar/>
+                <NavBar/>
                 {children}
-                <Footer/> */}
+                <Footer/>
             </div>
         )
     }
     return (
         <div className="flex flex-col">
+            <AppBar/>
             <NavBar/>
             <div className="flex flex-col md:grid grid-cols-5 relative">
                 <div className="hidden md:flex col-span-1">
