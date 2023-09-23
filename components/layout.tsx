@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import SideBar from "./sidebar"
-import NavBar from "./navbar"
+import HomeNavBar from "./homenavbar"
 import Footer from "./footer"
 import AppBar from "./appbar"
 
@@ -11,7 +11,7 @@ export default function Layout({children}: any){
     if (route === "/"){
         return (
             <div>
-                <NavBar/>
+                <HomeNavBar/>
                 {children}
                 <Footer/>
             </div>
