@@ -11,7 +11,7 @@ export default function Layout({children}: any){
     console.log(route)
     if (route === "/"){
         return (
-            <div className="w-full">
+            <div className="w-full min-h-screen flex flex-col justify-between">
                 <HomeNavBar/>
                 {children}
                 <Footer/>
