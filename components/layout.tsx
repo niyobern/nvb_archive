@@ -17,6 +17,11 @@ export default function Layout({children}: any){
                 <Footer/>
             </div>
         )
+    } else if (route === "/user/login" || route === "/user/register"){
+        return (
+        <div>
+            {children}
+        </div>)
     }
     return (
         <div className="flex flex-col">
