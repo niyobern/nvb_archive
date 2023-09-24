@@ -1,4 +1,4 @@
-import Banner from "../components/lessonbanner"
+import Banner from "../../components/lessonbanner"
 
 export default function amasomo(){
     return (
