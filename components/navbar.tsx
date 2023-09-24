@@ -5,7 +5,7 @@ import axios from "axios"
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default function NavBar({ language }: any){
-    const menu = ["", "Amasomo", "Isubukura", "Isuzumabumenyi", "Ikofi", "Konti Yanjye"]
+    const menu = ["", "amasomo", "Isubukura", "Isuzumabumenyi", "Ikofi", "Konti Yanjye"]
     const router = useRouter()
     const route = router.pathname.slice(1)
     const [lang, setLang] = useState(language)
@@ -39,7 +39,7 @@ export default function NavBar({ language }: any){
         <div className="hidden md:flex justify-between gap-4 text-lg text-center font-normal">
             {menu.map(( item => (
               <Link passHref={true} key={item} href={"/" + item}>
-                  <div className={`${route === item ? "bg-green-600 text-gray-900 px-2 py-1" : "text-gray-900"} capitalize hover:px-2 py-1 rounded hover:text-white hover:bg-teal-600 text-xl text-teal-800 font-medium text-nowrap`}>{item === "" ? "Ahabanza" : item}</div>
+                  <div className={`${route === item ? "bg-teal-500 text-white px-2 py-1" : "text-teal-800"} capitalize hover:px-2 py-1 rounded hover:text-white hover:bg-teal-600 text-xl font-medium text-nowrap`}>{item === "" ? "Ahabanza" : item}</div>
               </Link>
             )))}
             <div onClick={changeLang} className="group flex gap-2 rounded">
