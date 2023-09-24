@@ -13,24 +13,25 @@ export default function AppBar(){
 
     useEffect(() => {
       if (!language){
-        setLang(window.localStorage.getItem("lang"))
+        setLang(window.localStorage.getItem("lang") || "rw")
       } else {
         window.localStorage.setItem("lang", language)
       }
     }, [language])
 
     function changeLang(){
-      if (lang == "gb"){
-        setLang("rw")
-        window.localStorage.setItem("lang", "rw")
-        axios.post("/", {lang: "rw"})
-        .then(() => router.reload())
-      } else {
-        setLang("gb")
-        window.localStorage.setItem("lang", "gb")
-        axios.post("/", {lang: "gb"})
-        .then(() => router.reload())
-      }
+      console.log("clicked")
+      // if (lang == "gb"){
+      //   setLang("rw")
+      //   window.localStorage.setItem("lang", "rw")
+      //   axios.post("/", {lang: "rw"})
+      //   .then(() => router.reload())
+      // } else {
+      //   setLang("gb")
+      //   window.localStorage.setItem("lang", "gb")
+      //   axios.post("/", {lang: "gb"})
+      //   .then(() => router.reload())
+      // }
     }
 
     return (<div className="mb-0 flex flex-row md:hidden items-center justify-between sticky z-50 order-first top-0 w-full bg-white shadow rounded-b">
