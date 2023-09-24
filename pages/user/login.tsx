@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { handle, json, redirect } from 'next-runtime';
 import { useFormSubmit, Form } from 'next-runtime/form';
-import LoginComponent from '../components/LoginComponent';
+import LoginComponent from '../../components/LoginComponent';
 import Image from 'next/image';
-import Logo from '../public/images/logo.png'
+import Logo from '../../public/images/logo.png'
 
 export default function Home() {
   const fields = ["Email or Phone ", "Password"]
@@ -33,8 +33,8 @@ export default function Home() {
             px-6 py-10 sm:px-10 sm:py-6
             bg-white rounded-lg shadow-md lg:shadow-lg">
             <div className="text-center mb-4">
-                <h6 className="font-semibold text-[#063970] text-xl">Login</h6>
-                <Image src={Logo} alt="image" className='w-10 md:w-14 h-10 md:h-14 lg:w-20 lg:h-20 justify-self-center mx-auto'/>
+                <h6 className="font-semibold text-[#063970] text-xl mb-2">Login</h6>
+                <Image src={Logo} alt="image" className='rounded-full w-10 md:w-14 h-10 md:h-14 lg:w-20 lg:h-20 justify-self-center mx-auto'/>
                 <div onClick={handleShow} className={`${ show ? "inline-block": "hidden"} px-6 text-lg font-bold text-red-600 mt-2 pt-4 rounded-lg`}>You supplied Invalid Credentials</div>
             </div>
             <div className="space-y-5 tex-lg">
