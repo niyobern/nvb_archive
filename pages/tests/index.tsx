@@ -1,7 +1,7 @@
-import Question from "../components/questtion"
-import Indicator from "../components/timeindicator"
-import Count from "../components/questioncount"
-import Navigate from "../components/navigate"
+import Question from "../../components/questtion"
+import Indicator from "../../components/timeindicator"
+import Count from "../../components/questioncount"
+import Navigate from "../../components/navigate"
 
 export default function Ibazwa(){
     const start = Date.now()
