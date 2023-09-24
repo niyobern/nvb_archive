@@ -1,6 +1,6 @@
 export default function Footer(){
     return (
-        <div className="flex flex-col md:flex-row justify-between bg-gray-200 py-4 md:px-24 lg:px-48 text-center">
+        <div className="flex flex-col md:flex-row justify-between bg-gray-200 py-4 pb-12 md:pb-4 md:px-24 lg:px-48 text-center">
           <div className="text-gray-800 flex flex-col md:flex-row order-last md:order-0 md:gap-4">
             <span className="font-normal">Copyright © 2023 NVB. All Rights Reserved. </span>
             <span className="font-medium">Developed by Smaqui</span>
