@@ -6,9 +6,9 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
 
-export default function AppBar({ language }: any){
+export default function AppBar(){
   const router = useRouter()
-    const menu = ["Home", "Extension", "Marketing", "About", "Contact", "Testimonials"]
+  const language = "rw"
     const [lang, setLang] = useState(language)
 
     useEffect(() => {
