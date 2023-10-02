@@ -1,10 +1,10 @@
 import Content from "../../components/contentitem"
-import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 export default function contents(){
     const url = "https://nvb_backend-1-z3745144.deta.app"
-    const router = useRouter()
-    const route = router.query
+    const router = useSearchParams()
+    const route = router.getAll()
     console.log(route)
     return (
         <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
