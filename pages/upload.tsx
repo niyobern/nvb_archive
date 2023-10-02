@@ -1,6 +1,6 @@
 import Add from "../components/add"
 import Create from "../components/create"
-import {Cha, useState } from "react"
+import {ChangeEvent, useState } from "react"
 
 export default  function Upload(){
     const [formdata, setFormdata] = useState({})
