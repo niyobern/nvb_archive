@@ -7,7 +7,7 @@ export default  function Upload(){
     const [count, setCount] = useState([1])
     function changeCount(){
         const newCount = [...count]
-        newCount.push(count[count.length] + 1)
+        newCount.push(count.length + 1)
         setCount(newCount)
     }
     function handleChange(e:any){
