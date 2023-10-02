@@ -4,7 +4,8 @@ import {ChangeEvent, useState } from "react"
 import axios from "axios"
 
 export default  function Upload(){
-    const [formdata, setFormdata] = useState({})
+    const start = new Object()
+    const [formdata, setFormdata] = useState(start)
     const [count, setCount] = useState([1])
     function changeCount(){
         const newCount = [...count]
@@ -21,7 +22,16 @@ export default  function Upload(){
         });
     }
      function handleSubmit(){
-        axios.post()
+        const options = []
+        const files = []
+        for ( let i in formdata){
+            if (i.slice(0,6) === "option") {
+                options.push(formdata[i])
+            } else {
+                files.push(formdata[i])
+            }
+        }
+        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${formdata.question}`, {options: [op]})
      }
     return (
         <div className="flex flex-col bg-teal-200 h-screen gap-2">
