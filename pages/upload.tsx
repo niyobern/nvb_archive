@@ -1,6 +1,7 @@
 import Add from "../components/add"
 import Create from "../components/create"
 import {ChangeEvent, useState } from "react"
+import axios from "axios"
 
 export default  function Upload(){
     const [formdata, setFormdata] = useState({})
@@ -19,6 +20,9 @@ export default  function Upload(){
           [name]: value,
         });
     }
+     function handleSubmit(){
+        axios.post()
+     }
     return (
         <div className="flex flex-col bg-teal-200 h-screen gap-2">
             <div className="flex flex-col p-2 gap-1">
@@ -32,7 +36,7 @@ export default  function Upload(){
                             <label htmlFor={`option${i}`}>Option {i}</label>
                             <div className="flex flex-row gap-2 w-full">
                                 <input type="text" id={`option${i}`} name={`option${i}`} className="bg-white p-1 w-full" onChange={handleChange}/>
-                                <input type="file" id={`file${i}`} name={`file${i}`} className="bg-white p-1 w-full" onChange={handleChange}/>
+                                <input type="file" id={`file${i}`} name={`file${i}`} className="bg-white p-1 w-32" onChange={handleChange}/>
                             </div>
                         </div>
                     ))}
