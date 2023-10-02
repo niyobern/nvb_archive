@@ -3,21 +3,16 @@ import Create from "../components/create"
 import { useState } from "react"
 
 export default  function Upload(){
-    const [lessonKey, setLessonKey] = useState("")
-    const [title, setLessonTitle] = useState("Title of Lesson")
-
-    function handleLesson(data: any){
-        console.log(data)
-        setLessonKey(data.lesson_key)
-        setLessonTitle(data.title)
-    }
-    function handleFinish(){
-        setLessonKey("")
-        setLessonTitle("Title of Lesson")
-    }
     return (
-        <div className="bg-blue-400 h-full w-full rounded shadow shadow-blue-400 flex flex-col justif-center content-center">
-            {lessonKey? <Add lesson_key={lessonKey} lesson_title={title} handle={handleFinish}/> : <Create handle={handleLesson}/>}
+        <div className="flex flex-col bg-teal-200 h-screen">
+            <div className="flex flex-col p-2 gap-1">
+                <label htmlFor="question">Question</label>
+                <input type="text" id="question" name="question" className="bg-white border-b border-gray-200 rounded p-1"/>
+            </div>
+            <div className="flex flex-col p-2 gap-1">
+                <label htmlFor="option">Option</label>
+                <input type="text" id="question" name="option" className="bg-white"></input>
+            </div>
         </div>
     )
 }
