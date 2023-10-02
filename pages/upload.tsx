@@ -29,7 +29,7 @@ export default  function Upload(){
                 
                     {count.map((i)=>(
                         <div className="flex flex-col p-2 gap-1">
-                            <label htmlFor={`option${i}`}>Option 1</label>
+                            <label htmlFor={`option${i}`}>Option {i}</label>
                             <div className="flex flex-row gap-2 w-full">
                                 <input type="text" id={`option${i}`} name={`option${i}`} className="bg-white p-1 w-full" onChange={handleChange}/>
                                 <input type="file" id={`file${i}`} name={`file${i}`} className="bg-white p-1 w-full" onChange={handleChange}/>
