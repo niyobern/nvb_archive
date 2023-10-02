@@ -8,7 +8,6 @@ import NavBar from "./navbar"
 export default function Layout({children}: any){
     const router = useRouter()
     const route = router.pathname
-    console.log(route)
     if (route === "/"){
         return (
             <div className="w-full min-h-screen flex flex-col justify-between">
