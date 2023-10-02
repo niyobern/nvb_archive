@@ -34,7 +34,8 @@ export default  function Upload(){
                 files.push(formdata[i])
             }
         }
-        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${formdata.question}`, {options: [op]})
+        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${formdata.question}`, {options: options})
+        .then((data) => console.log(data))
      }
     return (
         <div className="flex flex-col bg-teal-200 h-screen gap-2">
