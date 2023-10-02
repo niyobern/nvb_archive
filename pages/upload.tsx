@@ -4,9 +4,12 @@ import {ChangeEvent, useState } from "react"
 import axios from "axios"
 
 export default  function Upload(){
-    const start = new Object()
-    const [formdata, setFormdata] = useState(start)
+    const [formdata, setFormdata] = useState<IFormData>({})
     const [count, setCount] = useState([1])
+
+    interface IFormData {
+        [key: string]: string | File;
+      }
     function changeCount(){
         const newCount = [...count]
         newCount.push(count.length + 1)
