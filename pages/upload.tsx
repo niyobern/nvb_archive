@@ -27,7 +27,7 @@ export default  function Upload(){
             </div>
             <div className="flex flex-col mx-2 bg-sky-200">
                 
-                    {count.map((i)=>(
+                    {count.map(i=>(
                         <div className="flex flex-col p-2 gap-1">
                             <label htmlFor={`option${i}`}>Option {i}</label>
                             <div className="flex flex-row gap-2 w-full">
