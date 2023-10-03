@@ -8,7 +8,8 @@ export default  function Upload(){
     const [count, setCount] = useState([1])
     const [imageMode, setImageMode] = useState(false)
     const [question, setQuestion] = useState("")
-    var [key, setKey] = useState(null)
+    const [image, setImage] = useState()
+    const [key, setKey] = useState(null)
 
     interface IFormData {
         [key: string]: string | File;
@@ -21,6 +22,9 @@ export default  function Upload(){
 
     function handleQuestion(e: any){
         setQuestion(e.target.value)
+    }
+    function handleImage(e: any){
+        setImage(e.target.files[0])
     }
     function handleChange(e:any){
         const target = e.target;
@@ -50,7 +54,11 @@ export default  function Upload(){
                 files.push(formdata[i])
             }
         }
-        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}`, options)
+        const data = new FormData()
+        data.append("question", question)
+        data.append("image", image)
+        data.append("options", options)
+        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}`, data)
         .then(data => setKey(data.data.key))
         console.log(key)
 
@@ -69,7 +77,7 @@ export default  function Upload(){
             </div>
             <div className="flex flex-col px-4 bg-white">
                 <label htmlFor="image">Image Question</label>
-                <input type="file" id="image" name="image" className="w-full p-2"/>
+                <input type="file" id="image" name="image" className="w-full p-2" onChange={handleImage}/>
             </div>
             <div className="flex flex-col mx-2 bg-sky-200">
                 
