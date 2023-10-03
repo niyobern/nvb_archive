@@ -96,7 +96,7 @@ export default  function Upload(){
             <div className="flex flex-col mx-2 bg-sky-200">
                 
                     {count.map(i=>(
-                        <div className="flex flex-col p-2 gap-1">
+                        <div className="flex flex-col p-2 gap-1" key={i}>
                             <label htmlFor={`option${i}`}>Option {i}</label>
                             <div className="flex flex-row gap-2 w-full">
                                 <input type="text" id={`option${i}`} name={`option${i}`} className={`${imageMode ? "w-32": " w-full"} bg-white p-1`} onChange={handleChange}/>
