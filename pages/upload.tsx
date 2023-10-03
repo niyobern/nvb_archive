@@ -9,7 +9,6 @@ export default  function Upload(){
     const [imageMode, setImageMode] = useState(false)
     const [question, setQuestion] = useState("")
     const [image, setImage] = useState<File>()
-    const [key, setKey] = useState("")
 
     interface IFormData {
         [key: string]: string | File;
@@ -18,6 +17,18 @@ export default  function Upload(){
         const newCount = [...count]
         newCount.push(count.length + 1)
         setCount(newCount)
+    }
+
+    function sendFiles(key:any, files: any, options: any){
+        if (options.length === 0){
+            return
+        }
+        for (let i of files){
+            const imageUpload = new FormData()
+            imageUpload.append("image", i)
+            axios.post(`https://nvb_backend-1-z3745144.deta.app/question/photo?question=${key}`, imageUpload)
+            .then(data => console.log(data.data, "image"))
+        }
     }
 
     function handleQuestion(e: any){
@@ -45,8 +56,8 @@ export default  function Upload(){
     }
      function handleSubmit(e: any){
         e.preventDefault()
-        const options = []
-        const files = []
+        const options: any[] = []
+        const files: any[] = []
         for ( let i in formdata){
             if (i.slice(0,6) === "option") {
                 options.push(formdata[i])
@@ -58,16 +69,10 @@ export default  function Upload(){
         if (image){
             data.append("image", image)
             axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}&options=${options}`, data)
-            .then(data => setKey(data.data.key))
+            .then(data => sendFiles(data.data.key, files, options))
         } else {
             axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}&options=${options}`)
-            .then(data => setKey(data.data.key))
-        }
-        for (let i of files){
-            const imageUpload = new FormData()
-            imageUpload.append("image", i)
-            axios.post(`https://nvb_backend-1-z3745144.deta.app/question/photo?question=${key}`, imageUpload)
-            .then(data => console.log(data.data, "image"))
+            .then(data => sendFiles(data.data.key, files, options))
         }
      }
     return (
