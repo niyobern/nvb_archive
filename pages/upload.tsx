@@ -21,8 +21,8 @@ export default  function Upload(){
     }
 
     function sendFiles(key:any, files: any, options: any){
-        alert("inserted")
         if (options.length > 0){
+            alert("inserted")
             return
         }
         for (let i of files){
@@ -31,6 +31,7 @@ export default  function Upload(){
             axios.post(`https://nvb_backend-1-z3745144.deta.app/question/photo?question=${key}`, imageUpload)
             .then(data => console.log(data.data, "image"))
         }
+        alert("video inserted")
     }
 
     function handleQuestion(e: any){
