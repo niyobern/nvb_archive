@@ -24,7 +24,8 @@ export default  function Upload(){
           [name]: value,
         });
     }
-     function handleSubmit(){
+     function handleSubmit(e: any){
+        e.preventDeault()
         const options = []
         const files = []
         for ( let i in formdata){
@@ -59,6 +60,7 @@ export default  function Upload(){
                     <svg className="h-12 w-12 text-green-500 p-2 font-bold"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="12" y1="5" x2="12" y2="19" />  <line x1="5" y1="12" x2="19" y2="12" /></svg>                
                 </div>
             </div>
+            <div onClick={handleSubmit} className="text-white font-medium p-2 cursor-pointer bg-teal-600">Submit</div>
         </div>
     )
 }
