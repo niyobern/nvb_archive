@@ -58,7 +58,6 @@ export default  function Upload(){
         image && data.append("image", image)
         axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}&options=${options}`, data)
         .then(data => setKey(data.data.key))
-        console.log(key)
         for (let i of files){
             const imageUpload = new FormData()
             imageUpload.append("image", i)
