@@ -25,7 +25,7 @@ export default  function Upload(){
         });
     }
      function handleSubmit(e: any){
-        e.preventDeault()
+        e.preventDefault()
         const options = []
         const files = []
         for ( let i in formdata){
@@ -35,8 +35,8 @@ export default  function Upload(){
                 files.push(formdata[i])
             }
         }
-        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${formdata.question}`, {options: options})
-        .then(data => console.log(data))
+        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${formdata.question}`, options)
+        .then(data => console.log(data.data.key))
      }
     return (
         <div className="flex flex-col bg-teal-200 h-screen gap-2">
