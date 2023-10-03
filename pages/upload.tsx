@@ -8,8 +8,8 @@ export default  function Upload(){
     const [count, setCount] = useState([1])
     const [imageMode, setImageMode] = useState(false)
     const [question, setQuestion] = useState("")
-    const [image, setImage] = useState()
-    const [key, setKey] = useState(null)
+    const [image, setImage] = useState<File>()
+    const [key, setKey] = useState("")
 
     interface IFormData {
         [key: string]: string | File;
@@ -56,16 +56,17 @@ export default  function Upload(){
         }
         const data = new FormData()
         data.append("question", question)
-        data.append("image", image)
-        data.append("options", options)
-        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}`, data)
+        image && data.append("image", image)
+        data.append("options", JSON.stringify(options))
+        axios.post("https://nvb_backend-1-z3745144.deta.app/lesson/question", data)
         .then(data => setKey(data.data.key))
         console.log(key)
 
         for (let i of files){
             const imageUpload = new FormData()
+            imageUpload.append("question", key)
             imageUpload.append("image", i)
-            axios.post(`https://nvb_backend-1-z3745144.deta.app/question/photo?question=${key}`, imageUpload)
+            axios.post("https://nvb_backend-1-z3745144.deta.app/question/photo", imageUpload)
             .then(data => console.log(data.data, "image"))
         }
      }
