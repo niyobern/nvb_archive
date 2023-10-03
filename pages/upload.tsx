@@ -6,6 +6,9 @@ import axios from "axios"
 export default  function Upload(){
     const [formdata, setFormdata] = useState<IFormData>({})
     const [count, setCount] = useState([1])
+    const [imageMode, setImageMode] = useState(false)
+    const [question, setQuestion] = useState("")
+    var [key, setKey] = useState(null)
 
     interface IFormData {
         [key: string]: string | File;
@@ -15,9 +18,21 @@ export default  function Upload(){
         newCount.push(count.length + 1)
         setCount(newCount)
     }
+
+    function handleQuestion(e: any){
+        setQuestion(e.target.value)
+    }
     function handleChange(e:any){
         const target = e.target;
         const value = target.type === "file" ? target.files[0] : target.value;
+        if (target.type === "file"){
+            for ( let i in formdata){
+                if (i.slice(0,6) === "option") {
+                    delete formdata[i]
+                }
+            }
+            setImageMode(true)
+        }
         const name = target.name;
         setFormdata({
           ...formdata,
@@ -35,14 +50,26 @@ export default  function Upload(){
                 files.push(formdata[i])
             }
         }
-        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${formdata.question}`, options)
-        .then(data => console.log(data.data.key))
+        axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}`, options)
+        .then(data => setKey(data.data.key))
+        console.log(key)
+
+        for (let i of files){
+            const imageUpload = new FormData()
+            imageUpload.append("image", i)
+            axios.post(`https://nvb_backend-1-z3745144.deta.app/question/photo?question=${key}`, imageUpload)
+            .then(data => console.log(data.data, "image"))
+        }
      }
     return (
         <div className="flex flex-col bg-teal-200 h-screen gap-2">
             <div className="flex flex-col p-2 gap-1">
                 <label htmlFor="question">Question</label>
-                <input type="text" id="question" name="question" className="bg-white border-b border-gray-200 rounded p-1"/>
+                <input type="text" id="question" name="question" className="bg-white border-b border-gray-200 rounded p-1" onChange={handleQuestion}/>
+            </div>
+            <div className="flex flex-col px-4 bg-white">
+                <label htmlFor="image">Image Question</label>
+                <input type="file" id="image" name="image" className="w-full p-2"/>
             </div>
             <div className="flex flex-col mx-2 bg-sky-200">
                 
@@ -50,8 +77,8 @@ export default  function Upload(){
                         <div className="flex flex-col p-2 gap-1">
                             <label htmlFor={`option${i}`}>Option {i}</label>
                             <div className="flex flex-row gap-2 w-full">
-                                <input type="text" id={`option${i}`} name={`option${i}`} className="bg-white p-1 w-full" onChange={handleChange}/>
-                                <input type="file" id={`file${i}`} name={`file${i}`} className="bg-white p-1 w-32" onChange={handleChange}/>
+                                <input type="text" id={`option${i}`} name={`option${i}`} className={`${imageMode ? "w-32": " w-full"} bg-white p-1`} onChange={handleChange}/>
+                                <input type="file" id={`file${i}`} name={`file${i}`} className={`${imageMode ? "w-full": "w-32"}bg-white p-1`} onChange={handleChange}/>
                             </div>
                         </div>
                     ))}
