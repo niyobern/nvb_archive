@@ -21,7 +21,8 @@ export default  function Upload(){
     }
 
     function sendFiles(key:any, files: any, options: any){
-        if (options.length === 0){
+        alert("inserted")
+        if (options.length > 0){
             return
         }
         for (let i of files){
