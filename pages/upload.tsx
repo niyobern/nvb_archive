@@ -8,6 +8,7 @@ export default  function Upload(){
     const [count, setCount] = useState([1])
     const [imageMode, setImageMode] = useState(false)
     const [question, setQuestion] = useState("")
+    const [answer, setAnswer] = useState("")
     const [image, setImage] = useState<File>()
 
     interface IFormData {
@@ -33,6 +34,9 @@ export default  function Upload(){
 
     function handleQuestion(e: any){
         setQuestion(e.target.value)
+    }
+    function handleAnswer(e: any){
+        setAnswer(e.target.value)
     }
     function handleImage(e: any){
         setImage(e.target.files[0])
@@ -68,10 +72,10 @@ export default  function Upload(){
         const data = new FormData()
         if (image){
             data.append("image", image)
-            axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}&options=${options}`, data)
+            axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}&answer=${answer}&options=${options}`, data)
             .then(data => sendFiles(data.data.key, files, options))
         } else {
-            axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}&options=${options}`)
+            axios.post(`https://nvb_backend-1-z3745144.deta.app/lesson/question?question=${question}&answer=${answer}&options=${options}`)
             .then(data => sendFiles(data.data.key, files, options))
         }
      }
@@ -80,6 +84,10 @@ export default  function Upload(){
             <div className="flex flex-col p-2 gap-1">
                 <label htmlFor="question">Question</label>
                 <input type="text" id="question" name="question" className="bg-white border-b border-gray-200 rounded p-1" onChange={handleQuestion}/>
+            </div>
+            <div className="flex flex-col p-2 gap-1">
+                <label htmlFor="question">Answer</label>
+                <input type="text" id="answer" name="answer" className="bg-white border-b border-gray-200 rounded p-1" onChange={handleAnswer}/>
             </div>
             <div className="flex flex-col px-4 bg-white">
                 <label htmlFor="image">Image Question</label>
