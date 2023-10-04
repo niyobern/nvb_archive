@@ -29,7 +29,7 @@ import { __String } from "typescript"
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => item)
     const lessonKeys = lessons.map((item: any) => item.key)
     const contents: string[] = []
-    lessons.forEach((value: any)=>{
+    lessonKeys.forEach((value: any)=>{
         axios.get(`://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${value}`)
         .then((item)=>{
             contents.push(item.data._items.map((item: any) => item))
