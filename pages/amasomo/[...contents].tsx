@@ -10,7 +10,8 @@ import { __String } from "typescript"
 //   }
    
   export const getStaticPaths = (async () => {
-    const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data.key
+    const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson")).data._items.map((item: any) => "/amasomo/"+ item.key)
+    console.log(lessons)
     const contents: string[] = []
     lessons.forEach((value: any)=>{
         axios.get(`://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${value}`)
