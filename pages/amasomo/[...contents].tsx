@@ -8,7 +8,14 @@ import { __String } from "typescript"
 //     name: string
 //     stargazers_count: number
 //   }
-   
+  async function fetchContent(keys: any, list: any){
+    const contents: any[] = []
+    for (let i = 0; i < keys.length; i++){
+      const item = await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${keys[i]}`)
+      item.data._items.map((item: any) => list[i].contents.push(item))
+    }
+    return contents
+  }
   export const getStaticPaths = (async () => {
     const lessonKeys = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson")).data._items.map((item: any) => item.key)
     const lessons = lessonKeys.map((item: any) => "/amasomo/"+ item)
@@ -26,27 +33,43 @@ import { __String } from "typescript"
   }) satisfies GetStaticPaths
    
   export const getStaticProps = (async () => {
-    const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, "contents": []}))
+    const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
-    const contents :any[] = ["a", "non"]
-    for (let i of lessonKeys){
-        axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${i}`)
-        .then((item)=>{
-          item.data._items.map((i: any) => contents.push(i))
-        })
-    }
-    console.log(contents)
-    return { props: { lessons: contents } }
+    await fetchContent(lessonKeys, lessons)
+    return { props: { lessons: lessons} }
   })
    
   export default function Contents({ lessons }: InferGetStaticPropsType<typeof getStaticProps>) {
-    console.log(lessons)
-    return (
+    const router = useRouter()
+    const slugs = router.query.contents || []
+    if (slugs.length === 1){
+      return (
         <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
-            <Content id="1" current={true} time="40 cards" title="Introduction" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <Content id="2" time="200 cards" title="Introduction" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <Content id="3" time="30 cards" title="Introduction" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <Content id="4" time="57 cards" title="Introduction" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            {
+            lessons.map((value: any)=><Content id={value.key} current={true} time="40 cards" title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
+            }
         </div>
     )
+    }else if (slugs.length === 2){
+      const key = slugs[1]
+      const lesson = lessons.find((item: any) => item.key === key)
+      if (!lesson){ (
+        <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
+        </div>
+      )
+    }
+      return (
+        <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
+          {
+            lesson.contents.map((value: any)=><Content id={value.key} current={true} time="40 cards" title={value.item}/>)
+          }
+        </div>
+    )
+    } else {
+      return (
+        <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
+        </div>
+    )
+    }
+
   }
