@@ -21,17 +21,6 @@ export default function AppBar(){
 
     function changeLang(){
       console.log("clicked")
-      // if (lang == "gb"){
-      //   setLang("rw")
-      //   window.localStorage.setItem("lang", "rw")
-      //   axios.post("/", {lang: "rw"})
-      //   .then(() => router.reload())
-      // } else {
-      //   setLang("gb")
-      //   window.localStorage.setItem("lang", "gb")
-      //   axios.post("/", {lang: "gb"})
-      //   .then(() => router.reload())
-      // }
     }
 
     return (<div className="mb-0 flex flex-row md:hidden items-center justify-between sticky z-50 order-first top-0 w-full bg-white shadow rounded-b">
