@@ -1,6 +1,7 @@
 import Banner from "../../components/lessonbanner"
 import Layout from '../../components/layout';
 import axios from "axios"
+import { useState } from "react";
 
 async function fetchContent(keys: any, list: any){
     const contents: any[] = []
@@ -18,9 +19,11 @@ export const getStaticProps = (async () => {
     return { props: { lessons: lessons} }
   })
 
-export default function amasomo(){
+export default function amasomo( { lessons }: any){
+    const lefts = lessons.map((item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
+    const rights = lessons[0].contents.map((i: any) => ({text: i.item, link: `/amasomo/${lessons[0].key}/${i.key}`}))
     return (
-        <Layout>
+        <Layout left={lefts} right={rights} titlel="Amasomo" titler={lessons[0].title}>
             <div className="flex flex-col md:grid grid-cols-2 gap-4 bg-gray-100 p-2">
                 <Banner/>
                 <Banner/>
