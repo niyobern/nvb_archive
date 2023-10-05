@@ -8,6 +8,7 @@ import LoginComponent from '../../components/LoginComponent';
 import Image from 'next/image';
 import Logo from '../../public/images/logo.png'
 
+
 export default function Home() {
   const fields = ["Email or Phone ", "Password"]
 
