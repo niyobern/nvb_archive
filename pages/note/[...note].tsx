@@ -54,7 +54,7 @@ export const getStaticProps = (async (context: any) => {
 
 export default function Note({ lessons, note }: any){
     const router = useRouter()
-    const slugs = router.query.note || [""]
+    const slugs = router.query.note 
     function navigate(move: string){
         if (slugs.length === 1){
             router.push(`/note/${slugs[0]}/${note.key}`)
