@@ -55,12 +55,12 @@ export default function Note({ lessons, notes }: any){
     const chapter = notes[slugs[0]]
     var index = 0
     if (slugs.length > 1){
-        index = chapter.findIndex((item: any) => item.key === slugs[1])
+        index = chapter.findIndex((item: any) => item.content_id === slugs[1])
     }
     return (
         <Layout lessons={lessons}>
             <div className="bg-teal-100 px-1 md:px-10 py-4 flex flex-col gap-6 md:gap-4 h-full">
-                <Card note={chapter}/>
+                <Card note={chapter[index]}/>
                 <Navigate/>
             </div>
         </Layout>
