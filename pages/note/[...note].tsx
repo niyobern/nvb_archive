@@ -54,17 +54,12 @@ export const getStaticProps = (async (context: any) => {
 })
 
 export default function Note({ lessons, note }: any){
-    
-    useEffect(() => {
-        const router = useRouter()
-        const slugs = router.query.note || [""]
-        if (slugs.length === 1){
-            router.push(`/note/${slugs[0]}/${note.key}`)
-        }
-    }, [])
+    const router = useRouter()
+    const slugs = router.query.note || [""]
+    if (slugs.length === 1){
+        router.push(`/note/${slugs[0]}/${note.key}`)
+    }
     function navigate(move: string){
-        const router = useRouter()
-        const slugs = router.query.note || [""]
         if (move ===  "prev"){
             router.push(`/note/${slugs[0]}/${note.prev}`)
         } else {
