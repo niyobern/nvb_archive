@@ -16,17 +16,6 @@ async function fetchContent(keys: any, list: any){
 export const getStaticPaths = (async () => {
     const lessonKeys = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson")).data._items.map((item: any) => item.key)
     const lessons = lessonKeys.map((item: any) => "/amasomo/"+ item)
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
-    console.log("Loaded")
     const contents: string[] = []
     lessonKeys.forEach((value: any)=>{
         axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${value}`)
@@ -56,7 +45,7 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
         <Layout lessons={lessons}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
                 {
-                lessons.map((value: any)=><Content key={value.key} id={value.key} current={true} time="40 cards" title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
+                lessons.map((value: any)=><Content key={value.key} link={`/amasomo/1/${value.key}`} current={true} time={`${lessons.length} cards`} title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
                 }
             </div>
         </Layout>
