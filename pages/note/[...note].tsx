@@ -9,9 +9,9 @@ async function fetchContent(keys: any, list: any){
     var contentsHere: any[] = []
     for (let i = 0; i < keys.length; i++){
       const item = await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${keys[i]}`)
-      item.data._items.forEach((item: any) => {
-        list[i].contents.push(item);
-        contentsHere.push(item.key)
+      item.data._items.forEach((content: any) => {
+        list[i].contents.push(content);
+        contentsHere.push(content.key)
     })
     }
     return contentsHere
@@ -29,7 +29,14 @@ async function fetchNotes(contents: any){
 export const getStaticPaths = (async () => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
-    const contents = await fetchContent(lessonKeys, lessons)
+    const conts = await fetchContent(lessonKeys, lessons)
+    const contents = []
+    for (let i of conts){
+        const x = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${i}`)).data._items
+        if (!!x && x.length > 0){
+            contents.push(x)
+        }
+    }
     const notes = await fetchNotes(contents)
     const links: any[] = []
     for (let i of contents){
@@ -44,8 +51,8 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async (context: any) => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
-    // const lessonKeys = lessons.map((item: any) => item.key)
-    // const contents = await fetchContent(lessonKeys, lessons)
+    const lessonKeys = lessons.map((item: any) => item.key)
+    await fetchContent(lessonKeys, lessons)
     // const notes = await fetchNotes(contents)
     const slugs = context.params.note
     const note = slugs.length === 1 ? (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)).data._items[0] : (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)).data
