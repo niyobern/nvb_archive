@@ -2,7 +2,7 @@ import Content from "../../components/contentitem"
 import { useRouter } from "next/router"
 import type { InferGetStaticPropsType, GetStaticPaths } from 'next'
 import axios from "axios"
-// import Layout from '../../components/layout';
+import Layout from '../../components/layout';
 
 
 async function fetchContent(keys: any, list: any){
@@ -48,43 +48,43 @@ export const getStaticProps = (async () => {
   })
    
 export default function Contents({ lessons }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <div></div>
-    // const router = useRouter()
-    // const slugs = router.query.contents || []
-    // if (slugs.length === 1){
-    //   return (
-    //     <Layout lessons={lessons}>
-    //         <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
-    //             {
-    //             lessons.map((value: any)=><Content key={value.key} id={value.key} current={true} time="40 cards" title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
-    //             }
-    //         </div>
-    //     </Layout>
-    // )
-    // }else if (slugs.length === 2){
-    //   const key = slugs[1]
-    //   const lesson = lessons.find((item: any) => item.key === key)
-    //   if (!lesson){ (
-    //     <Layout lessons={lessons}>        
-    //       <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
-    //     </Layout>
-    //   )
-    // }
-    //   return (
-    //     <Layout lessons={lessons}>
-    //         <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
-    //           {
-    //             lesson.contents.map((value: any)=><Content  key={value.key} current={true} time="40 cards" title={value.item} link={`/note/${lesson.key}/${value.key}`}/>)
-    //           }
-    //         </div>
-    //     </Layout>
-    // )
-    // } else {
-    //   return (
-    //     <Layout lessons={lessons}>
-    //         <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
-    //     </Layout>
-    // )
-    // }
+  // return <div></div>
+    const router = useRouter()
+    const slugs = router.query.contents || []
+    if (slugs.length === 1){
+      return (
+        <Layout lessons={lessons}>
+            <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
+                {
+                lessons.map((value: any)=><Content key={value.key} id={value.key} current={true} time="40 cards" title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
+                }
+            </div>
+        </Layout>
+    )
+    }else if (slugs.length === 2){
+      const key = slugs[1]
+      const lesson = lessons.find((item: any) => item.key === key)
+      if (!lesson){ (
+        <Layout lessons={lessons}>        
+          <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
+        </Layout>
+      )
+    }
+      return (
+        <Layout lessons={lessons}>
+            <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
+              {
+                lesson.contents.map((value: any)=><Content  key={value.key} current={true} time="40 cards" title={value.item} link={`/note/${lesson.key}/${value.key}`}/>)
+              }
+            </div>
+        </Layout>
+    )
+    } else {
+      return (
+        <Layout lessons={lessons}>
+            <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
+        </Layout>
+    )
+    }
 
 }
