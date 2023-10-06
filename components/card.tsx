@@ -8,7 +8,7 @@ export default function Card( { note }: any) {
                 <Image src="https://nvb_backend-1-z3745144.deta.app/image" alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center bg-black"/>
                 <div className="flex flex-col gap-2 mt-2">
                     {points.map((item: any) => (
-                        <div className="flex flex-row gap-2 justify-start">
+                        <div key={item} className="flex flex-row gap-2 justify-start">
                             <svg className="h-6 w-6 text-teal-800"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
                             <span>{item}</span>
                         </div>
