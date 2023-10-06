@@ -25,11 +25,11 @@ export default function LoginComponent(){
     data.append("username", formData.username)
     data.append("password", formData.password)
 
-    axios.post("https://nvb_backend-1-z3745144.deta.app/login/", data)
+    axios.post("https://nvb_backend-1-z3745144.deta.app/login", data)
     .then( data => {
       const token = data.data.token
       window.localStorage.setItem("token", token)
-      router.push("/amasomo")
+      router.push("/amasomo/1")
     })
   }
     return (
