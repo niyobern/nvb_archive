@@ -60,6 +60,7 @@ export const getStaticProps = (async (context: any) => {
 })
 
 export default function Note({ lessons, note }: any){
+    const router = useRouter()
     const slugs = router.query.note || [""]
     function navigate(move: string){
         if (slugs.length === 1){
@@ -74,7 +75,6 @@ export default function Note({ lessons, note }: any){
     if (!lessons || ! note){
         return <div>Not Found</div>
     }
-    const router = useRouter()
     return (
         <Layout lessons={lessons}>
             <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex flex-col gap-6 md:gap-4 h-full">
