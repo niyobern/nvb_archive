@@ -6,10 +6,12 @@ import AppBar from "./appbar"
 import NavBar from "./navbar"
 
 export default function Layout({ children, lessons, titlel, titler }: any){
-    const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
-    const right = lessons.map((item: any) => ({text: item.contents[0].title, link: `/note/${item.contents[0].key}`}))
     const router = useRouter()
     const route = router.pathname
+    const slugs = router.query.content
+    const index = lessons.find((value) = > value.key === slugs[0])
+    const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
+    const right = lessons.map((item: any) => ({text: item.contents[0].title, link: `/note/${item.contents[0].key}`}))
     if (route === "/"){
         return (
             <div className="w-full min-h-screen flex flex-col justify-between">
