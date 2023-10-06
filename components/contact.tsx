@@ -6,7 +6,7 @@ export default function Contact(){
             <div className="flex flex-col h-fit md:grid grid-rows-6 grid-cols-2">
                 <div className="row-start-1 col-span-full row-end-4 w-full pb-8 relative flex flex-col">
                     {/* <Image alt="Image" fill={true} src={image} className="object-fill"/> */}
-                    <h1 className="py-8 self-center md:px-24 z-10 uppercase text-3xl font-semibold text-center" id="contact1">CONTACT US ABOUT ECOGENIUS SUPPORT</h1>
+                    <h1 className="py-8 self-center md:px-24 z-10 uppercase text-3xl font-semibold text-center" id="contact1">CONTACT US ABOUT TRAFFIC LAWS SUPPORT</h1>
                     <p className="md:w-1/2 self-center z-10 text-center text-white bg-gray-900 bg-opacity-50" id="contact2">We love to show you how you can become succesfull, increase productivity lorem ipsum dolor sit amet due sit conseptuely</p>
                 </div>
                 <div className="row-start-4 col-span-full row-span-3 w-full bg-green-400 z-10 hidden md:flex"></div>
