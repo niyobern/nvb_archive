@@ -42,13 +42,12 @@ export const getStaticPaths = (async () => {
     }
 })
 
-export const getStaticProps = (async () => {
+export const getStaticProps = (async (context: any) => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
     // const contents = await fetchContent(lessonKeys, lessons)
     // const notes = await fetchNotes(contents)
-    const router = useRouter()
-    const slugs = router.query.note = []
+    const slugs = context.params.note
     const noteContent = await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)
     const note = slugs.length === 1 ? noteContent.data._items[0] : await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)
     return { props: { lessons: lessons, note: note} }
