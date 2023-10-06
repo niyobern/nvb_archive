@@ -14,7 +14,7 @@ export default function Layout({ children, lessons }: any){
         index = lessons.find((item: any) => item.key === slugs[1])
     }
     const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
-    const right = lessons.map((item: any) => ({text: item.contents[index].title, link: `/note/${item.contents[0].key}`}))
+    const right = lessons.map((item: any) => ({text: item.contents[index].item, link: `/note/${item.contents[0].key}`}))
     if (route === "/"){
         return (
             <div className="w-full min-h-screen flex flex-col justify-between">
@@ -28,6 +28,23 @@ export default function Layout({ children, lessons }: any){
         <div>
             {children}
         </div>)
+    } else if (route === "/account" || route === "/ikofi") {
+        return (
+            <div className="flex flex-col">
+                <AppBar/>
+                <NavBar/>
+                <div className="flex flex-col md:grid grid-cols-5 relative">
+                    <div className="hidden md:flex col-span-1">
+                        <SideBar data={[{text: "Account", link: "/account"}]} title="Account"/>
+                    </div>
+                    <div className="col-span-3 h-screen overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-teal-700">{children}</div>
+                    <div className="hidden md:flex col-span-1">
+                        <SideBar  data={[{text: "Account", link: "/account"}]} title="Account"/>
+                    </div>
+                </div>
+                <Footer/>
+            </div>
+        )
     }
     return (
         <div className="flex flex-col">
@@ -39,7 +56,7 @@ export default function Layout({ children, lessons }: any){
                 </div>
                 <div className="col-span-3 h-screen overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-teal-700">{children}</div>
                 <div className="hidden md:flex col-span-1">
-                    <SideBar data={right} title={lessons[index].contents.map((item: any) => item.item)}/>
+                    <SideBar data={right} title={lessons[index].title}/>
                 </div>
             </div>
             <Footer/>
