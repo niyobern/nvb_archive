@@ -47,7 +47,6 @@ export default function Layout({ children, lessons }: any){
     if (slugs && (slugs.length > 1)){
         index = lessons.findIndex((item: any) => item.key === slugs[1])
     }
-    console.log(index)
     const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
     const right = lessons[index].contents.map((item: any) => ({text: item.item, link: `/note/${lessons[index].key}/${item.key}`}))
     return (
