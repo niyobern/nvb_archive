@@ -60,7 +60,6 @@ export default function Note({ lessons, notes }: any){
     var index = position
     if (slugs.length > 1){
         index = chapter.findIndex((item: any) => item.content_id === slugs[1])
-        setPosition(index)
     }
     return (
         <Layout lessons={lessons}>
