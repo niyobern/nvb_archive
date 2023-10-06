@@ -33,6 +33,7 @@ export const getStaticPaths = (async () => {
     const notes = await fetchNotes(contents)
     const links: any[] = []
     for (let i of contents){
+        links.push(`/note/${i}`)
         notes[i].forEach((note: any) => links.push(`/note/${i}/${note.key}`))
     }
     return {
@@ -44,29 +45,32 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async () => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
-    const contents = await fetchContent(lessonKeys, lessons)
-    const notes = await fetchNotes(contents)
-    return { props: { lessons: lessons, notes: notes} }
+    // const contents = await fetchContent(lessonKeys, lessons)
+    // const notes = await fetchNotes(contents)
+    const router = useRouter()
+    const slugs = router.query.note = []
+    const noteContent = await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)
+    const note = slugs.length === 1 ? noteContent.data._items[0] : await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)
+    return { props: { lessons: lessons, note: note} }
 })
 
-export default function Note({ lessons, notes }: any){
+export default function Note({ lessons, note }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
-    const chapter = notes[slugs[0]]
-    var index = 0
-    if (slugs.length > 1){
-        index = chapter.findIndex((item: any) => item.key === slugs[1])
-        if (index < 0){
-            return <div className="flex flex-col justify-center content-center"><span className="text-2xl font-bold text-green-600">Not Found</span></div>
-        }
+    if (slugs.length === 1){
+        router.push(`/note/${slugs[0]}/${note.key}`)
     }
-    function navigate(move: number){
-        router.push(`/note/${slugs[0]}/${chapter[index + move]}`)
+    function navigate(move: string){
+        if (move ===  "prev"){
+            router.push(`/note/${slugs[0]}/${note.prev}`)
+        } else {
+            router.push(`/note/${slugs[0]}/${note.next}`)
+        }
     }
     return (
         <Layout lessons={lessons}>
             <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex flex-col gap-6 md:gap-4 h-full">
-                <Card note={chapter[index]} position={index + "/" + chapter.length}/>
+                <Card note={note} position={note.index + "/" + note.total}/>
                 <Navigate navigator={navigate}/>
             </div>
         </Layout>
