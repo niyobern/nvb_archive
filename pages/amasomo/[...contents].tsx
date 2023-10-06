@@ -44,7 +44,7 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
         <Layout lessons={lessons}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
                 {
-                lessons.map((value: any)=><Content key={value.key} link={`/amasomo/1/${value.key}`} current={true} time={`${value.contents.length} chapters`} title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
+                lessons.map((value: any)=><Content key={value.key} link={`/amasomo/1/${value.key}`} time={`${value.contents.length} chapters`} title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
                 }
             </div>
         </Layout>
@@ -62,7 +62,7 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
         <Layout lessons={lessons}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
               {
-                lesson.contents.map((value: any)=><Content  key={value.key} current={true} title={value.item} link={`/note/${lesson.key}/${value.key}`}/>)
+                lesson.contents.map((value: any)=><Content  key={value.key} title={value.item} link={`/note/${value.key}`}/>)
               }
             </div>
         </Layout>

@@ -1,8 +1,9 @@
-import Card from "../components/card"
-import Navigate from "../components/navigate"
-import Layout from '../components/layout';
+import Card from "../../components/card"
+import Navigate from "../../components/navigate"
+import Layout from '../../components/layout';
 import axios from "axios"
 import { useRouter } from "next/router";
+import { isTypeNode } from "typescript";
 
 async function fetchContent(keys: any, list: any){
     var contentsHere: any[] = []
@@ -51,11 +52,15 @@ export const getStaticProps = (async () => {
 export default function Note({ lessons, notes }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
-    const index = notes[slugs[0]].find((item: any) => item.key === slugs[1])
+    const chapter = notes[slugs[0]]
+    var index = 0
+    if (slugs.length > 1){
+        index = chapter.findIndex((item: any) => item.key === slugs[1])
+    }
     return (
         <Layout lessons={lessons}>
             <div className="bg-teal-100 px-1 md:px-10 py-4 flex flex-col gap-6 md:gap-4 h-full">
-                <Card note={notes[index]}/>
+                <Card note={chapter}/>
                 <Navigate/>
             </div>
         </Layout>
