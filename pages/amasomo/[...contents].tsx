@@ -59,7 +59,7 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
       )
     }
       return (
-        <Layout lesson={lessons} titlel="Amasomo" titler={lessons[0].title}>
+        <Layout lesson={lessons}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
               {
                 lesson.contents.map((value: any)=><Content  key={value.key} current={true} time="40 cards" title={value.item}/>)
