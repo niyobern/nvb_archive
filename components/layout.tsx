@@ -41,8 +41,12 @@ export default function Layout({ children, lessons }: any){
     }
     const slugs = router.query.content
     var index: number = 0
+    if (!lessons){
+        return <div></div>
+    }
     if (slugs && slugs.length > 1){
         index = lessons.find((item: any) => item.key === slugs[1])
+        console.log(index, "indexi")
     }
     const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
     const right = lessons.map((item: any) => ({text: item.contents[index].item, link: `/note/${item.contents[0].key}`}))
