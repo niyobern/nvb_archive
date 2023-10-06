@@ -31,17 +31,19 @@ export const getStaticPaths = (async () => {
    
 export const getStaticProps = (async () => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
+    console.log("Loaded")
     const lessonKeys = lessons.map((item: any) => item.key)
     await fetchContent(lessonKeys, lessons)
     return { props: { lessons: lessons} }
   })
    
 export default function Contents({ lessons }: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log(lessons)
     const router = useRouter()
     const slugs = router.query.contents || []
     if (slugs.length === 1){
       return (
-        <Layout>
+        <Layout lessons={lessons}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
                 {
                 lessons.map((value: any)=><Content key={value.key} id={value.key} current={true} time="40 cards" title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
@@ -69,7 +71,7 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
     )
     } else {
       return (
-        <Layout lesson={lessons} titlel="Amasomo" titler={lessons[0].title}>
+        <Layout lessons={lessons}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
         </Layout>
     )

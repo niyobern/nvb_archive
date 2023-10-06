@@ -6,7 +6,6 @@ import AppBar from "./appbar"
 import NavBar from "./navbar"
 
 export default function Layout({ children, lessons }: any){
-    console.log(lessons)
     const router = useRouter()
     const route = router.pathname
     const slugs = router.query.content
