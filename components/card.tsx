@@ -1,6 +1,5 @@
 import Image from "next/image"
 export default function Card( { note, position }: any) {
-    console.log(note)
     const points = note.points[0].split(",")
     return (
         <div className="flex flex-col justify-center content-center">

@@ -52,19 +52,21 @@ export const getStaticProps = (async () => {
 export default function Note({ lessons, notes }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
-    const [position, setPosition] = useState(0)
     const chapter = notes[slugs[0]]
-    function navigate(move: number){
-        setPosition(position + move)
-    }
-    var index = position
+    var index = 0
     if (slugs.length > 1){
-        index = chapter.findIndex((item: any) => item.content_id === slugs[1])
+        index = chapter.findIndex((item: any) => item.key === slugs[1])
+        if (index === 0){
+            return <div className="flex flex-col justify-center content-center"><span className="text-2xl font-bold text-green-600">Not Found</span></div>
+        }
+    }
+    function navigate(move: number){
+        router.push(`/note/${slugs[0]}/${chapter[index + move]}`)
     }
     return (
         <Layout lessons={lessons}>
             <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex flex-col gap-6 md:gap-4 h-full">
-                <Card note={chapter[index]} position={position + "/" + chapter.length}/>
+                <Card note={chapter[index]} position={index + "/" + chapter.length}/>
                 <Navigate navigator={navigate}/>
             </div>
         </Layout>
