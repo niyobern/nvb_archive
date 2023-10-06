@@ -56,7 +56,7 @@ export default function Note({ lessons, notes }: any){
     var index = 0
     if (slugs.length > 1){
         index = chapter.findIndex((item: any) => item.key === slugs[1])
-        if (index === 0){
+        if (index < 0){
             return <div className="flex flex-col justify-center content-center"><span className="text-2xl font-bold text-green-600">Not Found</span></div>
         }
     }
