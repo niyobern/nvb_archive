@@ -34,7 +34,7 @@ export const getStaticPaths = (async () => {
     for (let i of conts){
         const x = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${i}`)).data._items
         if (!!x && x.length > 0){
-            contents.push(x)
+            contents.push(i)
         }
     }
     const notes = await fetchNotes(contents)
