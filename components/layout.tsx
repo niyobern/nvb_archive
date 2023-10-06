@@ -39,17 +39,17 @@ export default function Layout({ children, lessons }: any){
             </div>
         )
     }
-    const slugs = router.query.content
+    var slugs = router.query.contents || []
     var index: number = 0
     if (!lessons){
         return <div></div>
     }
-    if (slugs && slugs.length > 1){
-        index = lessons.find((item: any) => item.key === slugs[1])
-        console.log(index, "indexi")
+    if (slugs && (slugs.length > 1)){
+        index = lessons.findIndex((item: any) => item.key === slugs[1])
     }
+    console.log(index)
     const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
-    const right = lessons.map((item: any) => ({text: item.contents[index].item, link: `/note/${item.contents[0].key}`}))
+    const right = lessons[index].contents.map((item: any) => ({text: item.item, link: `/note/${lessons[index].key}/${item.key}`}))
     return (
         <div className="flex flex-col">
             <AppBar/>
