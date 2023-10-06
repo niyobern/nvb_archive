@@ -3,7 +3,7 @@ import Navigate from "../../components/navigate"
 import Layout from '../../components/layout';
 import axios from "axios"
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect } from "react";
 
 async function fetchContent(keys: any, list: any){
     var contentsHere: any[] = []
@@ -44,7 +44,7 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async (context: any) => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
-    const lessonKeys = lessons.map((item: any) => item.key)
+    // const lessonKeys = lessons.map((item: any) => item.key)
     // const contents = await fetchContent(lessonKeys, lessons)
     // const notes = await fetchNotes(contents)
     const slugs = context.params.note
@@ -54,12 +54,17 @@ export const getStaticProps = (async (context: any) => {
 })
 
 export default function Note({ lessons, note }: any){
-    const router = useRouter()
-    const slugs = router.query.note || [""]
-    if (slugs.length === 1){
-        router.push(`/note/${slugs[0]}/${note.key}`)
-    }
+    
+    useEffect(() => {
+        const router = useRouter()
+        const slugs = router.query.note || [""]
+        if (slugs.length === 1){
+            router.push(`/note/${slugs[0]}/${note.key}`)
+        }
+    }, [])
     function navigate(move: string){
+        const router = useRouter()
+        const slugs = router.query.note || [""]
         if (move ===  "prev"){
             router.push(`/note/${slugs[0]}/${note.prev}`)
         } else {
