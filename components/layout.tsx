@@ -5,7 +5,9 @@ import Footer from "./footer"
 import AppBar from "./appbar"
 import NavBar from "./navbar"
 
-export default function Layout({ children, left, right, titlel, titler }: any){
+export default function Layout({ children, lessons, titlel, titler }: any){
+    const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
+    const right = lessons.map((item: any) => ({text: item.contents[0].title, link: `/note/${item.contents[0].key}`}))
     const router = useRouter()
     const route = router.pathname
     if (route === "/"){

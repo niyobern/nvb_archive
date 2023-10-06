@@ -44,7 +44,7 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
         <Layout>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
                 {
-                lessons.map((value: any)=><Content id={value.key} current={true} time="40 cards" title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
+                lessons.map((value: any)=><Content key={value.key} id={value.key} current={true} time="40 cards" title={value.title} description={value.description === "string" ? "Empty Description": value.description}/>)
                 }
             </div>
         </Layout>
@@ -53,23 +53,23 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
       const key = slugs[1]
       const lesson = lessons.find((item: any) => item.key === key)
       if (!lesson){ (
-        <Layout>        
+        <Layout lessons={lessons}>        
           <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
         </Layout>
       )
     }
       return (
-        <Layout>
+        <Layout left={lefts} right={rights} titlel="Amasomo" titler={lessons[0].title}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
               {
-                lesson.contents.map((value: any)=><Content id={value.key} current={true} time="40 cards" title={value.item}/>)
+                lesson.contents.map((value: any)=><Content  key={value.key} current={true} time="40 cards" title={value.item}/>)
               }
             </div>
         </Layout>
     )
     } else {
       return (
-        <Layout>
+        <Layout left={lefts} right={rights} titlel="Amasomo" titler={lessons[0].title}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
         </Layout>
     )
