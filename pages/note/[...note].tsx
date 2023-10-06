@@ -48,8 +48,7 @@ export const getStaticProps = (async (context: any) => {
     // const contents = await fetchContent(lessonKeys, lessons)
     // const notes = await fetchNotes(contents)
     const slugs = context.params.note
-    const noteContent = await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)
-    const note = slugs.length === 1 ? noteContent.data._items[0] : await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)
+    const note = slugs.length === 1 ? (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)).data._items[0] : (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)).data
     return { props: { lessons: lessons, note: note} }
 })
 
