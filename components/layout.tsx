@@ -5,7 +5,7 @@ import Footer from "./footer"
 import AppBar from "./appbar"
 import NavBar from "./navbar"
 
-export default function Layout({ children, lessons, titlel, titler }: any){
+export default function Layout({ children, lessons }: any){
     const router = useRouter()
     const route = router.pathname
     const slugs = router.query.content
