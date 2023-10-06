@@ -8,13 +8,6 @@ import NavBar from "./navbar"
 export default function Layout({ children, lessons }: any){
     const router = useRouter()
     const route = router.pathname
-    const slugs = router.query.content
-    var index: number = 0
-    if (slugs && slugs.length > 1){
-        index = lessons.find((item: any) => item.key === slugs[1])
-    }
-    const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
-    const right = lessons.map((item: any) => ({text: item.contents[index].item, link: `/note/${item.contents[0].key}`}))
     if (route === "/"){
         return (
             <div className="w-full min-h-screen flex flex-col justify-between">
@@ -46,6 +39,13 @@ export default function Layout({ children, lessons }: any){
             </div>
         )
     }
+    const slugs = router.query.content
+    var index: number = 0
+    if (slugs && slugs.length > 1){
+        index = lessons.find((item: any) => item.key === slugs[1])
+    }
+    const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
+    const right = lessons.map((item: any) => ({text: item.contents[index].item, link: `/note/${item.contents[0].key}`}))
     return (
         <div className="flex flex-col">
             <AppBar/>
