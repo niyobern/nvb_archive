@@ -3,7 +3,7 @@ import Navigate from "../../components/navigate"
 import Layout from '../../components/layout';
 import axios from "axios"
 import { useRouter } from "next/router";
-import { isTypeNode } from "typescript";
+import { useState } from "react";
 
 async function fetchContent(keys: any, list: any){
     var contentsHere: any[] = []
@@ -52,16 +52,21 @@ export const getStaticProps = (async () => {
 export default function Note({ lessons, notes }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
+    const [position, setPosition] = useState(0)
     const chapter = notes[slugs[0]]
-    var index = 0
+    function navigate(move: number){
+        setPosition(position + move)
+    }
+    var index = position
     if (slugs.length > 1){
         index = chapter.findIndex((item: any) => item.content_id === slugs[1])
+        setPosition(index)
     }
     return (
         <Layout lessons={lessons}>
-            <div className="bg-teal-100 px-1 md:px-10 py-4 flex flex-col gap-6 md:gap-4 h-full">
-                <Card note={chapter[index]}/>
-                <Navigate/>
+            <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex flex-col gap-6 md:gap-4 h-full">
+                <Card note={chapter[index]} position={position + "/" + chapter.length}/>
+                <Navigate navigator={navigate}/>
             </div>
         </Layout>
     )
