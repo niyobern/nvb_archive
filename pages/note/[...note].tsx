@@ -60,6 +60,9 @@ export const getStaticProps = (async (context: any) => {
 })
 
 export default function Note({ lessons, note }: any){
+    if (!lessons || ! note){
+        return <div>Not Found</div>
+    }
     const router = useRouter()
     const slugs = router.query.note || [""]
     function navigate(move: string){
