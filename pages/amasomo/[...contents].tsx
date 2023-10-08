@@ -51,7 +51,8 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
     )
     }else if (slugs.length === 2){
       const key = slugs[1]
-      const lesson = lessons.find((item: any) => item.key === key)
+      const lessonIndex = lessons.findIndex((item: any) => item.key === key)
+      const lesson = lessons[lessonIndex]
       if (!lesson){ (
         <Layout lessons={lessons}>        
           <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full"></div>
@@ -59,7 +60,7 @@ export default function Contents({ lessons }: InferGetStaticPropsType<typeof get
       )
     }
       return (
-        <Layout lessons={lessons}>
+        <Layout lessons={lessons} lessonIndex={lessonIndex}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
               {
                 lesson.contents.map((value: any)=><Content  key={value.key} title={value.item} link={`/note/${value.key}`}/>)
