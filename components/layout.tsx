@@ -6,6 +6,7 @@ import AppBar from "./appbar"
 import NavBar from "./navbar"
 
 export default function Layout({ children, lessons, lessonIndex }: any){
+    console.log(lessonIndex, "lesson Index")
     const router = useRouter()
     const route = router.pathname
     if (route === "/"){
@@ -39,7 +40,6 @@ export default function Layout({ children, lessons, lessonIndex }: any){
             </div>
         )
     }
-    var slugs = router.query.contents || []
     var index: number = lessonIndex || 0
     if (!lessons){
         return <div></div>
