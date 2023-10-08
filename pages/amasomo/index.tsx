@@ -19,7 +19,7 @@ export const getStaticProps = (async () => {
     return { props: { lessons: lessons} }
 })
 
-export default function amasomo( { lessons }: any){
+export default function Amasomo( { lessons }: any){
     const lefts = lessons.map((item: any) => ({text: item.title, link: `/amasomo/${item.key}`}))
     const rights = lessons[0].contents.map((i: any) => ({text: i.item, link: `/amasomo/${lessons[0].key}/${i.key}`}))
     return (
