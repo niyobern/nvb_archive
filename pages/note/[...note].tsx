@@ -69,7 +69,7 @@ export const getServerSideProps = (async (context: any) => {
           }
     }
     const index = lessons.findIndex((item: any) => item.contents.key === slugs[0])
-    return { props: { lessons: lessons, note: note} }
+    return { props: { lessons: lessons, note: note, index: index} }
 })
 
 export default function Note({ lessons, note, index }: any){
