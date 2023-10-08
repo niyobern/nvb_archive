@@ -36,9 +36,9 @@ export const getServerSideProps = (async (context: any) => {
             },
           }
     }
+    console.log(contents)
     const content = contents.find((item: any) => item.key == slugs[0])
     const lesson_id = content.lesson_id
-    console.log(contents)
     const index = lessons.findIndex((item: any) => item.key == lesson_id)
     return { props: { lessons: lessons, note: note, index: index} }
 })
