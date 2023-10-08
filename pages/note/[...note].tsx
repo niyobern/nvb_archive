@@ -56,6 +56,11 @@ export const getServerSideProps = (async (context: any) => {
     // const notes = await fetchNotes(contents)
     const slugs = context.params.note
     const note = slugs.length === 1 ? (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)).data._items[0] : (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)).data
+    if (! lessons || !note){
+        return {
+            notFound: true,
+        }
+    }
     return { props: { lessons: lessons, note: note} }
 })
 
@@ -65,21 +70,18 @@ export default function Note({ lessons, note }: any){
     if (slugs.length === 1){
         router.push(`/note/${slugs[0]}/${note.key}`)
     }
-    function navigate(move: string){
-        if (move ===  "prev"){
-            router.push(`/note/${slugs[0]}/${note.prev}`)
-        } else {
-            router.push(`/note/${slugs[0]}/${note.next}`)
-        }
-    }
-    if (!lessons || ! note){
-        return <div>Not Found</div>
-    }
+    // function navigate(move: string){
+    //     if (move ===  "prev"){
+    //         router.push(`/note/${slugs[0]}/${note.prev}`)
+    //     } else {
+    //         router.push(`/note/${slugs[0]}/${note.next}`)
+    //     }
+    // }
     return (
         <Layout lessons={lessons}>
-            <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex flex-col gap-6 md:gap-4 h-full">
+            <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
                 <Card note={note} position={note.index + "/" + note.total}/>
-                <Navigate navigator={navigate}/>
+                <Navigate next={`/note/${slugs[0]}/${note.next}`} prev={`/note/${slugs[0]}/${note.prev}`}/>
             </div>
         </Layout>
     )
