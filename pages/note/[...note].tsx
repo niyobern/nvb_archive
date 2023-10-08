@@ -16,43 +16,11 @@ async function fetchContent(keys: any, list: any){
     }
     return contentsHere
 }
-// async function fetchNotes(contents: any){
-//     var notesHere: any = {}
-//     for (let i = 0; i < contents.length; i++){
-//         const content = contents[i]
-//         const note = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${content}`)).data._items.map((item: any) => item)
-//         notesHere[content] = note
-//     }
-//     return notesHere
-// }
-
-// export const getStaticPaths = (async () => {
-//     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
-//     const lessonKeys = lessons.map((item: any) => item.key)
-//     const conts = await fetchContent(lessonKeys, lessons)
-//     const contents = []
-//     for (let i of conts){
-//         const x = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${i}`)).data._items
-//         if (!!x && x.length > 0){
-//             contents.push(i)
-//         }
-//     }
-//     const notes = await fetchNotes(contents)
-//     const links: any[] = []
-//     for (let i of contents){
-//         links.push(`/note/${i}`)
-//         notes[i].forEach((note: any) => links.push(`/note/${i}/${note.key}`))
-//     }
-//     return {
-//       paths: links,
-//       fallback: true, // false or "blocking"
-//     }
-// })
 
 export const getServerSideProps = (async (context: any) => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
-    await fetchContent(lessonKeys, lessons)
+    const contents = await fetchContent(lessonKeys, lessons)
     const slugs = context.params.note
     const note = slugs.length === 1 ? (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)).data._items[0] : (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)).data
     if (! lessons || !note){
@@ -68,7 +36,9 @@ export const getServerSideProps = (async (context: any) => {
             },
           }
     }
-    const index = lessons.findIndex((item: any) => item.contents.key === slugs[0])
+    const content = contents.find((item: any) => item.key == slugs[0])
+    const lesson_id = content.lesson_id
+    const index = lessons.findIndex((item: any) => item.key == lesson_id)
     return { props: { lessons: lessons, note: note, index: index} }
 })
 
