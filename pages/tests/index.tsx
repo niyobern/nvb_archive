@@ -21,7 +21,6 @@ async function fetchContent(keys: any, list: any){
 export const getServerSideProps = (async (context: any) => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
-    const [questions, setQuestions] = useState()
     await fetchContent(lessonKeys, lessons)
     if (! lessons){
         return {
@@ -31,6 +30,7 @@ export const getServerSideProps = (async (context: any) => {
     return { props: { lessons: lessons } }
 })
 export default function Ibazwa({ lessons }: any){
+    const [questions, setQuestions] = useState()
     useEffect(() => {
         axios.get("https://nvb_backend-1-z3745144.deta.app/question")
         .then((res: any) => console.log(res.data._items))
