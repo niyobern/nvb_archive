@@ -16,40 +16,40 @@ async function fetchContent(keys: any, list: any){
     }
     return contentsHere
 }
-async function fetchNotes(contents: any){
-    var notesHere: any = {}
-    for (let i = 0; i < contents.length; i++){
-        const content = contents[i]
-        const note = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${content}`)).data._items.map((item: any) => item)
-        notesHere[content] = note
-    }
-    return notesHere
-}
+// async function fetchNotes(contents: any){
+//     var notesHere: any = {}
+//     for (let i = 0; i < contents.length; i++){
+//         const content = contents[i]
+//         const note = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${content}`)).data._items.map((item: any) => item)
+//         notesHere[content] = note
+//     }
+//     return notesHere
+// }
 
-export const getStaticPaths = (async () => {
-    const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
-    const lessonKeys = lessons.map((item: any) => item.key)
-    const conts = await fetchContent(lessonKeys, lessons)
-    const contents = []
-    for (let i of conts){
-        const x = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${i}`)).data._items
-        if (!!x && x.length > 0){
-            contents.push(i)
-        }
-    }
-    const notes = await fetchNotes(contents)
-    const links: any[] = []
-    for (let i of contents){
-        links.push(`/note/${i}`)
-        notes[i].forEach((note: any) => links.push(`/note/${i}/${note.key}`))
-    }
-    return {
-      paths: links,
-      fallback: true, // false or "blocking"
-    }
-})
+// export const getStaticPaths = (async () => {
+//     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
+//     const lessonKeys = lessons.map((item: any) => item.key)
+//     const conts = await fetchContent(lessonKeys, lessons)
+//     const contents = []
+//     for (let i of conts){
+//         const x = (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${i}`)).data._items
+//         if (!!x && x.length > 0){
+//             contents.push(i)
+//         }
+//     }
+//     const notes = await fetchNotes(contents)
+//     const links: any[] = []
+//     for (let i of contents){
+//         links.push(`/note/${i}`)
+//         notes[i].forEach((note: any) => links.push(`/note/${i}/${note.key}`))
+//     }
+//     return {
+//       paths: links,
+//       fallback: true, // false or "blocking"
+//     }
+// })
 
-export const getStaticProps = (async (context: any) => {
+export const getServerSideProps = (async (context: any) => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
     await fetchContent(lessonKeys, lessons)
@@ -62,10 +62,10 @@ export const getStaticProps = (async (context: any) => {
 export default function Note({ lessons, note }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
+    if (slugs.length === 1){
+        router.push(`/note/${slugs[0]}/${note.key}`)
+    }
     function navigate(move: string){
-        if (slugs.length === 1){
-            router.push(`/note/${slugs[0]}/${note.key}`)
-        }
         if (move ===  "prev"){
             router.push(`/note/${slugs[0]}/${note.prev}`)
         } else {
