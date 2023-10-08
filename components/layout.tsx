@@ -5,7 +5,7 @@ import Footer from "./footer"
 import AppBar from "./appbar"
 import NavBar from "./navbar"
 
-export default function Layout({ children, lessons }: any){
+export default function Layout({ children, lessons, lessonIndex }: any){
     const router = useRouter()
     const route = router.pathname
     if (route === "/"){
@@ -40,7 +40,7 @@ export default function Layout({ children, lessons }: any){
         )
     }
     var slugs = router.query.contents || []
-    var index: number = 0
+    var index: number = lessonIndex || 0
     if (!lessons){
         return <div></div>
     }

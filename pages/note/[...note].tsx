@@ -53,7 +53,6 @@ export const getServerSideProps = (async (context: any) => {
     const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
     const lessonKeys = lessons.map((item: any) => item.key)
     await fetchContent(lessonKeys, lessons)
-    // const notes = await fetchNotes(contents)
     const slugs = context.params.note
     const note = slugs.length === 1 ? (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note?content_id=${slugs[0]}`)).data._items[0] : (await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/note/${slugs[1]}`)).data
     if (! lessons || !note){
@@ -69,26 +68,17 @@ export const getServerSideProps = (async (context: any) => {
             },
           }
     }
+    const index = lessons.findIndex((item: any) => item.contents.key === slugs[0])
     return { props: { lessons: lessons, note: note} }
 })
 
-export default function Note({ lessons, note }: any){
+export default function Note({ lessons, note, index }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
-    // if (slugs.length === 1){
-    //     router.push(`/note/${slugs[0]}/${note.key}`)
-    // }
-    // function navigate(move: string){
-    //     if (move ===  "prev"){
-    //         router.push(`/note/${slugs[0]}/${note.prev}`)
-    //     } else {
-    //         router.push(`/note/${slugs[0]}/${note.next}`)
-    //     }
-    // }
     return (
-        <Layout lessons={lessons}>
+        <Layout lessons={lessons} lessonIndex={index}>
             <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
-                <Card note={note} position={note.index + "/" + note.total}/>
+                <Card note={note} position={(note.index + 1) + "/" + note.total}/>
                 <Navigate next={`/note/${slugs[0]}/${note.next}`} prev={`/note/${slugs[0]}/${note.prev}`}/>
             </div>
         </Layout>
