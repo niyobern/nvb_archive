@@ -11,7 +11,7 @@ async function fetchContent(keys: any, list: any){
       const item = await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${keys[i]}`)
       item.data._items.forEach((content: any) => {
         list[i].contents.push(content);
-        contentsHere.push(content.key)
+        contentsHere.push(content)
     })
     }
     return contentsHere
