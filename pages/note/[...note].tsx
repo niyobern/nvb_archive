@@ -61,15 +61,23 @@ export const getServerSideProps = (async (context: any) => {
             notFound: true,
         }
     }
+    if (slugs.length === 1){
+        return {
+            redirect: {
+              destination: `/note/${slugs[0]}/${note.key}`,
+              permanent: true,
+            },
+          }
+    }
     return { props: { lessons: lessons, note: note} }
 })
 
 export default function Note({ lessons, note }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
-    if (slugs.length === 1){
-        router.push(`/note/${slugs[0]}/${note.key}`)
-    }
+    // if (slugs.length === 1){
+    //     router.push(`/note/${slugs[0]}/${note.key}`)
+    // }
     // function navigate(move: string){
     //     if (move ===  "prev"){
     //         router.push(`/note/${slugs[0]}/${note.prev}`)
