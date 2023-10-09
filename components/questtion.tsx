@@ -5,7 +5,7 @@ export default function Question({ question }:any) {
                 <span className="text-2xl font-medium text-teal-900 text-center">Question 1</span>
                 <p className="text-justify">{question.question}</p>
                 <div className="flex flex-col gap-2 mt-2">
-                    {question.options && question.options.map((item: any) => <div className="rounded bg-gray-200 p-2 hover:bg-gray-300 hover:shadow-lg active:text-white cursor-pointer">{item}</div>)}
+                    {question.options && question.options.map((item: any) => <div key={item} className="rounded bg-gray-200 p-2 hover:bg-gray-300 hover:shadow-lg active:text-white cursor-pointer">{item}</div>)}
                 </div>
             </div>
         </div>
