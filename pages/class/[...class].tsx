@@ -6,7 +6,7 @@ import Card from "../../components/card";
 import Navigate from "../../components/navigate";
 
 export const getStaticPaths = (async () => {
-    const links: any[] = []
+    const links = ["/class/1"]
     const dir = path.join(process.cwd(), 'data')
     const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
     const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
