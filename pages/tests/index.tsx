@@ -33,7 +33,7 @@ export default function Ibazwa({ lessons }: any){
     const [questions, setQuestions] = useState([])
     const [count, setCount] = useState(0)
     useEffect(() => {
-        axios.get("https://nvb_backend-1-z3745144.deta.app/question")
+        axios.get("https://nvb_backend-1-z3745144.deta.app/question/")
         .then((res: any) => setQuestions(res.data._items))
     }, [])
 
