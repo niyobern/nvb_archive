@@ -45,6 +45,7 @@ export const getServerSideProps = (async (context: any) => {
 export default function Note({ lessons, note, index }: any){
     const router = useRouter()
     const slugs = router.query.note || [""]
+    console.log(lessons[index])
     return (
         <Layout lessons={lessons} lessonIndex={index}>
             <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
