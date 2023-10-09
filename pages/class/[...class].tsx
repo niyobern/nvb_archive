@@ -1,0 +1,183 @@
+import Layout from "../../components/layout";
+import Content from "../../components/contentitem";
+import { readFile } from "fs/promises"
+import path from "path"
+import Card from "../../components/card";
+import Navigate from "../../components/navigate";
+
+export const getStaticPaths = (async () => {
+    const links: any[] = []
+    const dir = path.join(process.cwd(), 'data')
+    const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+    const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
+    const allContents = JSON.parse(rawContents)
+    const rawNotes = await readFile(dir + "/lesson_chapters.json", {encoding: "utf-8"})
+    const allNotes = JSON.parse(rawNotes)
+    lessonKeys.forEach((item: any) => {
+        links.push(`/class/1/${item}`)
+        const contents = allContents[item]
+        contents.forEach((content: any) => {
+            links.push(`/class/1/${item}/${content.key}`)
+            const notes = allNotes[item][content.key]
+            notes.forEach((note: any) => {
+                links.push(`/class/1/${item}/${content.key}/${note.key}`)
+            })
+        })
+    })
+    return {
+      paths: [...links],
+      fallback: true, // false or "blocking"
+    }
+})
+
+export const getStaticProps = (async (context: any) => {
+    const dir = path.join(process.cwd(), 'data')
+    const slugs = context.params.class
+    
+    if (slugs.length === 1){
+        const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
+        const lessons = JSON.parse(rawLessons)
+        const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}
+        lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
+        lessons.forEach((item: any) => links.right.push({text: item.title, link: `/class/1/${item.key}`}))
+        links.left.shift()
+        links.right.shift()
+        return { props: { links: links, contents: lessons, slugs: slugs } }
+    } else if (slugs.length === 2){
+        const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+        if (!lessonKeys.includes(slugs[1])){
+            return {
+                notFound: true,
+            } 
+        }
+        const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
+        const lessons = JSON.parse(rawLessons)
+        const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}
+        const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
+        const allContents = JSON.parse(rawContents)
+        const contents = allContents[slugs[1]]
+        lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
+        contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
+        links.left.shift()
+        links.right.shift()
+        return { props: { links: links, contents: contents, slugs: slugs } }
+    } else if (slugs.length === 3){
+        const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+        if (!lessonKeys.includes(slugs[1])){
+            return {
+                notFound: true,
+            } 
+        }
+        const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
+        const lessons = JSON.parse(rawLessons)
+        const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}
+        const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
+        const allContents = JSON.parse(rawContents)
+        const contents = allContents[slugs[1]]
+        if (!contents){
+            return {
+                notFound: true,
+            } 
+        }
+        const rawNotes = await readFile(dir + "/lesson_chapters.json", {encoding: "utf-8"})
+        const notes = JSON.parse(rawNotes)
+        const lesson = notes[slugs[1]]
+        if (!lesson){
+            return {
+                notFound: true,
+            } 
+        }
+        const chapter = lesson[slugs[2]]
+        if (!chapter){
+            return {
+                notFound: true,
+            } 
+        }
+        const note = chapter[0]
+        if (!note){
+            return {
+                notFound: true,
+            } 
+        }
+        note["total"] = chapter.length
+        note["index"] = 0
+        lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
+        contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
+        links.left.shift()
+        links.right.shift()
+        return { props: { links: links, note: note, slugs: slugs } }
+    } else if (slugs.length === 4){
+        const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+        if (!lessonKeys.includes(slugs[1])){
+            return {
+                notFound: true,
+            } 
+        }
+        const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
+        const lessons = JSON.parse(rawLessons)
+        const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}
+        const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
+        const allContents = JSON.parse(rawContents)
+        const contents = allContents[slugs[1]]
+        if (!contents){
+            return {
+                notFound: true,
+            } 
+        }
+        const rawNotes = await readFile(dir + "/lesson_chapters.json", {encoding: "utf-8"})
+        const notes = JSON.parse(rawNotes)
+        const lesson = notes[slugs[1]]
+        const chapter = lesson[slugs[2]]
+        if (!chapter){
+            return {
+                notFound: true,
+            } 
+        }
+        const note_index = Number(slugs[3])
+        const note = chapter[note_index]
+        if (!note){
+            return {
+                notFound: true,
+            } 
+        }
+        note["total"] = chapter.length
+        note["index"] = note_index
+        lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
+        contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
+        links.left.shift()
+        links.right.shift()
+        return { props: { links: links, note: note, slugs: slugs } }
+    }
+})
+export default function Class({ links, note, contents, slugs }: any){
+    if (note){
+        const index = Number(slugs[3])
+        const params = slugs.slice(0,3)
+        const link = "/class/" + params.join("/")
+        const disabled = [false, false]
+        const last = Number(note.total)
+        if (index === 0){
+            disabled[0] = true
+        } else if (index === last){
+            disabled[1] = true
+        }
+        return (
+            <Layout llinks={links}>
+                <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
+                    <Card note={note} position={(note.index + 1) + "/" + note.total}/>
+                    <Navigate prev={`${link}/${index-1}`} next={`${link}/${index+1}`} prevDisabled={disabled[0]} nextDisabled={disabled[1]}/>
+                </div>
+            </Layout>
+        )
+    }
+    const link = "/class/" + slugs.join("/")
+    return (
+        <Layout links={links}>
+            <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
+            {
+                contents.map((value: any)=><Content  key={value.key} title={value.title} link={`${link}/${value.key}`}/>)
+            }
+            </div>
+        </Layout>
+    )
+}
