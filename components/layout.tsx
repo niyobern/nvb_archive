@@ -45,6 +45,7 @@ export default function Layout({ children, lessons, lessonIndex }: any){
     }
     const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/1/${item.key}`}))
     const right = lessons[index].contents.map((item: any) => ({text: item.item, link: `/note/${item.key}`}))
+    console.log(lessons[index])
     return (
         <div className="flex flex-col">
             <AppBar/>
