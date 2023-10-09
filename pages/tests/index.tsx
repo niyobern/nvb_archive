@@ -44,7 +44,7 @@ export default function Ibazwa({ lessons }: any){
                 <Indicator start={start} duration={duration}/>
                 <Count/>
                 <Question/>
-                <Navigate/>
+                <Navigate test={true}/>
             </div>
         </Layout>
     )
