@@ -5,7 +5,7 @@ import Footer from "./footer"
 import AppBar from "./appbar"
 import NavBar from "./navbar"
 
-export default function Layout({ children, lessons, lessonIndex }: any){
+export default function Layout({ children, links }: any){
     const router = useRouter()
     const route = router.pathname
     if (route === "/"){
@@ -39,24 +39,17 @@ export default function Layout({ children, lessons, lessonIndex }: any){
             </div>
         )
     }
-    var index: number = lessonIndex || 0
-    if (!lessons){
-        return <div></div>
-    }
-    const left = lessons.map( (item: any) => ({text: item.title, link: `/amasomo/1/${item.key}`}))
-    const right = lessons[index].contents.map((item: any) => ({text: item.item, link: `/note/${item.key}`}))
-    console.log(lessons[index])
     return (
         <div className="flex flex-col">
             <AppBar/>
             <NavBar/>
             <div className="flex flex-col md:grid grid-cols-5 relative">
                 <div className="hidden md:flex col-span-1">
-                    <SideBar data={left} title="Amasomo"/>
+                    <SideBar data={links.left} title="Amasomo"/>
                 </div>
                 <div className="col-span-3 h-screen overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-teal-700">{children}</div>
                 <div className="hidden md:flex col-span-1">
-                    <SideBar data={right} title={lessons[index].title}/>
+                    <SideBar data={links.right} title={links.left[0].text}/>
                 </div>
             </div>
             <Footer/>
