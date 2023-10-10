@@ -5,7 +5,7 @@ import Footer from "./footer"
 import AppBar from "./appbar"
 import NavBar from "./navbar"
 
-export default function Layout({ children, links }: any){
+export default function Layout({ children, links, rightTitle }: any){
     const router = useRouter()
     const route = router.pathname
     if (route === "/"){
@@ -49,7 +49,7 @@ export default function Layout({ children, links }: any){
                 </div>
                 <div className="col-span-3 h-screen overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-teal-700">{children}</div>
                 <div className="hidden md:flex col-span-1">
-                    <SideBar data={links.right} title={links.left[0].text}/>
+                    <SideBar data={links.right} title="SideBar"/>
                 </div>
             </div>
             <Footer/>
