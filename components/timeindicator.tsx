@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-export default function Indicator({ start, duration }: any){
-    function msToTime(s: any) {
+export default function Indicator({ start, duration, submit }: any){
 
+    function msToTime(s: any) {
         function pad(n: any, z: any) {
           z = z || 2;
           return ('00' + n).slice(-z);
@@ -24,6 +24,9 @@ export default function Indicator({ start, duration }: any){
                 const current = Date.now();
                 const elapsed = current - start;
                 setPercentage(elapsed*100 / duration)
+                if (percentage > 100){
+                    submit()
+                }
             }, 1000)
         }
     )

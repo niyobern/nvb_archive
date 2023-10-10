@@ -5,7 +5,6 @@ import path from 'path';
 
 export const getServerSideProps = (async (context: any) => {
     const dir = path.join(process.cwd(), 'data')
-    const slugs = context.params.class
     const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
     const lessons = JSON.parse(rawLessons)
     const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}

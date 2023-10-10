@@ -1,55 +1,61 @@
-import Question from "../../components/questtion"
-import Indicator from "../../components/timeindicator"
-import Count from "../../components/questioncount"
-import Navigate from "../../components/navigate"
 import Layout from '../../components/layout';
-import axios from "axios";
-import { useEffect, useState } from "react"
+import { useState }from "react"
+import { readFile } from 'fs/promises';
+import path from 'path';
+import Image from "next/image";
+import test from "../../public/images/test.png"
+import Link from 'next/link';
 
-async function fetchContent(keys: any, list: any){
-    var contentsHere: any[] = []
-    for (let i = 0; i < keys.length; i++){
-      const item = await axios.get(`https://nvb_backend-1-z3745144.deta.app/lesson/content?lesson_id=${keys[i]}`)
-      item.data._items.forEach((content: any) => {
-        list[i].contents.push(content);
-        contentsHere.push(content)
-    })
-    }
-    return contentsHere
-}
 
 export const getServerSideProps = (async (context: any) => {
-    const lessons = (await axios.get("https://nvb_backend-1-z3745144.deta.app/lesson/")).data._items.map((item: any) => ({...item, contents: []}))
-    const lessonKeys = lessons.map((item: any) => item.key)
-    await fetchContent(lessonKeys, lessons)
-    if (! lessons){
-        return {
-            notFound: true,
-        }
-    }
-    return { props: { lessons: lessons } }
+    const dir = path.join(process.cwd(), 'data')
+    const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
+    const lessons = JSON.parse(rawLessons)
+    const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}
+    lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
+    lessons.forEach((item: any) => links.right.push({text: item.title, link: `/class/1/${item.key}`}))
+    links.left.shift()
+    links.right.shift()
+    return { props: { links: links } }
 })
-export default function Ibazwa({ lessons }: any){
-    const [questions, setQuestions] = useState([])
-    const [count, setCount] = useState(0)
-    useEffect(() => {
-        axios.get("https://nvb_backend-1-z3745144.deta.app/question/")
-        .then((res: any) => setQuestions(res.data._items))
-    }, [])
-
-    function handleNavigate(move: number){
-        setCount(count + move)
+export default function Tests( { links }: any){
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+    const updatedLinks = {...links}
+    updatedLinks.right = []
+    numbers.forEach(item => updatedLinks.right.push({text: `Isuzumabumenyi #${item}`, link: `/tests/${item}`}))
+    function handleClick(item: number){
+        setModal(!modal)
+        setFocused(item)
     }
-    
-    const start = Date.now()
-    const duration = 20*60*1000
+    const [modal, setModal] = useState(false)
+    const [focused, setFocused] = useState(0)
+    if (modal){
+        return (
+        <Layout links={updatedLinks}>
+            <div className="absolute w-full h-full top-8 md:top-20 left-0 flex flex-col items-center">
+                <div className="bg-white flex flex-col h-fit">
+                    <Image src={test} width={500} height={500} alt="thumbnail" className="w-full"/>
+                    <h1 className="font-medium text-lg leading-none p-1">Isuzumabumenyi #{focused} <span className="text-sm font-normal">Rigufasha kwitegura ikizamini cya provisoire</span></h1>
+                </div>
+                <div className="flex justify-between gap-8">
+                    <Link href={`/tests/${focused}`}><div className="mt-4 text-xl text-white font-medium py-2 px-4 shadow bg-green-700 pointer-cursor hover:bg-green-800">Tangira</div></Link>
+                    <div onClick={() => handleClick(0)} className="mt-4 text-lg text-white font-normal py-2 px-4 shadow bg-gray-700 pointer-cursor hover:bg-gray-800">Bireke</div>
+                </div>
+            </div>
+        </Layout>
+        )
+    }
     return (
-        <Layout lessons={lessons} lessonIndex={1}>
-            <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col h-full">
-                <Indicator start={start} duration={duration}/>
-                <Count/>
-                <Question question={questions[count]}/>
-                <Navigate test={true} move={handleNavigate}/>
+        <Layout links={updatedLinks}>
+            <div className="flex flex-col h-full md:grid grid-cols-2 gap-4 bg-gray-100 p-2">
+                {
+                    numbers.map((item: number) => (
+                        <div className="bg-white flex flex-col h-fit" onClick={() => handleClick(item)}>
+                            <Image src={test} width={500} height={500} alt="thumbnail" className="w-full"/>
+                            <h1 className="font-medium text-lg leading-none p-1">Isuzumabumenyi #{item} <span className="text-sm font-normal">Rigufasha kwitegura ikizamini cya provisoire</span></h1>
+                        </div>
+                    ))
+                }
             </div>
         </Layout>
     )
