@@ -19,9 +19,9 @@ export const getStaticPaths = (async () => {
         contents.forEach((content: any) => {
             links.push(`/class/1/${item}/${content.key}`)
             const notes = allNotes[item][content.key]
-            notes.forEach((note: any) => {
-                links.push(`/class/1/${item}/${content.key}/${note.key}`)
-            })
+            for (let i = 0; i < notes.length; i++){
+                links.push(`/class/1/${item}/${content.key}/${i}`)
+            }
         })
     })
     return {
