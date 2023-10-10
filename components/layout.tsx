@@ -5,7 +5,7 @@ import Footer from "./footer"
 import AppBar from "./appbar"
 import NavBar from "./navbar"
 
-export default function Layout({ children, links, rightTitle }: any){
+export default function Layout({ children, links }: any){
     const router = useRouter()
     const route = router.pathname
     if (route === "/"){
