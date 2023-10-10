@@ -152,6 +152,7 @@ export const getStaticProps = (async (context: any) => {
 export default function Class({ links, note, contents, slugs }: any){
     if (note){
         const index = isNaN(slugs[3]) ? 0 : Number(slugs[0])
+        console.log(index, "index")
         const params = slugs.slice(0,3)
         const link = "/class/" + params.join("/")
         const disabled = [false, false]
