@@ -99,8 +99,8 @@ export const getStaticProps = (async (context: any) => {
                 notFound: true,
             } 
         }
-        // note["total"] = chapter.length
-        // note["index"] = 0
+        note["total"] = chapter.length
+        note["index"] = 0
         note["prev"] = null
         note["next"] = 1
         lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
@@ -142,8 +142,8 @@ export const getStaticProps = (async (context: any) => {
                 notFound: true,
             } 
         }
-        // note["total"] = chapter.length
-        // note["index"] = note_index
+        note["total"] = chapter.length
+        note["index"] = note_index
         note["prev"] = note_index - 1
         note["next"] = note_index + 1
         if (note_index === chapter.length){
