@@ -99,8 +99,10 @@ export const getStaticProps = (async (context: any) => {
                 notFound: true,
             } 
         }
-        note["total"] = chapter.length
-        note["index"] = 0
+        // note["total"] = chapter.length
+        // note["index"] = 0
+        note["prev"] = null
+        note["next"] = 1
         lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
         contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
         links.left.shift()
@@ -140,8 +142,15 @@ export const getStaticProps = (async (context: any) => {
                 notFound: true,
             } 
         }
-        note["total"] = chapter.length
-        note["index"] = note_index
+        // note["total"] = chapter.length
+        // note["index"] = note_index
+        note["prev"] = note_index - 1
+        note["next"] = note_index + 1
+        if (note_index === chapter.length){
+            note["next"] = null
+        } else if (note_index === 0){
+            note["prev"] = null
+        }
         lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
         contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
         links.left.shift()
@@ -151,22 +160,19 @@ export const getStaticProps = (async (context: any) => {
 })
 export default function Class({ links, note, contents, slugs }: any){
     if (note){
-        const index = isNaN(slugs[3]) ? 0 : Number(slugs[0])
-        console.log(index, "index")
-        const params = slugs.slice(0,3)
+        const params = slugs.slice(0, 3)
         const link = "/class/" + params.join("/")
-        const disabled = [false, false]
-        const last = Number(note.total)
-        if (index === 0){
+        const disabled = [false, true]
+        if (note.prev === null){
             disabled[0] = true
-        } else if (index === last){
+        } else if (note.next === null){
             disabled[1] = true
         }
         return (
             <Layout links={links}>
                 <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
                     <Card note={note} position={(note.index + 1) + "/" + note.total}/>
-                    <Navigate prev={`${link}/${index-1}`} next={`${link}/${index+1}`} prevDisabled={disabled[0]} nextDisabled={disabled[1]}/>
+                    <Navigate prev={`${link}/${note.prev}`} next={`${link}/${note.next}`} prevDisabled={disabled[0]} nextDisabled={disabled[1]}/>
                 </div>
             </Layout>
         )
