@@ -144,14 +144,16 @@ export const getStaticProps = (async (context: any) => {
                 notFound: true,
             } 
         }
+        const params = slugs.slice(0, 2)
+        const link = "/class/" + params.join("/")
         note["total"] = chapter.length
         note["index"] = note_index
-        note["prev"] = note_index - 1
-        note["next"] = note_index + 1
+        note["prev"] = `${link}/${note_index - 1}`
+        note["next"] = `${link}/${note_index + 1}`
         if (note_index === chapter.length){
-            note["next"] = null
+            note["next"] = link
         } else if (note_index === 0){
-            note["prev"] = null
+            note["prev"] = link
         }
         lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
         contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
@@ -162,43 +164,15 @@ export const getStaticProps = (async (context: any) => {
 })
 export default function Class({ links, note, contents, slugs }: any){
     const router = useRouter()
-    const [disabled, setDisabled] = useState([true, false])
-    // useEffect(()=> {
-    //     if (note && note.prev === null){
-    //         setDisabled([true, false])
-    //     } else {
-    //         setDisabled([false, false])
-    //     }
-    //     if (note && note.next === null){
-    //         setDisabled([false, true])
-    //     } else {
-    //         setDisabled([disabled[0], false])
-    //     }
-    // }, [router.asPath])
-    function navigate(move: any){
-        const params = slugs.slice(0, 3)
-        const link = "/class/" + params.join("/")
-        router.push(`${link}/${move}`)
-        if (note && note.prev === null){
-            setDisabled([true, false])
-        } else {
-            setDisabled([false, false])
-        }
-        if (note && note.next === null){
-            setDisabled([false, true])
-        } else {
-            setDisabled([disabled[0], false])
-        }
-    }
+
     if (note){
         const params = slugs.slice(0, 3)
-        // const link = "/class/" + params.join("/")
         
         return (
             <Layout links={links}>
                 <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
                     <Card note={note} position={(note.index + 1) + "/" + note.total}/>
-                    <Navigate prev={note.prev} next={note.next} move={navigate} prevDisabled={disabled[0]} nextDisabled={disabled[1]}/>
+                    <Navigate prev={note.prev} next={note.next}/>
                 </div>
             </Layout>
         )
