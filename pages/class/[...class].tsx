@@ -152,7 +152,7 @@ export const getStaticProps = (async (context: any) => {
         note["index"] = note_index
         note["prev"] = `${link}/${slugs[2]}/${note_index - 1}`
         note["next"] = `${link}/${slugs[2]}/${note_index + 1}`
-        if (note_index === chapter.length){
+        if (note_index === chapter.length - 1){
             note["next"] = link
         } else if (note_index === 0){
             note["prev"] = link
