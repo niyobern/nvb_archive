@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Link from "next/link"
-import { BiLogoWhatsapp } from "react-icons/Bi"
+// import { BiLogoWhatsapp } from "react-icons/Bi"
 import { IoLogoWhatsapp } from "react-icons/Io"
 export default function HomeNavBar(){
     const [show, setShow] = useState(false)
