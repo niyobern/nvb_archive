@@ -164,8 +164,13 @@ export default function Class({ links, note, contents, slugs }: any){
     useEffect(()=> {
         if (note && note.prev === null){
             setDisabled([true, false])
-        } else if (note && note.next === null){
+        } else {
+            setDisabled([false, false])
+        }
+        if (note && note.next === null){
             setDisabled([false, true])
+        } else {
+            setDisabled([disabled[0], false])
         }
     }, [slugs])
     if (note){
