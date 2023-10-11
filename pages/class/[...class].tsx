@@ -4,7 +4,7 @@ import { readFile } from "fs/promises"
 import path from "path"
 import Card from "../../components/card";
 import Navigate from "../../components/navigate";
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export const getStaticPaths = (async () => {
     const links = ["/class/1"]
@@ -160,17 +160,17 @@ export const getStaticProps = (async (context: any) => {
     }
 })
 export default function Class({ links, note, contents, slugs }: any){
+    const [disabled, setDisabled] = useState([true, false])
+    useEffect(()=> {
+        if (note.prev === null){
+            setDisabled([true, false])
+        } else if (note.next === null){
+            setDisabled([false, true])
+        }
+    })
     if (note){
         const params = slugs.slice(0, 3)
         const link = "/class/" + params.join("/")
-        const disabled = [true, false]
-        useEffect(()=> {
-            if (note.prev === null){
-                disabled[0] = true
-            } else if (note.next === null){
-                disabled[1] = true
-            }
-        })
         
         return (
             <Layout links={links}>
