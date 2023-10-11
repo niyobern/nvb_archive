@@ -162,9 +162,9 @@ export const getStaticProps = (async (context: any) => {
 export default function Class({ links, note, contents, slugs }: any){
     const [disabled, setDisabled] = useState([true, false])
     useEffect(()=> {
-        if (note.prev === null){
+        if (note && note.prev === null){
             setDisabled([true, false])
-        } else if (note.next === null){
+        } else if (note && note.next === null){
             setDisabled([false, true])
         }
     })
