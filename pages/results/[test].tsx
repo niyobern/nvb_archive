@@ -1,6 +1,6 @@
 import Question from "../../components/questtion"
 import Indicator from "../../components/timeindicator"
-import Count from "../../components/questioncount"
+import Answer from "../../components/answercount";
 import Navigate from "../../components/navigate"
 import Layout from '../../components/layout';
 import { useEffect, useState } from "react"
@@ -37,9 +37,9 @@ export default function Result({ links, questions, slug }: any){
         const answersRaw = window.localStorage.getItem(`test${slug}`) || ""
         const answers = JSON.parse(answersRaw)
         setAnswers(answers)
-    })
+    }, [slug])
 
-    function answer( move: number =  1){
+    function answer(index: number, choice: number, move: number =  1){
         if ((count < 19 || move < 0) && (count > 0 || move > 0)){
             setCount(count + move)
         } 
@@ -47,9 +47,9 @@ export default function Result({ links, questions, slug }: any){
     return (
         <Layout links={updatedLinks}>
             <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col min-h-screen">
-                <Count questions={answers} move={answer} count={count}/>
-                <Question question={questions[count]} count={count} answer={answer}/>
-                <Navigate test={true} move={answer} current={count}/>
+                <Answer answers={answers} questions={questions} move={answer} count={count} total={questions.length}/>
+                <Question question={questions[count]} count={count} answer={answers[count]}/>
+                <Navigate test={true} move={answer} current={count} currentAnswer={answers[count] || 0}/>
             </div>
         </Layout>
     )

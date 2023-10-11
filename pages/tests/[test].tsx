@@ -67,29 +67,38 @@ export default function Ibazwa({ links, questions, slug }: any){
 
     const start = Date.now()
     const duration = 20*60*1000
-    function answer(index: number, choice: number, move: number =  1){
+    function answer(index: number, choice: number, move: number =  1, target: number = -1){
         const answersCopy = [...answers]
         answersCopy[index] = choice
         setAnswers(answersCopy)
-        if (!(count > 19 && move > 0) || !(count < 1 || move < 0)){
-            setCount(count + move)
+        if (target > 0){
+            setCount(target)
         }
-        if (count === 19 && move > 0){
-            handleSubmit(0)
+        if (index <= 0 && move < 0){
+            return
+        } else if (index >= 19 && move > 0){
+            handleSubmit(1)
         }
+        setCount(index + move)
     }
     function handleSubmit(a: number = 1, b: boolean = true){
         a && window.localStorage.setItem(`test${slug}`, JSON.stringify(answers))
         setSubmit(b)
-        a && router.push(`/results/${slug}`)
+        if (a){
+            setConsent(false);
+            setCount(0);
+            setAnswers([0])
+            router.push(`/results/${slug}`)
+        }
     }
+
     return (
         <Layout links={updatedLinks}>
             <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col min-h-screen">
                 <Indicator start={start} duration={duration} submit={handleSubmit}/>
-                <Count questions={answers} move={answer} count={count}/>
+                <Count questions={answers} move={answer} count={count} total={questions.length}/>
                 <Question question={questions[count]} count={count} answer={answer} test={true}/>
-                <Navigate test={true} move={answer} current={count}/>
+                <Navigate test={true} move={answer} current={count} currentAnswer={answers[count] || 0}/>
             </div>
             <div className={`${submit ? "flex": "hidden"}`}><SubmitDialog submit={handleSubmit}/></div>
         </Layout>

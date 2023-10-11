@@ -1,7 +1,7 @@
-export default function Answer({ questions, move, count }: any){
+export default function Answer({ answers, questions, move, count }: any){
     const states = []
     for (let i = 0; i<20; i++){
-        if (questions[i] == 0){
+        if (answers[i] == questions[i].answer){
             states[i] = "bg-green-600"
         } else {
             states[i] = "bg-red-600"
