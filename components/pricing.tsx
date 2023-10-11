@@ -22,7 +22,7 @@ const Pricing = () => {
         <div className='grid md:grid-cols-3'>
         {
           packages.map((item: any) => (
-            <div className='bg-white text-teal-900 m-4 p-8 rounded-xl shadow-2xl'>
+          <div key={item} className='bg-white text-teal-900 m-4 p-8 rounded-xl shadow-2xl'>
             <span className='uppercase px-3 py-1 bg-indigo-200 text-indigo-900 rounded-2xl text-sm'>Standard</span>
             <div>
               <p className='text-4xl font-bold py-4 flex'>FRW 1000<span className='text-xl text-teal-500 flex flex-col justify-end'>/week</span></p>
