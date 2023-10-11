@@ -25,7 +25,7 @@ export default function Indicator({ start, duration, submit }: any){
                 const elapsed = current - start;
                 setPercentage(elapsed*100 / duration)
                 if (percentage > 100){
-                    submit()
+                    submit(1)
                 }
             }, 1000)
         }
