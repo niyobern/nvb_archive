@@ -50,7 +50,7 @@ export default function Tests( { links }: any){
             <div className="flex flex-col h-full md:grid grid-cols-2 gap-4 bg-gray-100 p-2">
                 {
                     numbers.map((item: number) => (
-                        <div className="bg-white flex flex-col h-fit" onClick={() => handleClick(item)}>
+                        <div key={item} className="bg-white flex flex-col h-fit" onClick={() => handleClick(item)}>
                             <Image src={test} width={500} height={500} alt="thumbnail" className="w-full"/>
                             <h1 className="font-medium text-lg leading-none p-1">Isuzumabumenyi #{item} <span className="text-sm font-normal">Rigufasha kwitegura ikizamini cya provisoire</span></h1>
                         </div>

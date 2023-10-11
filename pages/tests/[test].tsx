@@ -12,7 +12,17 @@ import Link from "next/link";
 import SubmitDialog from "../../components/submitDialog";
 import { useRouter } from "next/router";
 
-export const getServerSideProps = (async (context: any) => {
+export const getStaticPaths = (async () => {
+    const links = ["/tests/1"]
+    for (let i=2;i<26;i++){
+        links.push(`/tests/${i}`)
+    }
+    return {
+      paths: [...links],
+      fallback: false,
+    }
+})
+export const getStaticProps = (async (context: any) => {
     const dir = path.join(process.cwd(), 'data')
     const slug = context.params.test
     const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
