@@ -176,7 +176,9 @@ export default function Class({ links, note, contents, slugs }: any){
     //     }
     // }, [router.asPath])
     function navigate(move: any){
-        router.push(`router.pathname/${move}`)
+        const params = slugs.slice(0, 3)
+        const link = "/class/" + params.join("/")
+        router.push(`${link}/${move}`)
         if (note && note.prev === null){
             setDisabled([true, false])
         } else {
