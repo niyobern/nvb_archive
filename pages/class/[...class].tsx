@@ -162,7 +162,7 @@ export default function Class({ links, note, contents, slugs }: any){
     if (note){
         const params = slugs.slice(0, 3)
         const link = "/class/" + params.join("/")
-        const disabled = [false, true]
+        const disabled = [true, false]
         if (note.prev === null){
             disabled[0] = true
         } else if (note.next === null){
