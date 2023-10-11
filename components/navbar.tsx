@@ -6,7 +6,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default function NavBar({ language }: any){
     const menu = ["", "amasomo", "Isubukura", "Isuzumabumenyi", "Ikofi", "Konti Yanjye"]
-    const links = ["", "amasomo", "amasomo/1", "tests", "ikofi", "account"]
+    const links = ["", "class/1", "subukura", "tests", "ikofi", "account"]
     const router = useRouter()
     const route = router.pathname.slice(1)
     const [lang, setLang] = useState(language)

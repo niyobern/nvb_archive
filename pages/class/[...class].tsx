@@ -4,7 +4,6 @@ import { readFile } from "fs/promises"
 import path from "path"
 import Card from "../../components/card";
 import Navigate from "../../components/navigate";
-import { useEffect, useState } from "react"
 import { useRouter } from "next/router";
 
 export const getStaticPaths = (async () => {

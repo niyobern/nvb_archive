@@ -1,5 +1,7 @@
 import { useState } from "react"
 import Link from "next/link"
+import { BiLogoWhatsapp } from "react-icons/Bi"
+import { IoLogoWhatsapp } from "react-icons/Io"
 export default function HomeNavBar(){
     const [show, setShow] = useState(false)
     function handleShow(){
@@ -22,14 +24,10 @@ export default function HomeNavBar(){
                     </svg>
                 </div>
             </div>
-            <div className="fixed bottom-4 right-4 hover:bg-teal-800 rounded-r-full group flex flex-row content-center">
-                <div className="text-white text-2xl font-medium hidden group-hover:flex flex-col justify-center px-2"><span>Injira</span></div>
-                <Link href="/user/login">
-                  <div className="rounded-full border-2 text-teal-800 border-green-800 bg-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12"><path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z" /></svg>
-                  </div>
-                </Link>
+            <div className="fixed bottom-4 right-2 md:right-10 bg-white rounded-full p-2 hover:bg-gray-100 z-50 text-green-600" onClick={() => window.open("https://wa.me/+250785501924?text=Hello")}>
+              <IoLogoWhatsapp size={40}/>
             </div>
+            {/* <div className="_1yCVn _1qse9"><div className="_2uc4w"><span className="_lI8mw"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span><div className="_3jDIS"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.486 2 2 6.486 2 12v4.143C2 17.167 2.897 18 4 18h1a1 1 0 0 0 1-1v-5.143a1 1 0 0 0-1-1h-.908C4.648 6.987 7.978 4 12 4s7.352 2.987 7.908 6.857H19a1 1 0 0 0-1 1V18c0 1.103-.897 2-2 2h-2v-1h-4v3h6c2.206 0 4-1.794 4-4 1.103 0 2-.833 2-1.857V12c0-5.514-4.486-10-10-10z"></path></svg></div><div className="_3trGj"><span className="_3XZUa">Nockira</span><span className="_Muogh">Tubasubiza muminota mike?</span></div></div><div className="_39IQj"><div className="_1mXIm"><span className="_3Oyio"></span><span className="_3sxfE">Nockira</span><p className="_1iYf5">Mwiriwe, Twafasha iki?</p><span className="_3--Dl">06:55</span></div></div><div className="_3XP0H"><input placeholder="Type a message" className="_siqLL" value=""/><button className="_3twZq">Send</button></div></div> */}
         </div>
     )
 }
