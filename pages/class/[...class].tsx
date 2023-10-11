@@ -4,6 +4,7 @@ import { readFile } from "fs/promises"
 import path from "path"
 import Card from "../../components/card";
 import Navigate from "../../components/navigate";
+import { useEffect } from "react"
 
 export const getStaticPaths = (async () => {
     const links = ["/class/1"]
@@ -163,11 +164,14 @@ export default function Class({ links, note, contents, slugs }: any){
         const params = slugs.slice(0, 3)
         const link = "/class/" + params.join("/")
         const disabled = [true, false]
-        if (note.prev === null){
-            disabled[0] = true
-        } else if (note.next === null){
-            disabled[1] = true
-        }
+        useEffect(()=> {
+            if (note.prev === null){
+                disabled[0] = true
+            } else if (note.next === null){
+                disabled[1] = true
+            }
+        })
+        
         return (
             <Layout links={links}>
                 <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
