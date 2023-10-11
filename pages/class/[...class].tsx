@@ -101,10 +101,12 @@ export const getStaticProps = (async (context: any) => {
                 notFound: true,
             } 
         }
+        const params = slugs.slice(0, 3)
+        const link = "/class/" + params.join("/")
         note["total"] = chapter.length
         note["index"] = 0
-        note["prev"] = null
-        note["next"] = 1
+        note["prev"] = link
+        note["next"] = `${link}/1`
         lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
         contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
         links.left.shift()
