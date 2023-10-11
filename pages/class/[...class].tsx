@@ -5,6 +5,7 @@ import path from "path"
 import Card from "../../components/card";
 import Navigate from "../../components/navigate";
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router";
 
 export const getStaticPaths = (async () => {
     const links = ["/class/1"]
@@ -160,8 +161,22 @@ export const getStaticProps = (async (context: any) => {
     }
 })
 export default function Class({ links, note, contents, slugs }: any){
+    const router = useRouter()
     const [disabled, setDisabled] = useState([true, false])
-    useEffect(()=> {
+    // useEffect(()=> {
+    //     if (note && note.prev === null){
+    //         setDisabled([true, false])
+    //     } else {
+    //         setDisabled([false, false])
+    //     }
+    //     if (note && note.next === null){
+    //         setDisabled([false, true])
+    //     } else {
+    //         setDisabled([disabled[0], false])
+    //     }
+    // }, [router.asPath])
+    function navigate(move: any){
+        router.push(`router.pathname/${move}`)
         if (note && note.prev === null){
             setDisabled([true, false])
         } else {
@@ -172,16 +187,16 @@ export default function Class({ links, note, contents, slugs }: any){
         } else {
             setDisabled([disabled[0], false])
         }
-    }, [slugs])
+    }
     if (note){
         const params = slugs.slice(0, 3)
-        const link = "/class/" + params.join("/")
+        // const link = "/class/" + params.join("/")
         
         return (
             <Layout links={links}>
                 <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
                     <Card note={note} position={(note.index + 1) + "/" + note.total}/>
-                    <Navigate prev={`${link}/${note.prev}`} next={`${link}/${note.next}`} prevDisabled={disabled[0]} nextDisabled={disabled[1]}/>
+                    <Navigate prev={note.prev} next={note.next} move={navigate} prevDisabled={disabled[0]} nextDisabled={disabled[1]}/>
                 </div>
             </Layout>
         )
