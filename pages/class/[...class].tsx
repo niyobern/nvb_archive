@@ -167,7 +167,7 @@ export default function Class({ links, note, contents, slugs }: any){
         } else if (note && note.next === null){
             setDisabled([false, true])
         }
-    })
+    }, [slugs])
     if (note){
         const params = slugs.slice(0, 3)
         const link = "/class/" + params.join("/")
