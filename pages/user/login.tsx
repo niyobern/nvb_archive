@@ -20,7 +20,7 @@ export default function Home() {
       setShow(true)
     };
     if (form.isSuccess){
-      router.push("/home")
+      router.push("/subukura")
     }
   }, [form, router]);
   function handleShow(){
