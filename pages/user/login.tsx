@@ -6,7 +6,7 @@ import { handle, json, redirect } from 'next-runtime';
 import { useFormSubmit, Form } from 'next-runtime/form';
 import LoginComponent from '../../components/LoginComponent';
 import Image from 'next/image';
-import Logo from '../../public/images/logo.png'
+import Logo from "../../public/images/logo.png"
 
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
       setShow(true)
     };
     if (form.isSuccess){
-      router.push("/home")
+      router.push("/subukura")
     }
   }, [form, router]);
   function handleShow(){

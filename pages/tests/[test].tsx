@@ -94,7 +94,7 @@ export default function Ibazwa({ links, questions, slug }: any){
     function handleSubmit(a: number = 1, b: boolean = true){
         a && window.localStorage.setItem(`test${slug}`, JSON.stringify(answers))
         setSubmit(b)
-        if (a){
+        if (a && !submit){
             setConsent(false);
             setCount(0);
             setAnswers([0])
@@ -108,7 +108,7 @@ export default function Ibazwa({ links, questions, slug }: any){
                 <Indicator start={start} duration={duration} submit={handleSubmit}/>
                 <Count questions={answers} move={answer} count={count} total={questions.length}/>
                 <Question question={questions[count]} count={count} answer={answer} test={true}/>
-                <Navigate test={true} move={answer} current={count} currentAnswer={answers[count] || 0}/>
+                <Navigate test={true} move={answer} index={count} currentAnswer={answers[count] || 0}/>
             </div>
             <div className={`${submit ? "flex": "hidden"}`}><SubmitDialog submit={handleSubmit}/></div>
         </Layout>
