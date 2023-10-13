@@ -6,7 +6,6 @@ import { handle, json, redirect } from 'next-runtime';
 import { useFormSubmit, Form } from 'next-runtime/form';
 import LoginComponent from '../../components/LoginComponent';
 import Image from 'next/image';
-import Logo from '../../public/images/logo.png'
 
 
 export default function Home() {
