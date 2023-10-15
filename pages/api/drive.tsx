@@ -1,28 +1,40 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { Deta } from "deta"
+import axios from "axios"
+import Flutterwave from "flutterwave-node-v3"
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse){    
-    const deta = Deta("c0j5ubhk5sb_dSpm3XKufpv54g1JMYBjH4sco9TqbR9y"); //instantiate with Data Key or env DETA_PROJECT_KEY
-    
-    const db = deta.Base("simple_db");
-    await db.put({ name: "alex", age: 77 });
-    // // We will use "one" as a key.
-    // await db.put({ name: "alex", age: 77 }, "one");
-    // // The key could also be included in the object itself.
-    // await db.put({ name: "alex", age: 77, key: "one" });
-
-    // // Store simple types.
-    // await db.put("hello, worlds");
-    // await db.put(7);
-    // // "success" is the value and "smart_work" is the key.
-    // await db.put("success", "smart_work");
-    // await db.put(["a", "b", "c"], "my_abc");
-    
-    // // Put expiring items.
-    // // Expire in 300 seconds.
-    // await db.put({ name: "alex", age: 21 }, "alex21", { expireIn: 300 });
-    // // Expire at date.
-    // await db.put({ name: "max", age: 28 }, "max28", { expireAt: new Date("2023-01-01T00:00:00") });
-    // const item = await db.get('one');
-    res.end("item")
+export default async function handler(req: NextApiRequest, res: NextApiResponse){ 
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
+const payload = {
+    phone_number: '0786082841',
+    amount: 1500,
+    currency: 'RWF',
+    email: 'JoeBloggs@acme.co',
+    tx_ref: "mumaboko3867ahhferc",
+    order_id: "3"
+}
+flw.MobileMoney.rwanda(payload)
+    .then(console.log)
+    .catch(console.log); 
+    const data ={
+            tx_ref: "mugw2-es-1ra01matyazo",
+            amount: "10000",
+            currency: "RWF",
+            redirect_url: "https://webhook.site/9d0b00ba-9a69-44fa-a43d-a82c33c36fdc",
+            meta: {
+                consumer_id: 23,
+                consumer_mac: "92a3-912ba-1192a"
+            },
+            customer: {
+                email: "niyobern@outlook.com",
+                phonenumber: "0786082841",
+                name: "Bernard Niyomugabo"
+            },
+            customizations: {
+                title: "Pied Piper Payments",
+                logo: "http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png"
+            }
+        }  
+    // const resp = await axios.post("https://api.flutterwave.com/v3/payments", data, { headers: {"Authorization": "Bearer FLWSECK-4e1f61f5536c7c731d4f21b2def8fe03-18b331491f5vt-X", "Content-Type": "application/json"}})
+    // console.log(resp.data)
+    res.end("end")
 }
