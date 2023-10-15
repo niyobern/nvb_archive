@@ -12,11 +12,11 @@ const payload = {
     tx_ref: "mumaboko3867ahhferc",
     order_id: "3"
 }
-flw.MobileMoney.rwanda(payload)
-    .then(console.log)
-    .catch(console.log); 
+// flw.MobileMoney.rwanda(payload)
+//     .then(console.log)
+//     .catch(console.log); 
     const data ={
-            tx_ref: "mugw2-es-1ra01matyazo",
+            tx_ref: "mugw2-es-1ra01maty1zo",
             amount: "10000",
             currency: "RWF",
             redirect_url: "https://webhook.site/9d0b00ba-9a69-44fa-a43d-a82c33c36fdc",
@@ -34,7 +34,7 @@ flw.MobileMoney.rwanda(payload)
                 logo: "http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png"
             }
         }  
-    // const resp = await axios.post("https://api.flutterwave.com/v3/payments", data, { headers: {"Authorization": "Bearer FLWSECK-4e1f61f5536c7c731d4f21b2def8fe03-18b331491f5vt-X", "Content-Type": "application/json"}})
-    // console.log(resp.data)
+    const resp = await axios.post("https://api.flutterwave.com/v3/payments", data, { headers: {"Authorization": "Bearer FLWSECK-4e1f61f5536c7c731d4f21b2def8fe03-18b331491f5vt-X", "Content-Type": "application/json"}})
+    console.log(resp.data)
     res.end("end")
 }
