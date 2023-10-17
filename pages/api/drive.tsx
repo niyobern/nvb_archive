@@ -10,6 +10,7 @@ const payload = {
     currency: 'RWF',
     email: 'JoeBloggs@acme.co',
     tx_ref: "mumaboko3867ahhferc",
+    redirect_url: "https://nvb_backend-1-z3745144.deta.app/subscription/webhook",
     order_id: "3"
 }
 // flw.MobileMoney.rwanda(payload)
