@@ -5,6 +5,8 @@ import path from "path"
 import Card from "../../components/card";
 import Navigate from "../../components/navigate";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react"
+import AuthDialog from "../../components/authdialog";
 
 export const getStaticPaths = (async () => {
     const links = ["/class/1"]
@@ -164,11 +166,17 @@ export const getStaticProps = (async (context: any) => {
     }
 })
 export default function Class({ links, note, contents, slugs }: any){
-    const router = useRouter()
-
+    const [auth, setAuth] = useState(true)
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        if (!token){
+            setAuth(false)
+        }
+    }, [])
+    if (!auth){
+        return <AuthDialog/>
+    }
     if (note){
-        const params = slugs.slice(0, 3)
-        
         return (
             <Layout links={links}>
                 <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">

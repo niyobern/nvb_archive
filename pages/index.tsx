@@ -5,9 +5,6 @@ import Layout from "../components/layout"
 import Pricing from "../components/pricing"
 
 export default function Home(){
-    // useEffect(() => {
-
-    // })
     return (
         <Layout>
             <Hero/>

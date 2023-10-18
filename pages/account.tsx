@@ -1,7 +1,8 @@
 import Layout from '../components/layout';
 import { readFile } from 'fs/promises';
 import path from 'path';
-
+import { useEffect, useState } from 'react';
+import AuthDialog from '../components/authdialog';
 
 export const getServerSideProps = (async (context: any) => {
     const dir = path.join(process.cwd(), 'data')
@@ -16,6 +17,16 @@ export const getServerSideProps = (async (context: any) => {
 })
 
 export default function Account({ links }: any){
+    const [auth, setAuth] = useState(true)
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        if (!token){
+            setAuth(false)
+        }
+    }, [])
+    if (!auth){
+        return <AuthDialog/>
+    }
     return (
         <Layout links={links}>
             <div className="text-lg bg-sky-400 flex flex-col content-center justify-center h-full">

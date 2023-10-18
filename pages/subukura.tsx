@@ -1,8 +1,10 @@
 import Layout from '../components/layout';
 import { readFile } from 'fs/promises';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import path from 'path';
 import banner from "../public/images/download.jpg"
+import AuthDialog from '../components/authdialog';
 
 
 export const getServerSideProps = (async (context: any) => {
@@ -18,6 +20,16 @@ export const getServerSideProps = (async (context: any) => {
 })
 
 export default function Subukura({ links }: any){
+    const [auth, setAuth] = useState(true)
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        if (!token){
+            setAuth(false)
+        }
+    }, [])
+    if (!auth){
+        return <AuthDialog/>
+    }
     return (
         <Layout links={links}>
             <div className='flex flex-col md:grid grid-cols-2 gap-2 p-2'>

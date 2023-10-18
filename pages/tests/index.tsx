@@ -1,5 +1,5 @@
 import Layout from '../../components/layout';
-import { useState }from "react"
+import { useState, useEffect }from "react"
 import { readFile } from 'fs/promises';
 import path from 'path';
 import Image from "next/image";
@@ -29,6 +29,16 @@ export default function Tests( { links }: any){
     }
     const [modal, setModal] = useState(false)
     const [focused, setFocused] = useState(0)
+    const [auth, setAuth] = useState(true)
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        if (!token){
+            setAuth(false)
+        }
+    }, [])
+    if (!auth){
+        return <AuthDialog/>
+    }
     if (modal){
         return (
         <Layout links={updatedLinks}>

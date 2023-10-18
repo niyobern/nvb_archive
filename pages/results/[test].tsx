@@ -1,14 +1,11 @@
 import Question from "../../components/questtion"
-import Indicator from "../../components/timeindicator"
 import Answer from "../../components/answercount";
 import Navigate from "../../components/navigate"
 import Layout from '../../components/layout';
 import { useEffect, useState } from "react"
 import { readFile } from 'fs/promises';
 import path from 'path';
-import Image from "next/image";
-import test from "../../public/images/test.png"
-import Link from "next/link";
+import AuthDialog from "../../components/authdialog";
 
 export const getServerSideProps = (async (context: any) => {
     const dir = path.join(process.cwd(), 'data')
@@ -38,7 +35,16 @@ export default function Result({ links, questions, slug }: any){
         const answers = JSON.parse(answersRaw)
         setAnswers(answers)
     }, [slug])
-
+    const [auth, setAuth] = useState(true)
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        if (!token){
+            setAuth(false)
+        }
+    }, [])
+    if (!auth){
+        return <AuthDialog/>
+    }
     function answer(index: number, choice: number, move: number =  1){
         if ((count < 19 || move < 0) && (count > 0 || move > 0)){
             setCount(count + move)

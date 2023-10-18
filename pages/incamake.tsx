@@ -1,7 +1,9 @@
 import Lesson from "../components/lesson"
 import Layout from '../components/layout';
+import AuthDialog from "../components/authdialog";
 import { readFile } from "fs/promises";
 import path from "path";
+import { useEffect, useState } from "react";
 
 export const getServerSideProps = (async (context: any) => {
     const dir = path.join(process.cwd(), 'data')
@@ -16,10 +18,20 @@ export const getServerSideProps = (async (context: any) => {
 })
 
 export default function Incamake({ links }: any){
+    const [auth, setAuth] = useState(true)
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        if (!token){
+            setAuth(false)
+        }
+    }, [])
+    if (!auth){
+        return <AuthDialog/>
+    }
     return (
         <Layout links={links}>
             <div className="p-1 px-2 h-content flex flex-col">
-                <Lesson/>
+                {/* <Lesson/> */}
             </div>
         </Layout>
     )

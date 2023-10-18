@@ -11,6 +11,7 @@ import test from "../../public/images/test.png"
 import Link from "next/link";
 import SubmitDialog from "../../components/submitDialog";
 import { useRouter } from "next/router";
+import AuthDialog from "../../components/authdialog";
 
 export const getStaticPaths = (async () => {
     const links = ["/tests/1"]
@@ -37,6 +38,13 @@ export const getStaticProps = (async (context: any) => {
     return { props: { links: links, questions: questions, slug } }
 })
 export default function Ibazwa({ links, questions, slug }: any){
+    const [auth, setAuth] = useState(true)
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        if (!token){
+            setAuth(false)
+        }
+    }, [])
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
     const updatedLinks = {...links}
     updatedLinks.right = []
@@ -56,6 +64,9 @@ export default function Ibazwa({ links, questions, slug }: any){
     const [answers, setAnswers] = useState([0])
 
     const [submit, setSubmit] = useState(false)
+    if (!auth){
+        return <AuthDialog/>
+    }
     if (!consent){
         return (
         <Layout links={updatedLinks}>
