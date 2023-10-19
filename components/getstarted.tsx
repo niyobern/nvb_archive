@@ -64,7 +64,7 @@ export default function GetStarted({ title, select, id }: any){
                                     <div className="flex w-full  flex-col mx-auto px-2 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                                         <div className="relative flex-grow w-full">
                                         <label htmlFor="name"className="leading-7 text-sm text-gray-600">Full Name</label>
-                                        <input onChange={handleChange} required={true} value={formData.name} type="text" id="name" name="name" required={true} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                        <input onChange={handleChange} required={true} value={formData.name} type="text" id="name" name="name" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                                         </div>
                                         <div className="relative flex-grow w-full">
                                         <label htmlFor="email"className="leading-7 text-sm text-gray-600">Email</label>

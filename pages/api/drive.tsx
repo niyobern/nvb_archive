@@ -5,12 +5,11 @@ import Flutterwave from "flutterwave-node-v3"
 export default async function handler(req: NextApiRequest, res: NextApiResponse){ 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 const payload = {
-    phone_number: '0727533247',
+    phone_number: '0785501924',
     amount: 1500,
     currency: 'RWF',
     email: 'JoeBloggs@acme.co',
     tx_ref: "mumaboko3867ahhferc",
-    redirect_url: "https://nvb_backend-1-z3745144.deta.app/subscription/webhook",
     order_id: "3"
 }
 flw.MobileMoney.rwanda(payload)

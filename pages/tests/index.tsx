@@ -4,6 +4,7 @@ import { readFile } from 'fs/promises';
 import path from 'path';
 import Image from "next/image";
 import test from "../../public/images/test.png"
+import AuthDialog from '../../components/authdialog';
 import Link from 'next/link';
 
 
