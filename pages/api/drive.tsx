@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import axios from "axios"
-import Flutterwave from "flutterwave-node-v3"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){ 
-const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
+// const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 const payload = {
     phone_number: '0785501924',
     amount: 1500,
@@ -12,9 +11,6 @@ const payload = {
     tx_ref: "mumaboko3867ahhferc",
     order_id: "3"
 }
-flw.MobileMoney.rwanda(payload)
-    .then(console.log)
-    .catch(console.log); 
     const data ={
             tx_ref: "mugw2-es-1ra01maty1zo",
             amount: "10000",
@@ -30,11 +26,11 @@ flw.MobileMoney.rwanda(payload)
                 name: "Bernard Niyomugabo"
             },
             customizations: {
-                title: "Pied Piper Payments",
+                title: "NVB",
                 logo: "http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png"
             }
         }  
-    // const resp = await axios.post("https://api.flutterwave.com/v3/payments", data, { headers: {"Authorization": "Bearer FLWSECK-4e1f61f5536c7c731d4f21b2def8fe03-18b331491f5vt-X", "Content-Type": "application/json"}})
-    // console.log(resp.data)
+    const resp = await axios.post("https://api.flutterwave.com/v3/payments", data, { headers: {"Authorization": `Bearer ${process.env.FLW_SECRET_KEY}`, "Content-Type": "application/json"}})
+    console.log(resp.data)
     res.end("end")
 }
