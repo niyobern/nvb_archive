@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import axios from "axios"
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse){ 
-// const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
+export default async function handler(req: NextApiRequest, res: NextApiResponse){ // const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
     const payload = {
-        phone_number: '0785501924',
+        phone_number: '0727533247',
         amount: 1500,
         currency: 'RWF',
         email: 'JoeBloggs@acme.co',
