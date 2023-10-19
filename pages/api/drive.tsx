@@ -5,7 +5,7 @@ import Flutterwave from "flutterwave-node-v3"
 export default async function handler(req: NextApiRequest, res: NextApiResponse){ 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 const payload = {
-    phone_number: '0786082841',
+    phone_number: '0727533247',
     amount: 1500,
     currency: 'RWF',
     email: 'JoeBloggs@acme.co',
@@ -13,9 +13,9 @@ const payload = {
     redirect_url: "https://nvb_backend-1-z3745144.deta.app/subscription/webhook",
     order_id: "3"
 }
-// flw.MobileMoney.rwanda(payload)
-//     .then(console.log)
-//     .catch(console.log); 
+flw.MobileMoney.rwanda(payload)
+    .then(console.log)
+    .catch(console.log); 
     const data ={
             tx_ref: "mugw2-es-1ra01maty1zo",
             amount: "10000",
@@ -35,7 +35,7 @@ const payload = {
                 logo: "http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png"
             }
         }  
-    const resp = await axios.post("https://api.flutterwave.com/v3/payments", data, { headers: {"Authorization": "Bearer FLWSECK-4e1f61f5536c7c731d4f21b2def8fe03-18b331491f5vt-X", "Content-Type": "application/json"}})
-    console.log(resp.data)
+    // const resp = await axios.post("https://api.flutterwave.com/v3/payments", data, { headers: {"Authorization": "Bearer FLWSECK-4e1f61f5536c7c731d4f21b2def8fe03-18b331491f5vt-X", "Content-Type": "application/json"}})
+    // console.log(resp.data)
     res.end("end")
 }
