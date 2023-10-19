@@ -14,6 +14,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         order_id: req.body.key    
     }
     const resp = await axios.post("https://api.flutterwave.com/v3/charges?type=mobile_money_rwanda", payload, { headers: {"Authorization": `Bearer ${process.env.FLW_SECRET_KEY}`, "Content-Type": "application/json"}})
-    console.log(resp.data)
-    res.end("end")
+    res.status(200).json(resp.data)
 }

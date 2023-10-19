@@ -42,7 +42,9 @@ export default function GetStarted({ title, select, id }: any){
         axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id})
         .then( data => {
           axios.post("/api/drive", data)
-          .then( () => router.push("/account"))
+          .then( (flutterwave) => {
+            const redirect = window.open(flutterwave.data.meta.authorization.redirect)
+          })
         })
       })
     }).catch( err => console.log(err))
