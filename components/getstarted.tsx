@@ -11,10 +11,14 @@ type Data = {
   password: string
 }
 
-export default function GetStarted({ title, select }: any){
+export default function GetStarted({ title, select, id }: any){
   const router = useRouter()
   const [show, setShow] = useState(false)
   const [formData, setFormData] = useState<Data>({name: "", phone: "", email: null, password: ""})
+  const [promo, setPromo] = useState("")
+  function handlePromo( e: any){
+    setPromo(e.target.value)
+  }
   function handleChange(e: any){
     const target = e.target
     const value = target.value
@@ -26,10 +30,20 @@ export default function GetStarted({ title, select }: any){
   }
   function handleSubmit(e: any){
     e.preventDefault()
+    const loginData = new FormData()
+    const username = formData.email || formData.phone
+    loginData.append("username", username)
+    loginData.append("password", formData.password)
     axios.post("https://nvb_backend-1-z3745144.deta.app/users/", formData)
-    .then( data => {
-      console.log(data.data)
-      router.push("/user/login")
+    .then( () => {
+      axios.post("https://nvb_backend-1-z3745144.deta.app/login", loginData)
+      .then( data => {
+        localStorage.setItem("token", data.data)
+        axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id})
+        .then( data => {
+          router.push("/user/login")
+        })
+      })
     })
   }
   function handleShow(){
@@ -50,19 +64,21 @@ export default function GetStarted({ title, select }: any){
                                     <div className="flex w-full  flex-col mx-auto px-2 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                                         <div className="relative flex-grow w-full">
                                         <label htmlFor="name"className="leading-7 text-sm text-gray-600">Full Name</label>
-                                        <input onChange={handleChange} value={formData.name} type="text" id="name" name="name" required={true} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                        <input onChange={handleChange} required={true} value={formData.name} type="text" id="name" name="name" required={true} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                                         </div>
                                         <div className="relative flex-grow w-full">
                                         <label htmlFor="email"className="leading-7 text-sm text-gray-600">Email</label>
-                                        <input onChange={handleChange} value={formData.email} type="email" id="email" name="email" required={true} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                        <input onChange={handleChange} value={formData.email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                                         </div>
                                         <div className="relative flex-grow  w-full">
                                         <label htmlFor="phone"className="leading-7 text-sm text-gray-600">Phone Number</label>
-                                        <input onChange={handleChange} value={formData.phone} type="text" id="phone" name="phone" minLength={10} maxLength={10} required={true} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                        <input onChange={handleChange} required={true} value={formData.phone} type="text" id="phone" name="phone" minLength={10} maxLength={10} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                                         </div>
                                         <div className="relative flex-grow w-full">
                                         <label htmlFor="password"className="leading-7 text-sm text-gray-600">Password</label>
-                                        <input onChange={handleChange} value={formData.password} type="password" id="password" name="password" required={true} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                        <input onChange={handleChange} required={true} value={formData.password} type="password" id="password" name="password" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                        <label htmlFor="promo"className="leading-7 text-sm text-gray-600">Promo Code</label>
+                                        <input onChange={handlePromo} value={promo} type="text" id="promo" name="promo" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                                         </div>
                                     <div className="relative flex flex-col w-full h-20 justify-end">
                                         <div className="flex flex-row justify-between">
