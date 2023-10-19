@@ -41,10 +41,11 @@ export default function GetStarted({ title, select, id }: any){
         localStorage.setItem("token", data.data)
         axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id})
         .then( data => {
-          router.push("/user/login")
+          axios.post("/api/drive", data)
+          .then( () => router.push("/account"))
         })
       })
-    })
+    }).catch( err => console.log(err))
   }
   function handleShow(){
     setShow(false)
