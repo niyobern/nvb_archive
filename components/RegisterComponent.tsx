@@ -24,13 +24,6 @@ export default function RegisterComponent(){
   }
   function handleSubmit(e: any){
     e.preventDefault()
-    // const data = new FormData()
-    // data.append("name", formData.name)
-    // data.append("phone", formData.phone)
-    // data.append("password", formData.password)
-    // if (typeof formData.email === "string" && formData.email.length > 0){
-    //   data.append("email", formData.email)
-    // }
     axios.post("https://nvb_backend-1-z3745144.deta.app/users/", formData)
     .then( data => {
       console.log(data.data)
