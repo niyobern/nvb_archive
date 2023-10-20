@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
+import { useRouter } from "next/router";
 
 function fetchToken(){
     const url = "https://nvb_backend-1-z3745144.deta.app/auth"
@@ -21,12 +22,17 @@ function fetchToken(){
 
 export default async function useAuth(){
     const [auth, setAuth] = useState(true)
+    const router = useRouter()
     useEffect( () => {
         setInterval( () => {
             const authenticated = fetchToken()
             if (!authenticated){
                 setAuth(false)
                 return
+            }
+            const active = localStorage.getItem("active") || "0"
+            if (active == "0"){
+                router.push("/acount")
             }
         }, 60000)
     })
