@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
 
-function fetchToken(){    const url = "https://nvb_backend-1-z3745144.deta.app/auth"
+function fetchToken(){
+    const url = "https://nvb_backend-1-z3745144.deta.app/auth"
     const token = window.localStorage.getItem("token")
     if (!token){
         return false
@@ -9,6 +10,9 @@ function fetchToken(){    const url = "https://nvb_backend-1-z3745144.deta.app/a
     axios.post(url, {headers: {"Authentication": token}})
     .then( (data) => {
         localStorage.setItem("token", data.data)
+        axios.post("https://nvb_backend-1-z3745144.deta.app/user/details", {headers: {"Authentication": token}})
+        .then( res => localStorage.setItem("active", res.data.active))
+        .catch( err => console.log(err))
         return true
     })
     .catch( () => localStorage.removeItem("token"))

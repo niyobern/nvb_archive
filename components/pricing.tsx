@@ -10,7 +10,7 @@ type Package = {
 }
 const Pricing = () => {
   const packages: Package[] = []
-  const [selected, setSelected] = useState()
+  const [selected, setSelected] = useState(0)
   function handleSelect(index: number){
     setSelected(index)
   }
