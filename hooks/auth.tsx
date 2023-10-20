@@ -10,10 +10,8 @@ function fetchToken(){
     }
     axios.post(url, {headers: {"Authentication": token}})
     .then( (data) => {
-        localStorage.setItem("token", data.data)
-        axios.post("https://nvb_backend-1-z3745144.deta.app/user/details", {headers: {"Authentication": token}})
-        .then( res => localStorage.setItem("active", res.data.active))
-        .catch( err => console.log(err))
+        localStorage.setItem("token", data.data.token)
+        localStorage.setItem("active", data.data.active)
         return true
     })
     .catch( () => localStorage.removeItem("token"))
@@ -32,7 +30,7 @@ export default async function useAuth(){
             }
             const active = localStorage.getItem("active") || "0"
             if (active == "0"){
-                router.push("/acount")
+                router.push("/account")
             }
         }, 60000)
     })
