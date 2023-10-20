@@ -1,8 +1,7 @@
 import axios from "axios"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import Image from 'next/image';
-import Logo from '../public/images/logo.png'
+import { ColorRing } from  'react-loader-spinner'
 
 type Data = {
   name: string
@@ -16,6 +15,7 @@ export default function GetStarted({ title, select, id }: any){
   const [show, setShow] = useState(false)
   const [formData, setFormData] = useState<Data>({name: "", phone: "", email: null, password: ""})
   const [promo, setPromo] = useState("")
+  const [loading, setLoading] = useState(false)
   function handlePromo( e: any){
     setPromo(e.target.value)
   }
@@ -55,7 +55,7 @@ export default function GetStarted({ title, select, id }: any){
     return (
         <div className="fixed top-0 left-0 w-screen h-screen">
             <div className="flex flex-col h-screen bg-transparent">
-                <div className="grid place-items-center md:mx-2 my-24 sm:my-auto" x-data="{ showPass: true }">
+                <div className={`${loading ? "hidden" : "grid"} place-items-center md:mx-2 my-24 sm:my-auto`} x-data="{ showPass: true }">
                     <div className="w-full p-12 sm:w-8/12 md:w-4/12 sm:px-10 sm:py-6 bg-white shadow-teal-600 rounded-lg shadow-md lg:shadow-lg">
                         <div className="text-center mb-4">
                             <span className='uppercase px-3 py-1 bg-teal-200 text-gray-900 rounded-2xl'>{title}</span>
@@ -94,6 +94,19 @@ export default function GetStarted({ title, select, id }: any){
                             </section>
                         </div>
                     </div>
+                </div>
+                <div className={`${loading ? "flex" : "hidden"} place-items-center md:mx-2 my-24 sm:my-auto`} x-data="{ showPass: true }">
+                  <div className="w-full p-12 sm:w-8/12 md:w-4/12 sm:px-10 sm:py-6 bg-white shadow-teal-600 rounded-lg shadow-md lg:shadow-lg">
+                    <ColorRing
+                      visible={true}
+                      height="80"
+                      width="80"
+                      ariaLabel="blocks-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="blocks-wrapper"
+                      colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                    />
+                  </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';import axios from 'axios';
 import GetStarted from './getstarted';
 
 type Package = {
@@ -11,7 +10,7 @@ type Package = {
 }
 const Pricing = () => {
   const packages: Package[] = []
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState()
   function handleSelect(index: number){
     setSelected(index)
   }

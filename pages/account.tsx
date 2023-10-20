@@ -1,8 +1,10 @@
 import Layout from '../components/layout';
 import { readFile } from 'fs/promises';
 import path from 'path';
+import axios from "axios";
 import { useEffect, useState } from 'react';
 import AuthDialog from '../components/authdialog';
+import Details from "../components/details"
 
 export const getServerSideProps = (async (context: any) => {
     const dir = path.join(process.cwd(), 'data')
@@ -18,22 +20,31 @@ export const getServerSideProps = (async (context: any) => {
 
 export default function Account({ links }: any){
     const [auth, setAuth] = useState(true)
+    const initialDetails = [{
+        Name: '',
+        Email: '',
+        Phone: '',
+        "Subscription Plan": '',
+        "Days remaining": ''
+    }]
+    const [details, setDetails] = useState(initialDetails)
     useEffect( () => {
         const token = localStorage.getItem("token")
         if (!token){
             setAuth(false)
         }
+        axios.get("https://nvb_backend-1-z3745144.deta.app/users/details", { headers: {'Authentication': token}})
+        .then((res: any) => {
+            setDetails(res.data)
+        }).catch((err: any) => console.log(err))
     }, [])
     if (!auth){
         return <AuthDialog/>
     }
     return (
         <Layout links={links}>
-            <div className="text-lg bg-sky-400 flex flex-col content-center justify-center h-full">
-                <div className="bg-white rounded w-96 h-64 shadow-lg shadow-sky-600 mx-auto flex flex-col text-center justify-center">
-                    <span className="text-4xl font-bold text-red-800">Sorry</span>
-                    <span className="text-gray-800 text-xl font-medium">No details yet</span>
-                </div>
+            <div className="text-lg bg-sky-400 flex flex-col p-2 md:flex-row h-full">
+               {details.map( (item: any, index: number) =>  <Details key={index} data={item}hk/>)}
             </div>
         </Layout>
     )
