@@ -31,30 +31,30 @@ const Pricing = () => {
         <div className='text-center py-8 text-white'>
           <h2 className='text-3xl uppercase'>Ibiciro</h2>
           <h3 className='text-5xl font-bold text-white py-8'>Ibiciro bijyanye n'amikoro yawe</h3>
-          <p className='text-3xl'>
+          {/* <p className='text-3xl'>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia
             laudantium odio ullam inventore aliquid ipsum quasi tenetur velit
             voluptatum iste.
-          </p>
+          </p> */}
         </div>
 
         <div className='grid md:grid-cols-3'>
         {
           packages.map((item: any, index: number) => (
           <div key={index} className='bg-white text-teal-900 m-4 p-8 rounded-xl shadow-2xl'>
-            <span className='uppercase px-3 py-1 bg-indigo-200 text-indigo-900 rounded-2xl text-sm'>{item.title}</span>
+            <span className='uppercase px-3 py-1 bg-indigo-200 text-indigo-900 rounded-2xl text-sm'>{item.name}</span>
             <div>
-              <p className='text-4xl font-bold py-4 flex'>FRW {item.cost}<span className='text-xl text-teal-500 flex flex-col justify-end'>{item.period}</span></p>
+              <p className='text-4xl font-bold py-4 flex'>FRW {item.cost}<span className='text-xl text-teal-500 flex flex-col justify-end'>/{item.period}</span></p>
             </div>
             {/* <p className='text-2xl py-8 text-teal-500'>Lorem ipsum dolor, sit amet consectetur adipisicing.</p> */}
             <div className='text-xl'>
-            {item.points.map((item:   any, index: any) =><p key={index} className='flex py-2'><svg className="h-6 w-6 text-teal-800"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>Lorem, ipsum dolor.</p>)}
+            {item.points && item.points.map((value: any, index: any) =><p key={index} className='flex py-2'><svg className="h-6 w-6 text-teal-800"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>{value}</p>)}
                 <button onClick={() => handleSelect(index + 1)} className='w-full py-4 my-4 bg-green-600 text-white'>Get Started</button>
             </div>
           </div>
           ))
         }
-        {selected && <GetStarted title="Standard" select={handleSelect} id={packages[selected-1].key}/>}
+        {selected && <GetStarted title={packages[selected-1].name}select={handleSelect} id={packages[selected-1].key}/>}
         </div>
       </div>
     </div>
