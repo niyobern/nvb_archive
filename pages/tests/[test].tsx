@@ -38,7 +38,7 @@ export const getStaticProps = (async (context: any) => {
     links.right.shift()
     return { props: { links: links, questions: questions, slug } }
 })
-export default async function Ibazwa({ links, questions, slug }: any){
+export default function Ibazwa({ links, questions, slug }: any){
     const token = localStorage.getItem("token")
     const [start, setStart] = useState(0)
     if (start === -1){
