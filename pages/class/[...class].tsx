@@ -4,7 +4,6 @@ import { readFile } from "fs/promises"
 import path from "path"
 import Card from "../../components/card";
 import Navigate from "../../components/navigate";
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react"
 import AuthDialog from "../../components/authdialog";
 
