@@ -13,7 +13,7 @@ type Data = {
 export default function GetStarted({ title, select, id }: any){
   const router = useRouter()
   const [show, setShow] = useState(false)
-  const [formData, setFormData] = useState<Data>({name: "", phone: "", email: null, password: ""})
+  const [formData, setFormData] = useState<Data>({name: "", phone: "", email: "", password: ""})
   const [promo, setPromo] = useState("")
   const [loading, setLoading] = useState(false)
   function handlePromo( e: any){
