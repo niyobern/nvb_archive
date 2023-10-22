@@ -14,7 +14,10 @@ const Pricing = () => {
   const [selected, setSelected] = useState(0)
   useEffect( ()=> {
     axios.get("https://nvb_backend-1-z3745144.deta.app/subscription/package")
-    .then(( res => setPackages(res.data)))
+    .then(( res => {
+      setPackages(res.data)
+      console.log(res.data)
+    }))
   }, [])
   function handleSelect(index: number){
     setSelected(index)
@@ -41,7 +44,7 @@ const Pricing = () => {
           <div key={index} className='bg-white text-teal-900 m-4 p-8 rounded-xl shadow-2xl'>
             <span className='uppercase px-3 py-1 bg-indigo-200 text-indigo-900 rounded-2xl text-sm'>{item.title}</span>
             <div>
-              <p className='text-4xl font-bold py-4 flex'>FRW {item.item.item.cost}<span className='text-xl text-teal-500 flex flex-col justify-end'>{item.period}</span></p>
+              <p className='text-4xl font-bold py-4 flex'>FRW {item.cost}<span className='text-xl text-teal-500 flex flex-col justify-end'>{item.period}</span></p>
             </div>
             {/* <p className='text-2xl py-8 text-teal-500'>Lorem ipsum dolor, sit amet consectetur adipisicing.</p> */}
             <div className='text-xl'>
