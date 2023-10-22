@@ -121,6 +121,7 @@ export default function Ibazwa({ links, questions, slug }: any){
     function handleSubmit(a: number = 1, b: boolean = true){
         a && window.localStorage.setItem(`test${slug}`, JSON.stringify(answers))
         a && window.localStorage.setItem(`test${slug}_score`, JSON.stringify(score))
+        const token = localStorage.getItem("token")
         setSubmit(b)
         if (a && !submit){
             setConsent(false);
