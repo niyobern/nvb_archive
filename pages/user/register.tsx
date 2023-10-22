@@ -4,20 +4,9 @@ import { useEffect, useState } from 'react';
 import { useFormSubmit, Form } from 'next-runtime/form';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Logo from '../../public/images/logo.png'
+import Logo from '../../public/images/logo.png';
+import Pricing from '../../components/pricing';
 import RegisterComponent from '../../components/RegisterComponent';
-
-// export const getServerSideProps = handle({
-//   async get() {
-//     return json({});
-//   },
-//   async post({ req: { body }, cookies}: any) {
-//     const result = await axios.post(`${baseUrl}/register`, {"email": body.email, "phone": body.phone, "password": body.password})
-//     const data = result.data
-//     cookies.set("user_id", data.user_id )
-//     return json({...data});
-//   },
-// });
 
 export default function Home() {
   const form: any = useFormSubmit()
@@ -46,7 +35,8 @@ export default function Home() {
                 <div onClick={handleShow} className={`${ show ? "inline-block": "hidden"} px-6 text-lg font-bold text-red-600 mt-2 pt-4 rounded-lg`}>Try with an other email and phone</div>
             </div>
             <div className="space-y-5 tex-lg">
-              <RegisterComponent/>
+              {/* <RegisterComponent/> */}
+              <Pricing/>
             </div>
         </div>
 </div>
