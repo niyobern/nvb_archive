@@ -29,10 +29,14 @@ export default function Result({ links, questions, slug }: any){
 
     const [count, setCount] = useState(0)
     const [answers, setAnswers] = useState([0])
+    const [score, setScore] = useState(0)
 
     useEffect(() => {
         const answersRaw = window.localStorage.getItem(`test${slug}`) || ""
+        const scoreRaw = window.localStorage.getItem(`test${slug}_score`) || ""
         const answers = JSON.parse(answersRaw)
+        const scored = JSON.parse(scoreRaw)
+        setScore(scored)
         setAnswers(answers)
     }, [slug])
     const [auth, setAuth] = useState(true)
@@ -54,6 +58,7 @@ export default function Result({ links, questions, slug }: any){
         <Layout links={updatedLinks}>
             <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col min-h-screen">
                 <Answer answers={answers} questions={questions} move={answer} count={count} total={questions.length}/>
+                <div className="bg-white p-1 text-center text-xl text-teal-800 font-semibold">{score} /20</div>
                 <Question question={questions[count]} count={count} answer={answers[count]}/>
                 <Navigate test={true} move={answer} current={count} currentAnswer={answers[count] || 0}/>
             </div>

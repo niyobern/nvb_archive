@@ -6,6 +6,7 @@ import Layout from '../../components/layout';
 import { useEffect, useState } from "react"
 import { readFile } from 'fs/promises';
 import path from 'path';
+import axios from "axios";
 import Image from "next/image";
 import test from "../../public/images/test.png"
 import Link from "next/link";
@@ -37,7 +38,12 @@ export const getStaticProps = (async (context: any) => {
     links.right.shift()
     return { props: { links: links, questions: questions, slug } }
 })
-export default function Ibazwa({ links, questions, slug }: any){
+export default async function Ibazwa({ links, questions, slug }: any){
+    const token = localStorage.getItem("token")
+    const start = await axios.get("https://nvb_backend-1-z3745144.deta.app/study/test/start", { headers: {"Authentication": token}})
+    if (start.data === -1){
+        handleSubmit(1, false)
+    }
     const [auth, setAuth] = useState(true)
     useEffect( () => {
         const token = localStorage.getItem("token")
@@ -52,6 +58,7 @@ export default function Ibazwa({ links, questions, slug }: any){
     numbers.forEach(item => updatedLinks.right.push({text: `Isuzumabumenyi #${item}`, link: `/tests/${item}`}))
     
     const [consent, setConsent] = useState(false)
+    const [score, setScore] = useState(0)
 
     useEffect(() => {
         setConsent(false);
@@ -78,7 +85,7 @@ export default function Ibazwa({ links, questions, slug }: any){
                 <div className="font-bold text-gray-800"><span className="font-normal text-base">Umubare w'ibibazo: </span>20</div>
                 <div className="font-bold text-gray-800"><span className="font-normal text-base">Iminota iteganyijwe: </span>20</div>
                 <div className="flex justify-between gap-8">
-                    <div onClick={() =>setConsent(true)} className="mt-4 text-xl text-white font-medium py-2 px-4 shadow bg-emerald-700 cursor-pointer hover:bg-green-800">Tangira</div>
+                    <div onClick={startTest} className="mt-4 text-xl text-white font-medium py-2 px-4 shadow bg-emerald-700 cursor-pointer hover:bg-green-800">Tangira</div>
                     <Link href="/tests"><div className="mt-4 text-lg text-white font-normal py-2 px-4 shadow bg-red-700 hover:bg-gray-800">Bireke</div></Link>
                 </div>
             </div>
@@ -86,9 +93,17 @@ export default function Ibazwa({ links, questions, slug }: any){
         )
     }
 
-    const start = Date.now()
     const duration = 20*60*1000
+    function startTest(){
+        setConsent(true)
+        const token = localStorage.getItem("token") || ""
+        axios.post("https://nvb_backend-1-z3745144.deta.app/study/test/start", {"time": Date.now()}, { headers: {"Authentication": token}})
+        .then( res => console.log(res.data))
+    }
     function answer(index: number, choice: number, move: number =  1, target: number = -1){
+        if (choice === questions[index].answer){
+            setScore(score + 1)
+        }
         const answersCopy = [...answers]
         answersCopy[index] = choice
         setAnswers(answersCopy)
@@ -104,11 +119,13 @@ export default function Ibazwa({ links, questions, slug }: any){
     }
     function handleSubmit(a: number = 1, b: boolean = true){
         a && window.localStorage.setItem(`test${slug}`, JSON.stringify(answers))
+        a && window.localStorage.setItem(`test${slug}_score`, JSON.stringify(score))
         setSubmit(b)
         if (a && !submit){
             setConsent(false);
             setCount(0);
             setAnswers([0])
+            axios.post("https://nvb_backend-1-z3745144.deta.app/study/test/end", {"test_id": slug, "marks": score}, { headers: {"Authentication": token}})
             router.push(`/results/${slug}`)
         }
     }
@@ -116,7 +133,7 @@ export default function Ibazwa({ links, questions, slug }: any){
     return (
         <Layout links={updatedLinks}>
             <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col min-h-screen">
-                <Indicator start={start} duration={duration} submit={handleSubmit}/>
+                <Indicator start={start} duration={duration}/>
                 <Count questions={answers} move={answer} count={count} total={questions.length}/>
                 <Question question={questions[count]} count={count} answer={answer} test={true}/>
                 <Navigate test={true} move={answer} index={count} currentAnswer={answers[count] || 0}/>
