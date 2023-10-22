@@ -34,11 +34,12 @@ export default function GetStarted({ title, select, id }: any){
     const username = formData.email || formData.phone
     loginData.append("username", username)
     loginData.append("password", formData.password)
+    setLoading(true)
     axios.post("https://nvb_backend-1-z3745144.deta.app/users/", formData)
     .then( () => {
       axios.post("https://nvb_backend-1-z3745144.deta.app/login", loginData)
       .then( data => {
-        localStorage.setItem("token", data.data)
+        localStorage.setItem("token", data.data.token)
         axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id})
         .then( data => {
           axios.post("/api/drive", data)
