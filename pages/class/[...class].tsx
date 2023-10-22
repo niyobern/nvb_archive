@@ -6,6 +6,7 @@ import Card from "../../components/card";
 import Navigate from "../../components/navigate";
 import { useState, useEffect } from "react"
 import AuthDialog from "../../components/authdialog";
+import axios from "axios"
 
 export const getStaticPaths = (async () => {
     const links = ["/class/1"]
@@ -171,6 +172,7 @@ export default function Class({ links, note, contents, slugs }: any){
         if (!token){
             setAuth(false)
         }
+        axios.post("https://nvb_backend-1-z3745144.deta.app/study/class", { "path": slugs.join("/")}, { headers: {"Authentication": token}})
     }, [])
     if (!auth){
         return <AuthDialog/>
