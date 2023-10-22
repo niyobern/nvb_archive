@@ -133,7 +133,7 @@ export default async function Ibazwa({ links, questions, slug }: any){
     return (
         <Layout links={updatedLinks}>
             <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col min-h-screen">
-                <Indicator start={start} duration={duration}/>
+                <Indicator start={start.data} duration={duration}/>
                 <Count questions={answers} move={answer} count={count} total={questions.length}/>
                 <Question question={questions[count]} count={count} answer={answer} test={true}/>
                 <Navigate test={true} move={answer} index={count} currentAnswer={answers[count] || 0}/>
