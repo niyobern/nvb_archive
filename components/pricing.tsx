@@ -1,5 +1,6 @@
-import React, { useState } from 'react';import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import GetStarted from './getstarted';
+import axios from 'axios';
 
 type Package = {
   key: string,
@@ -9,8 +10,12 @@ type Package = {
   period: string
 }
 const Pricing = () => {
-  const packages: Package[] = []
+  const [packages, setPackages] = useState<Package[]>([])
   const [selected, setSelected] = useState(0)
+  useEffect( ()=> {
+    axios.get("https://nvb_backend-1-z3745144.deta.app/subscription/package")
+    .then(( res => setPackages(res.data)))
+  }, [])
   function handleSelect(index: number){
     setSelected(index)
   }
