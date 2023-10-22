@@ -40,8 +40,8 @@ export const getStaticProps = (async (context: any) => {
 })
 export default async function Ibazwa({ links, questions, slug }: any){
     const token = localStorage.getItem("token")
-    const start = await axios.get("https://nvb_backend-1-z3745144.deta.app/study/test/start", { headers: {"Authentication": token}})
-    if (start.data === -1){
+    const [start, setStart] = useState(0)
+    if (start === -1){
         handleSubmit(1, false)
     }
     const [auth, setAuth] = useState(true)
@@ -50,6 +50,8 @@ export default async function Ibazwa({ links, questions, slug }: any){
         if (!token){
             setAuth(false)
         }
+        axios.get("https://nvb_backend-1-z3745144.deta.app/study/test/start", { headers: {"Authentication": token}})
+        .then( res => setStart(res.data))
     }, [])
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
     const updatedLinks = {...links}
@@ -133,7 +135,7 @@ export default async function Ibazwa({ links, questions, slug }: any){
     return (
         <Layout links={updatedLinks}>
             <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col min-h-screen">
-                <Indicator start={10000} duration={duration}/>
+                <Indicator start={start} duration={duration}/>
                 <Count questions={answers} move={answer} count={count} total={questions.length}/>
                 <Question question={questions[count]} count={count} answer={answer} test={true}/>
                 <Navigate test={true} move={answer} index={count} currentAnswer={answers[count] || 0}/>
