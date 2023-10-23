@@ -11,11 +11,11 @@ type Data = {
 }
 
 export default function GetStarted({ title, select, id }: any){
-  const router = useRouter()
   const [show, setShow] = useState(false)
   const [formData, setFormData] = useState<Data>({name: "", phone: "", email: "", password: ""})
   const [promo, setPromo] = useState("")
   const [loading, setLoading] = useState(false)
+  const [pay, setPay] = useState("")
   function handlePromo( e: any){
     setPromo(e.target.value)
   }
@@ -40,15 +40,29 @@ export default function GetStarted({ title, select, id }: any){
       axios.post("https://nvb_backend-1-z3745144.deta.app/login", loginData)
       .then( data => {
         localStorage.setItem("token", data.data.token)
-        axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id})
+        axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id}, { headers : {"Authorization": data.data.token}})
         .then( data => {
-          axios.post("/api/drive", data)
+          axios.post("/api/drive", data.data)
           .then( (flutterwave) => {
-            const redirect = window.open(flutterwave.data.meta.authorization.redirect)
+              setPay(flutterwave.data.meta.authorization.redirect)
+          })
+          .catch( err => {
+            setLoading(false)
+            console.log(err)
           })
         })
+        .catch( err => {
+          setLoading(false)
+          console.log(err)
+        })
       })
-    }).catch( err => console.log(err))
+    }).catch( err => {
+      setLoading(false)
+      console.log(err)
+    }).catch( err => {
+      setLoading(false)
+      console.log(err)
+    })
   }
   function handleShow(){
     setShow(false)
@@ -96,8 +110,8 @@ export default function GetStarted({ title, select, id }: any){
                         </div>
                     </div>
                 </div>
-                <div className={`${loading ? "flex" : "hidden"} place-items-center md:mx-2 my-24 sm:my-auto`} x-data="{ showPass: true }">
-                  <div className="w-full p-12 sm:w-8/12 md:w-4/12 sm:px-10 sm:py-6 bg-white shadow-teal-600 rounded-lg shadow-md lg:shadow-lg">
+                <div className={`${loading ? "flex" : "hidden"} justify-center items-center md:mx-2 my-24 sm:my-auto`} x-data="{ showPass: true }">
+                  <div className="w-full flex flex-col gap-4 justify-center items-center p-12 sm:w-8/12 md:w-4/12 sm:px-10 sm:py-6 bg-white shadow-teal-600 rounded-lg shadow-md lg:shadow-lg">
                     <ColorRing
                       visible={true}
                       height="80"
@@ -107,6 +121,8 @@ export default function GetStarted({ title, select, id }: any){
                       wrapperClass="blocks-wrapper"
                       colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
                     />
+                    {pay === "" && <span className="text-teal-800 text-xl font-medium">We are configuring your account</span>}
+                    {pay !== "" && <button onClick={() => window.open(pay,'_blank', 'width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0,modal=yes')} className="rounded mb-4 bg-teal-600 px-4 py-2 hover:bg-teal-700 pointer-cursor">Continue to pay</button>}
                   </div>
                 </div>
             </div>

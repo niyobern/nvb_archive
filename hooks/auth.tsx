@@ -8,7 +8,7 @@ function fetchToken(){
     if (!token){
         return false
     }
-    axios.post(url, {headers: {"Authentication": token}})
+    axios.post(url, {headers: {"Authorization": token}})
     .then( (data) => {
         localStorage.setItem("token", data.data.token)
         localStorage.setItem("active", data.data.active)

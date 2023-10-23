@@ -5,6 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "GET"){
         res.status(400)
     }
+    console.log(req.body)
     const payload = {
         phone_number: req.body.phone,
         amount: req.body.price,
