@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 function fetchToken(){
     const url = "https://nvb_backend-1-z3745144.deta.app/auth"
     const token = window.localStorage.getItem("token")
+    console.log(token)
     if (!token){
         return false
     }
