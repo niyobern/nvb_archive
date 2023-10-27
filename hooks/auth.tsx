@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 function fetchToken(){
     const url = "https://nvb_backend-1-z3745144.deta.app/auth"
-    var answer = false
+    var answer = {loggedIn: false}
     const token = window.localStorage.getItem("token")
     if (!token){
         return
@@ -12,12 +12,12 @@ function fetchToken(){
     axios.post(url, {}, { headers: {"Authorization": token}})
     .then( (data) => {
         localStorage.setItem("active", data.data.active)
-        answer = true
+        answer.loggedIn = true
     })
     .catch( () => {
         window.localStorage.removeItem("token")
     })
-    return answer
+    return answer.loggedIn
 }
 
 export default async function useAuth(){
