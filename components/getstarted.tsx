@@ -16,6 +16,7 @@ export default function GetStarted({ title, select, id }: any){
   const [promo, setPromo] = useState("")
   const [loading, setLoading] = useState(false)
   const [pay, setPay] = useState("")
+  const router = useRouter()
   function handlePromo( e: any){
     setPromo(e.target.value)
   }
@@ -45,6 +46,7 @@ export default function GetStarted({ title, select, id }: any){
           axios.post("/api/drive", data.data)
           .then( (flutterwave) => {
               setPay(flutterwave.data.meta.authorization.redirect)
+              router.push("/account")
           })
           .catch( err => {
             setLoading(false)
