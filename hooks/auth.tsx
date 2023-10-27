@@ -4,20 +4,20 @@ import { useRouter } from "next/router";
 
 function fetchToken(){
     const url = "https://nvb_backend-1-z3745144.deta.app/auth"
+    var answer = false
     const token = window.localStorage.getItem("token")
     if (!token){
-        return false
+        return
     }
-    axios.post(url, {headers: {"Authorization": token}})
+    axios.post(url, {}, { headers: {"Authorization": token}})
     .then( (data) => {
-        console.log(token, typeof token)
-        console.log(data.data)
-        localStorage.setItem("token", data.data.token)
         localStorage.setItem("active", data.data.active)
-        return true
+        answer = true
     })
-    .catch( (err) => console.log(err))
-    return false
+    .catch( () => {
+        window.localStorage.removeItem("token")
+    })
+    return answer
 }
 
 export default async function useAuth(){
@@ -27,10 +27,12 @@ export default async function useAuth(){
         setInterval( () => {
             const authenticated = fetchToken()
             if (!authenticated){
+                console.log("nooo")
                 setAuth(false)
                 return
             }
             const active = localStorage.getItem("active") || "0"
+            console.log(active, "yeee")
             if (active == "0"){
                 router.push("/account")
             }
