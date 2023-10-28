@@ -9,7 +9,7 @@ export default async function webHook(req: NextApiRequest, res: NextApiResponse)
             const prefix = "jiprovisional_sub_key_"
             const tx_ref = data.tx_ref
             const key = tx_ref.slice(prefix.length, tx_ref.length)
-            axios.post('https://nvb_backend-1-z3745144.deta.app/subscription/pay/', {"sub": key, "amount": data.amount})
+            axios.post('https://nvb_backend-1-z3745144.deta.app/subscription/pay/', {"sub": key, "amount": data.amount}, { headers: {"APISecret": `${process.env.API_SECRETE}`}})
         }
     }
     res.status(200).json({message: "received"})
