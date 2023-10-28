@@ -46,7 +46,7 @@ export default function LoginComponent(){
         </div>
       <div className="relative flex flex-col w-full h-20 justify-end">
         <div className="flex flex-row justify-between">
-            <Link href="/users/register" className="text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-slate-600 rounded text-lg">Signup</Link>
+            <Link href="/user/register" className="text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-slate-600 rounded text-lg">Signup</Link>
             <button onClick={handleSubmit} className="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Login</button>
         </div>
       </div>
