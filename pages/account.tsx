@@ -33,7 +33,7 @@ export default function Account({ links }: any){
         if (!token){
             setAuth(false)
         }
-        axios.get("https://nvb_backend-1-z3745144.deta.app/users/details", { headers: {'Authentication': token}})
+        axios.get("https://nvb_backend-1-z3745144.deta.app/users/details", { headers: {'Authorization': token}})
         .then((res: any) => {
             setDetails(res.data)
         }).catch((err: any) => console.log(err))

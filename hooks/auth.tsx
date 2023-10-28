@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 function fetchToken(){
     const url = "https://nvb_backend-1-z3745144.deta.app/auth"
-    var answer = {loggedIn: false}
     const token = window.localStorage.getItem("token")
     if (!token){
         return
@@ -12,12 +11,11 @@ function fetchToken(){
     axios.post(url, {}, { headers: {"Authorization": token}})
     .then( (data) => {
         localStorage.setItem("active", data.data.active)
-        answer.loggedIn = true
     })
     .catch( () => {
         window.localStorage.removeItem("token")
     })
-    return answer.loggedIn
+    return
 }
 
 export default async function useAuth(){
@@ -25,14 +23,12 @@ export default async function useAuth(){
     const router = useRouter()
     useEffect( () => {
         setInterval( () => {
-            const authenticated = fetchToken()
+            const authenticated = localStorage.getItem("token")
             if (!authenticated){
-                console.log("nooo")
                 setAuth(false)
                 return
             }
             const active = localStorage.getItem("active") || "0"
-            console.log(active, "yeee")
             if (active == "0"){
                 router.push("/account")
             }

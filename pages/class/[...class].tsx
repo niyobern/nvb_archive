@@ -172,7 +172,7 @@ export default function Class({ links, note, contents, slugs }: any){
         if (!token){
             setAuth(false)
         }
-        axios.post("https://nvb_backend-1-z3745144.deta.app/study/class", { "path": slugs.join("/")}, { headers: {"Authentication": token}})
+        axios.post("https://nvb_backend-1-z3745144.deta.app/study/class", { "path": slugs.join("/")}, { headers: {"Authorization": token}})
     }, [slugs])
     if (!auth){
         return <AuthDialog/>
