@@ -43,6 +43,9 @@ export default function GetStarted({ title, select, id }: any){
         localStorage.setItem("token", data.data.token)
         axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id}, { headers : {"Authorization": data.data.token}})
         .then( data => {
+          if (data.data.paid == 1){
+            router.push("/account")
+          }
           axios.post("/api/drive", data.data)
           .then( (flutterwave) => {
               setPay(flutterwave.data.meta.authorization.redirect)
