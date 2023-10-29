@@ -26,10 +26,10 @@ export const getStaticPaths = (async () => {
 })
 export const getStaticProps = (async (context: any) => {
     const dir = path.join(process.cwd(), 'data')
-    const slug = context.params.test
+    const slug = Number(context.params.test)
     const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
     const lessons = JSON.parse(rawLessons)
-    const rawQuestions = await readFile(dir + `/tests/${slug}.json`, {encoding: "utf-8"})
+    const rawQuestions = await readFile(dir + `/tests/${slug -1 }.json`, {encoding: "utf-8"})
     const questions = JSON.parse(rawQuestions)
     const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}
     lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
@@ -52,7 +52,7 @@ export default function Ibazwa({ links, questions, slug }: any){
         axios.get("https://nvb_backend-1-z3745144.deta.app/study/test/start", { headers: {"Authorization": token}})
         .then( res => setStart(res.data))
     }, [])
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     const updatedLinks = {...links}
     updatedLinks.right = []
     const router = useRouter()
