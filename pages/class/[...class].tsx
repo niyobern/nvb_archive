@@ -77,8 +77,8 @@ export const getStaticProps = (async (context: any) => {
         const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
         const allContents = JSON.parse(rawContents)
         const contents = allContents[slugs[1]]
-        const heading1 = lessons[Number(slugs[1])]
-        const heading2 = contents[Number(slugs[2])]
+        const heading1 = lessons[Number(slugs[1])].title
+        const heading2 = contents[Number(slugs[2])].item
         if (!contents){
             return {
                 notFound: true,
@@ -128,8 +128,8 @@ export const getStaticProps = (async (context: any) => {
         const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
         const allContents = JSON.parse(rawContents)
         const contents = allContents[slugs[1]]
-        const heading1 = lessons[Number(slugs[1])]
-        const heading2 = contents[Number(slugs[2].item)]
+        const heading1 = lessons[Number(slugs[1])].title
+        const heading2 = contents[Number(slugs[2])].item
         if (!contents){
             return {
                 notFound: true,
@@ -184,7 +184,7 @@ export default function Class({ links, note, contents, slugs, heading1: heading1
         return <AuthDialog/>
     }
     if (note){
-        axios.post("https://nvb_backend-1-z3745144.deta.app/study/class", { "path": "/class/" + slugs.join("/"), "heading1": heading1, "heading2": heading2}, { headers: {"Authorization": jwt}})      
+        axios.post("https://nvb_backend-1-z3745144.deta.app/study/", { path: "/class/" + slugs.join("/"), heading1: heading1, heading2: heading2}, { headers: {"Authorization": jwt}})      
         return (
             <Layout links={links}>
                 <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
@@ -199,7 +199,7 @@ export default function Class({ links, note, contents, slugs, heading1: heading1
         <Layout links={links}>
             <div className="flex flex-col gap-4 bg-gray-100 p-4 h-full">
             {
-                contents.map((value: any)=><Content  key={value.key} title={value.item} link={`${link}/${value.key}`}/>)
+                contents.map((value: any)=><Content  key={value.key} title={value.item? value.item : value.title} link={`${link}/${value.key}`}/>)
             }
             </div>
         </Layout>

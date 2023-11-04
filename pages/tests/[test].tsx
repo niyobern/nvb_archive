@@ -49,7 +49,7 @@ export default function Ibazwa({ links, questions, slug }: any){
         if (!token){
             setAuth(false)
         }
-        axios.get("https://nvb_backend-1-z3745144.deta.app/study/test/start", { headers: {"Authorization": token}})
+        axios.get("https://nvb_backend-1-z3745144.deta.app/study/start", { headers: {"Authorization": token}})
         .then( res => setStart(res.data))
     }, [])
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
