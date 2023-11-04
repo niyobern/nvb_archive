@@ -77,6 +77,8 @@ export const getStaticProps = (async (context: any) => {
         const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
         const allContents = JSON.parse(rawContents)
         const contents = allContents[slugs[1]]
+        const heading1 = lessons[Number(slugs[1])]
+        const heading2 = contents[Number(slugs[2])]
         if (!contents){
             return {
                 notFound: true,
@@ -112,7 +114,7 @@ export const getStaticProps = (async (context: any) => {
         contents.forEach((content: any) => links.right.push({text: content.item, link: `/class/1/${slugs[1]}/${content.key}`}))
         links.left.shift()
         links.right.shift()
-        return { props: { links: links, note: note, slugs: slugs } }
+        return { props: { links: links, note: note, slugs: slugs, heading1: heading1, heading2: heading2 } }
     } else if (slugs.length === 4){
         const lessonKeys = ['0', '1', '2', '3']
         if (!lessonKeys.includes(slugs[1])){
@@ -126,6 +128,8 @@ export const getStaticProps = (async (context: any) => {
         const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
         const allContents = JSON.parse(rawContents)
         const contents = allContents[slugs[1]]
+        const heading1 = lessons[Number(slugs[1])]
+        const heading2 = contents[Number(slugs[2])]
         if (!contents){
             return {
                 notFound: true,
@@ -162,18 +166,18 @@ export const getStaticProps = (async (context: any) => {
         contents.forEach((content: any) => links.right.push({text: content.item, link: `/class/1/${slugs[1]}/${content.key}`}))
         links.left.shift()
         links.right.shift()
-        return { props: { links: links, note: note, slugs: slugs } }
+        return { props: { links: links, note: note, slugs: slugs, heading1: heading1, heading2: heading2 } }
     }
 })
-export default function Class({ links, note, contents, slugs }: any){
+export default function Class({ links, note, contents, slugs, heading1: heading1, heading2: heading2 }: any){
     const [auth, setAuth] = useState(true)
     useEffect( () => {
         const token = localStorage.getItem("token")
         if (!token){
             setAuth(false)
         }
-        axios.post("https://nvb_backend-1-z3745144.deta.app/study/class", { "path": slugs.join("/")}, { headers: {"Authorization": token}})
-    }, [slugs])
+        axios.post("https://nvb_backend-1-z3745144.deta.app/study/class", { "path": "/class/" + slugs.join("/"), "heading1": heading1, "heading2": heading2}, { headers: {"Authorization": token}})
+    }, [slugs, heading1, heading2])
     if (!auth){
         return <AuthDialog/>
     }
