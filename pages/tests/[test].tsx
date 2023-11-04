@@ -15,8 +15,8 @@ import { useRouter } from "next/router";
 import AuthDialog from "../../components/authdialog";
 
 export const getStaticPaths = (async () => {
-    const links = ["/tests/1"]
-    for (let i=2;i<26;i++){
+    const links = ["/tests/0"]
+    for (let i=1;i<20;i++){
         links.push(`/tests/${i}`)
     }
     return {
