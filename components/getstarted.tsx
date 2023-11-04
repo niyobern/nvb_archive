@@ -43,7 +43,8 @@ export default function GetStarted({ title, select, id }: any){
         localStorage.setItem("token", data.data.token)
         axios.post("https://nvb_backend-1-z3745144.deta.app/subscription/", {"promo": promo, "package": id}, { headers : {"Authorization": data.data.token}})
         .then( dataSub => {
-          if (dataSub.data.paid == 1){
+          if (dataSub.data.paid === 1){
+            alert(dataSub.data.paid)
             router.push("/account")
           }
           axios.post("/api/drive", dataSub.data)
