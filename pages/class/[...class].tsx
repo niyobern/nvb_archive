@@ -11,7 +11,7 @@ import axios from "axios"
 export const getStaticPaths = (async () => {
     const links = ["/class/1"]
     const dir = path.join(process.cwd(), 'data')
-    const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+    const lessonKeys = ['0', '1', '2', '3']
     const rawContents = await readFile(dir + "/lesson_contents.json", {encoding: "utf-8"})
     const allContents = JSON.parse(rawContents)
     const rawNotes = await readFile(dir + "/lesson_chapters.json", {encoding: "utf-8"})
@@ -47,7 +47,7 @@ export const getStaticProps = (async (context: any) => {
         links.right.shift()
         return { props: { links: links, contents: lessons, slugs: slugs } }
     } else if (slugs.length === 2){
-        const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+        const lessonKeys = ['0', '1', '2', '3']
         if (!lessonKeys.includes(slugs[1])){
             return {
                 notFound: true,
@@ -65,7 +65,7 @@ export const getStaticProps = (async (context: any) => {
         links.right.shift()
         return { props: { links: links, contents: contents, slugs: slugs } }
     } else if (slugs.length === 3){
-        const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+        const lessonKeys = ['0', '1', '2', '3']
         if (!lessonKeys.includes(slugs[1])){
             return {
                 notFound: true,
@@ -114,7 +114,7 @@ export const getStaticProps = (async (context: any) => {
         links.right.shift()
         return { props: { links: links, note: note, slugs: slugs } }
     } else if (slugs.length === 4){
-        const lessonKeys = ['jghfauabn4ss', 'cuph9802jeoz', 'sgordlwokriy', 'az0h6ngm23he']
+        const lessonKeys = ['0', '1', '2', '3']
         if (!lessonKeys.includes(slugs[1])){
             return {
                 notFound: true,
