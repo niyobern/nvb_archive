@@ -29,7 +29,7 @@ export const getStaticProps = (async (context: any) => {
     const slug = Number(context.params.test)
     const rawLessons = await readFile(dir + "/lessons.json", {encoding: "utf-8"})
     const lessons = JSON.parse(rawLessons)
-    const rawQuestions = await readFile(dir + `/tests/${slug -1 }.json`, {encoding: "utf-8"})
+    const rawQuestions = await readFile(dir + `/tests/${slug}.json`, {encoding: "utf-8"})
     const questions = JSON.parse(rawQuestions)
     const links = {left: [{text: "", link: ""}], right: [{text: "", link: ""}]}
     lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
