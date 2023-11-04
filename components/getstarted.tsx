@@ -47,15 +47,17 @@ export default function GetStarted({ title, select, id }: any){
             alert("Your account is activated")
             router.push("/account")
           }
-          axios.post("/api/drive", dataSub.data)
-          .then( (flutterwave) => {
-              setPay(flutterwave.data.meta.authorization.redirect)
-              router.push("/account")
-          })
-          .catch( err => {
-            setLoading(false)
-            console.log(err)
-          })
+          else {
+            axios.post("/api/drive", dataSub.data)
+            .then( (flutterwave) => {
+                setPay(flutterwave.data.meta.authorization.redirect)
+                router.push("/account")
+            })
+            .catch( err => {
+              setLoading(false)
+              console.log(err)
+            })
+        }
         })
         .catch( err => {
           setLoading(false)
