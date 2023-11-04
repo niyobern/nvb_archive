@@ -40,10 +40,16 @@ export const getStaticProps = (async (context: any) => {
 })
 export default function Ibazwa({ links, questions, slug }: any){
     const [start, setStart] = useState(0)
+    const [score, setScore] = useState(0)
+    const [answers, setAnswers] = useState([0]) 
+    const [submit, setSubmit] = useState(false)
+    const [consent, setConsent] = useState(false)
+    const [count, setCount] = useState(0)
+    const [auth, setAuth] = useState(true)
+    const router = useRouter()
     if (start === -1){
         handleSubmit(1, false)
     }
-    const [auth, setAuth] = useState(true)
     useEffect( () => {
         const token = localStorage.getItem("token")
         if (!token){
@@ -55,11 +61,7 @@ export default function Ibazwa({ links, questions, slug }: any){
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     const updatedLinks = {...links}
     updatedLinks.right = []
-    const router = useRouter()
     numbers.forEach(item => updatedLinks.right.push({text: `Isuzumabumenyi #${item}`, link: `/tests/${item}`}))
-    
-    const [consent, setConsent] = useState(false)
-    const [score, setScore] = useState(0)
 
     useEffect(() => {
         setConsent(false);
@@ -68,10 +70,6 @@ export default function Ibazwa({ links, questions, slug }: any){
         setSubmit(false)
     }, [slug])
 
-    const [count, setCount] = useState(0)
-    const [answers, setAnswers] = useState([0])
-
-    const [submit, setSubmit] = useState(false)
     if (!auth){
         return <AuthDialog/>
     }
@@ -127,7 +125,7 @@ export default function Ibazwa({ links, questions, slug }: any){
             setConsent(false);
             setCount(0);
             setAnswers([0])
-            axios.post("https://nvb_backend-1-z3745144.deta.app/study/test/end", {"test_id": slug, "marks": score}, { headers: {"Authorization": token}})
+            axios.post("https://nvb_backend-1-z3745144.deta.app/study/end", {"test_id": slug, "marks": score}, { headers: {"Authorization": token}})
             router.push(`/results/${slug}`)
         }
     }
