@@ -171,20 +171,18 @@ export const getStaticProps = (async (context: any) => {
 })
 export default function Class({ links, note, contents, slugs, heading1: heading1, heading2: heading2 }: any){
     const [auth, setAuth] = useState(true)
-    const [jwt, setJwt] = useState("")
     useEffect( () => {
         const token = localStorage.getItem("token")
         if (!token){
             setAuth(false)
         } else {
-            setJwt(token)
+            axios.post("https://nvb_backend-1-z3745144.deta.app/study/", { path: "/class/" + slugs.join("/"), heading1: heading1, heading2: heading2}, { headers: {"Authorization": token}})      
         }
     }, [slugs, heading1, heading2])
     if (!auth){
         return <AuthDialog/>
     }
     if (note){
-        axios.post("https://nvb_backend-1-z3745144.deta.app/study/", { path: "/class/" + slugs.join("/"), heading1: heading1, heading2: heading2}, { headers: {"Authorization": jwt}})      
         return (
             <Layout links={links}>
                 <div className="bg-teal-100 px-1 md:px-10 flex fex-col justify-center py-4 flex-col gap-6 md:gap-4 h-full">
