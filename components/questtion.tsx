@@ -7,10 +7,10 @@ export default function Question({ question, count, answer, test }:any) {
                 <div className="rounded bg-white shadow-lg shadow-gray-400 p-4 flex flex-col">
                     <span className="text-2xl font-medium text-teal-900 text-center">Question {count + 1}</span>
                     <p className="text-justify">{question.question}</p>
-                { question.image && <Image src={`../public/images/images/${question.image}`} alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center w-full"/>}
+                { question.image && <Image src={question.image} alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center w-full"/>}
                     <div className="flex flex-col gap-2 mt-2 h-fit">
-                        {question.options && question.options.map((item: any, index: number) => <div onClick={() => answer(count, index + 1, 1)} key={index} className={`${item === "" ? "hidden" : "active:text-white"} bg-gray-200 rounded p-2 hover:bg-gray-300 hover:shadow-lg active:text-white cursor-pointer`}>{item}</div>)}
-                        { question.images && question.images.map((item: any, index: any) => <Image key={index} src={`../public/images/images/${item}`} alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center w-full"/>)}
+                        {question.answers && question.answers[0] !== "https://d1yurxstr9hyp.cloudfront.net/28a0bf05-0d43-4b5e-a9ec-3158030158bb/2351.png" && question.answers.map((item: any, index: number) => <div onClick={() => answer(count, index + 1, 1)} key={index} className={`${item === "" ? "hidden" : "active:text-white"} bg-gray-200 rounded p-2 hover:bg-gray-300 hover:shadow-lg active:text-white cursor-pointer`}>{item}</div>)}
+                        {question.answers && question.answers[0] === "https://d1yurxstr9hyp.cloudfront.net/28a0bf05-0d43-4b5e-a9ec-3158030158bb/2351.png" && question.answers.map((item: any, index: any) => <Image key={index} src={item} alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center w-full"/>)}
                     </div>
                 </div>
             </div>
