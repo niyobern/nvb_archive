@@ -64,13 +64,13 @@ export default function Ibazwa({ links, questions, slug }: any){
     updatedLinks.right = []
     numbers.forEach(item => updatedLinks.right.push({text: `Isuzumabumenyi #${item}`, link: `/tests/${item-1}`}))
 
-    // useEffect(() => {
-    //     setConsent(false);
-    //     setCount(0);
-    //     setAnswers([0])
-    //     setSubmit(false)
-    //     setStart(0)
-    // }, [slug])
+    useEffect(() => {
+        setConsent(false);
+        setCount(0);
+        setAnswers([0])
+        setSubmit(false)
+        setStart(0)
+    }, [slug])
 
     if (!auth){
         return <AuthDialog/>
