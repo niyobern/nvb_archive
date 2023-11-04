@@ -5,7 +5,6 @@ import useAuth from '../hooks/auth';
 function MyApp({ Component, pageProps }: AppProps) {
     useAuth()
     
-
   return (
       <Component {...pageProps}/>
   )

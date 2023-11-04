@@ -29,7 +29,7 @@ export default async function useAuth(){
                 return
             }
             const active = localStorage.getItem("active") || "0"
-            if (active == "0" && router.pathname !== "/account"){
+            if (authenticated && active == "0" && router.pathname !== "/account"){
                 router.push("/account")
             }
         }, 60000)
