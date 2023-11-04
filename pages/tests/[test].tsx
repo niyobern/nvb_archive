@@ -78,7 +78,7 @@ export default function Ibazwa({ links, questions, slug }: any){
     if (!consent){
         return (
         <Layout links={updatedLinks}>
-            <div className="absolute w-full h-full top-8 md:top-16 left-0 flex flex-col items-center">
+            <div className="absolute w-full h-screen top-8 md:top-16 left-0 flex flex-col items-center">
                 <div className="bg-white flex flex-col h-fit">
                     <Image src={test} width={500} height={500} alt="thumbnail" className="w-full"/>
                 </div>
@@ -110,7 +110,7 @@ export default function Ibazwa({ links, questions, slug }: any){
         }
         if (index <= 0 && move < 0){
             return
-        } else if (index >= 19 && move > 0){
+        } else if (index >= questions.length - 1 && move > 0){
             setSubmit(true)
         } else { setCount(index + move) 
         }
