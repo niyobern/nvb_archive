@@ -38,6 +38,7 @@ export default function Account({ links }: any){
         const token = localStorage.getItem("token")
         if (!token){
             setAuth(false)
+            return
         }
         axios.get("https://nvb_backend-1-z3745144.deta.app/users/details", { headers: {'Authorization': token}})
         .then((res: any) => {

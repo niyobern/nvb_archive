@@ -23,6 +23,7 @@ export default async function useAuth(){
     const router = useRouter()
     useEffect( () => {
         setInterval( () => {
+            fetchToken()
             const authenticated = localStorage.getItem("token")
             if (!authenticated){
                 setAuth(false)
@@ -32,6 +33,6 @@ export default async function useAuth(){
             if (authenticated && active == "0" && router.pathname !== "/account"){
                 router.push("/account")
             }
-        }, 60000)
+        }, 10000)
     })
 }
