@@ -29,7 +29,7 @@ export default function LoginComponent(){
     .then( data => {
       const token = data.data.token
       window.localStorage.setItem("token", token)
-      router.push("/subukura")
+      router.push("/account")
     }).catch(err => alert("Invalid Credentials"))
   }
     return (

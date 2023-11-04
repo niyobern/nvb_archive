@@ -11,7 +11,6 @@ function fetchToken(){
     axios.post(url, {}, { headers: {"Authorization": token}})
     .then( (data) => {
         localStorage.setItem("active", data.data.active)
-        console.log(data.data)
     })
     .catch( () => {
         window.localStorage.removeItem("token")
