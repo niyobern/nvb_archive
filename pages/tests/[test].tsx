@@ -39,7 +39,7 @@ export const getStaticProps = (async (context: any) => {
     return { props: { links: links, questions: questions, slug } }
 })
 export default function Ibazwa({ links, questions, slug }: any){
-    const [start, setStart] = useState(0)
+    const [start, setStart] = useState(Date.now())
     const [score, setScore] = useState(0)
     const [answers, setAnswers] = useState([0]) 
     const [submit, setSubmit] = useState(false)
@@ -47,17 +47,18 @@ export default function Ibazwa({ links, questions, slug }: any){
     const [count, setCount] = useState(0)
     const [auth, setAuth] = useState(true)
     const router = useRouter()
-    if (start === -1){
-        handleSubmit(1, false)
-    }
+    const duration = 20*60*1000
     useEffect( () => {
         const token = localStorage.getItem("token")
         if (!token){
             setAuth(false)
         }
-        axios.get("https://nvb_backend-1-z3745144.deta.app/study/start", { headers: {"Authorization": token}})
-        .then( res => setStart(res.data))
-    }, [])
+        const time = localStorage.getItem("start") || String(Date.now())
+        setStart(Number(time))
+        if (start + duration < Date.now()){
+            setSubmit(true)
+        }
+    }, [duration, start])
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     const updatedLinks = {...links}
     updatedLinks.right = []
@@ -92,12 +93,9 @@ export default function Ibazwa({ links, questions, slug }: any){
         )
     }
 
-    const duration = 20*60*1000
     function startTest(){
         setConsent(true)
-        const token = localStorage.getItem("token") || ""
-        axios.post("https://nvb_backend-1-z3745144.deta.app/study/test/start", {"time": Date.now()}, { headers: {"Authorizaton": token}})
-        .then( res => console.log(res.data))
+        localStorage.setItem("start", String(Date.now()))
     }
     function answer(index: number, choice: number, move: number =  1, target: number = -1){
         if (choice === questions[index].answer){
@@ -112,7 +110,7 @@ export default function Ibazwa({ links, questions, slug }: any){
         if (index <= 0 && move < 0){
             return
         } else if (index >= 19 && move > 0){
-            handleSubmit(1)
+            setSubmit(true)
         }
         setCount(index + move)
     }

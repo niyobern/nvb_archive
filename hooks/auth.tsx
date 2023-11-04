@@ -13,6 +13,7 @@ function fetchToken(){
         localStorage.setItem("active", data.data.active)
     })
     .catch( () => {
+        alert("failed auth")
         window.localStorage.removeItem("token")
     })
     return

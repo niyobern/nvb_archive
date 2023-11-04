@@ -17,7 +17,7 @@ export default function Indicator({ start, duration }: any){
         return pad(hrs, 2) + ':' + pad(mins, 2) + ':' + pad(secs, 2);
       }
       
-    const [percentage, setPercentage] = useState(0)
+    const [percentage, setPercentage] = useState(0.01)
     useEffect(
         () => {
             setTimeout( () => {
@@ -30,6 +30,8 @@ export default function Indicator({ start, duration }: any){
             }, 500)
         }
     )
+    console.log(start, "start")
+    console.log(percentage, "percentage")
     return (
         <div className="flex flex-col">
             <div className="flex flex-row justify-between">
