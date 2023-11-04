@@ -39,7 +39,7 @@ export const getStaticProps = (async (context: any) => {
     return { props: { links: links, questions: questions, slug } }
 })
 export default function Ibazwa({ links, questions, slug }: any){
-    const [start, setStart] = useState(Date.now())
+    const [start, setStart] = useState(0)
     const [score, setScore] = useState(0)
     const [answers, setAnswers] = useState([0]) 
     const [submit, setSubmit] = useState(false)
@@ -55,21 +55,22 @@ export default function Ibazwa({ links, questions, slug }: any){
         }
         const time = localStorage.getItem("start") || String(Date.now())
         setStart(Number(time))
-        if (start + duration < Date.now()){
+        if (Number(time) + duration < Date.now()){
             setSubmit(true)
         }
-    }, [duration, start])
+    }, [start, duration, submit])
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     const updatedLinks = {...links}
     updatedLinks.right = []
     numbers.forEach(item => updatedLinks.right.push({text: `Isuzumabumenyi #${item}`, link: `/tests/${item}`}))
 
-    useEffect(() => {
-        setConsent(false);
-        setCount(0);
-        setAnswers([0])
-        setSubmit(false)
-    }, [slug])
+    // useEffect(() => {
+    //     setConsent(false);
+    //     setCount(0);
+    //     setAnswers([0])
+    //     setSubmit(false)
+    //     setStart(0)
+    // }, [slug])
 
     if (!auth){
         return <AuthDialog/>
@@ -111,27 +112,29 @@ export default function Ibazwa({ links, questions, slug }: any){
             return
         } else if (index >= 19 && move > 0){
             setSubmit(true)
+        } else { setCount(index + move) 
         }
-        setCount(index + move)
     }
     function handleSubmit(a: number = 1, b: boolean = true){
         a && window.localStorage.setItem(`test${slug}`, JSON.stringify(answers))
         a && window.localStorage.setItem(`test${slug}_score`, JSON.stringify(score))
         const token = localStorage.getItem("token")
         setSubmit(b)
-        if (a && !submit){
-            setConsent(false);
-            setCount(0);
-            setAnswers([0])
+        if (a && !b){
             axios.post("https://nvb_backend-1-z3745144.deta.app/study/end", {"test_id": slug, "marks": score}, { headers: {"Authorization": token}})
             router.push(`/results/${slug}`)
+            window.location.assign(`/results/${slug}`)
+            // setConsent(false);
+            // setCount(0);
+            // setAnswers([0])
+            // localStorage.removeItem("start")
         }
     }
 
     return (
         <Layout links={updatedLinks}>
             <div className="bg-teal-100 px-1 gap-4 md:px-10 py-2 md:py-4 flex flex-col min-h-screen">
-                <Indicator start={start} duration={duration}/>
+                {start !== 0 && <Indicator start={start} duration={duration}/>}
                 <Count questions={answers} move={answer} count={count} total={questions.length}/>
                 <Question question={questions[count]} count={count} answer={answer} test={true}/>
                 <Navigate test={true} move={answer} index={count} currentAnswer={answers[count] || 0}/>
