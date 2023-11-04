@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports= {
   images: {
-    domains: ["nvb_backend-1-z3745144.deta.app"]
+    domains: ["d1yurxstr9hyp.cloudfront.net"]
   },
   reactStrictMode: true,
 }
