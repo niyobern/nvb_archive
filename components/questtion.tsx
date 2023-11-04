@@ -9,8 +9,8 @@ export default function Question({ question, count, answer, test }:any) {
                     <p className="text-justify">{question.question}</p>
                 { question.image && <Image priority={true} src={question.image} alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center w-fit"/>}
                     <div className="flex flex-col gap-2 mt-2 h-fit">
-                        {question.answers && question.answers[0] !== "https://d1yurxstr9hyp.cloudfront.net/28a0bf05-0d43-4b5e-a9ec-3158030158bb/2351.png" && question.answers.map((item: any, index: number) => <div onClick={() => answer(count, index + 1, 1)} key={index} className={`${item === "" ? "hidden" : "active:text-white"} bg-gray-200 rounded p-2 hover:bg-gray-300 hover:shadow-lg active:text-white cursor-pointer`}>{item}</div>)}
-                        {question.answers && question.answers[0] === "https://d1yurxstr9hyp.cloudfront.net/28a0bf05-0d43-4b5e-a9ec-3158030158bb/2351.png" && question.answers.map((item: any, index: any) => <Image priority={true} onClick={() => answer(count, index + 1, 1)} key={index} src={item} alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center w-fit"/>)}
+                        {question.answers && question.answers[0].slice(0,36) !== "https://d1yurxstr9hyp.cloudfront.net" && question.answers.map((item: any, index: number) => <div onClick={() => answer(count, index + 1, 1)} key={index} className={`${item === "" ? "hidden" : "active:text-white"} bg-gray-200 rounded p-2 hover:bg-gray-300 hover:shadow-lg active:text-white cursor-pointer`}>{item}</div>)}
+                        {question.answers && question.answers[0].slice(0,36) === "https://d1yurxstr9hyp.cloudfront.net" && question.answers.map((item: any, index: any) => <Image priority={true} onClick={() => answer(count, index + 1, 1)} key={index} src={item} alt="Image" height={500} width={500} className="h-48 md:h-64 rounded-sm self-center w-fit"/>)}
                     </div>
                 </div>
             </div>
