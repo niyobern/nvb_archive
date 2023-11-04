@@ -159,7 +159,7 @@ export const getStaticProps = (async (context: any) => {
             note["prev"] = link
         }
         lessons.forEach((item: any) => links.left.push({text: item.title, link: `/class/1/${item.key}`}))
-        contents.forEach((content: any) => links.right.push({text: content.title, link: `/class/1/${slugs[1]}/${content.key}`}))
+        contents.forEach((content: any) => links.right.push({text: content.item, link: `/class/1/${slugs[1]}/${content.key}`}))
         links.left.shift()
         links.right.shift()
         return { props: { links: links, note: note, slugs: slugs } }
