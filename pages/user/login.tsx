@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { handle, json, redirect } from 'next-runtime';
 import { useFormSubmit, Form } from 'next-runtime/form';
 import LoginComponent from '../../components/LoginComponent';
 import Image from 'next/image';
@@ -20,7 +19,7 @@ export default function Home() {
       setShow(true)
     };
     if (form.isSuccess){
-      router.push("/subukura")
+      router.push("/account")
     }
   }, [form, router]);
   function handleShow(){
