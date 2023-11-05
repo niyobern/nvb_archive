@@ -51,7 +51,6 @@ export default function GetStarted({ title, select, id }: any){
             axios.post("/api/drive", dataSub.data)
             .then( (flutterwave) => {
                 setPay(flutterwave.data.meta.authorization.redirect)
-                router.push("/account")
             })
             .catch( err => {
               setLoading(false)
@@ -74,6 +73,10 @@ export default function GetStarted({ title, select, id }: any){
   }
   function handleShow(){
     setShow(false)
+  }
+  function paying(){
+    window.open(pay,'_blank', 'width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0,modal=yes')
+    router.push("/account")
   }
     return (
         <div className="fixed top-0 left-0 w-screen h-screen">
@@ -130,7 +133,7 @@ export default function GetStarted({ title, select, id }: any){
                       colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
                     />
                     {pay === "" && <span className="text-teal-800 text-xl font-medium">We are configuring your account</span>}
-                    {pay !== "" && <button onClick={() => window.open(pay,'_blank', 'width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0,modal=yes')} className="rounded mb-4 bg-teal-600 px-4 py-2 hover:bg-teal-700 pointer-cursor">Continue to pay</button>}
+                    {pay !== "" && <button onClick={paying} className="rounded mb-4 bg-teal-600 px-4 py-2 hover:bg-teal-700 pointer-cursor">Continue to pay</button>}
                   </div>
                 </div>
             </div>
