@@ -7,7 +7,7 @@ export default function SubmitDialog( { submit, id }: any){
                 <div className="flex gap-8 justify-center">
                     <div onClick={() => submit(0, false)} className="text-white font-semibold text-2xl bg-gray-400 px-4 py-2 hover:bg-gray-600 w-fit self-center cursor-pointer">Bireke</div>
                     <div onClick={() => submit(1, false)} className="text-white font-semibold text-2xl bg-teal-800 px-4 py-2 hover:bg-green-700 w-fit self-center cursor-pointer">Reba amanota</div>
-                    <Link href={`/tests/${id}`} className="text-white font-semibold text-2xl bg-teal-800 px-4 py-2 hover:bg-green-700 w-fit self-center cursor-pointer">Subiramo</Link>
+                    {/* <Link href={`/tests/${id}`} className="text-white font-semibold text-2xl bg-teal-800 px-4 py-2 hover:bg-green-700 w-fit self-center cursor-pointer">Subiramo</Link> */}
                 </div>
             </div>
         </div>
