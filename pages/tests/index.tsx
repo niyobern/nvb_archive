@@ -26,7 +26,7 @@ export default function Tests( { links }: any){
     numbers.forEach(item => updatedLinks.right.push({text: `Isuzumabumenyi #${item}`, link: `/tests/${item - 1}`}))
     function handleClick(item: number){
         setModal(!modal)
-        setFocused(item)
+        setFocused(item - 1)
     }
     const [modal, setModal] = useState(false)
     const [focused, setFocused] = useState(0)
