@@ -139,7 +139,7 @@ export default function Ibazwa({ links, questions, slug }: any){
                 <Question question={questions[count]} count={count} answer={answer} test={true}/>
                 <Navigate test={true} move={answer} index={count} currentAnswer={answers[count] || 0}/>
             </div>
-            <div className={`${submit ? "flex": "hidden"}`}><SubmitDialog submit={handleSubmit}/></div>
+            <div className={`${submit ? "flex": "hidden"}`}><SubmitDialog submit={handleSubmit} id={slug}/></div>
         </Layout>
     )
 }
