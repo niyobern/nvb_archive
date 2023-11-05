@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import useAuth from '../hooks/auth';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    useAuth()
+  useAuth()
     
   return (
       <Component {...pageProps}/>
