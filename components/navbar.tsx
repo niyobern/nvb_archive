@@ -5,8 +5,8 @@ import axios from "axios"
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default function NavBar({ language }: any){
-    const menu = ["", "amasomo", "Isubukura", "Isuzumabumenyi", "Ikofi", "Konti Yanjye"]
-    const links = ["", "class/1", "subukura", "tests", "ikofi", "account"]
+    const menu = ["", "amasomo",  "Isuzumabumenyi", "Konti Yanjye", "Sohoka"]
+    const links = ["", "class/1",  "tests", "account", "logout"]
     const router = useRouter()
     const route = router.pathname.slice(1)
     const [lang, setLang] = useState(language)
@@ -43,10 +43,10 @@ export default function NavBar({ language }: any){
                   <div className={`${route === item ? "bg-teal-500 text-white px-2 py-1" : "text-teal-800"} capitalize hover:px-2 py-1 rounded hover:text-white hover:bg-teal-600 text-xl font-medium text-nowrap`}>{item === "" ? "Ahabanza" : item}</div>
               </Link>
             )))}
-            <div onClick={changeLang} className="group flex gap-2 rounded">
+            {/* <div onClick={changeLang} className="group flex gap-2 rounded">
               <span className="hidden text-blue-900 group-hover:flex text-center">{lang == "gb" ? "English" : "Kinyarwanda"}</span>
               <span className={`fi fi-${lang} text-2xl`}/>
-            </div>
+            </div> */}
         </div>
         <div className="px-4 flex md:hidden justify-between h-12 w-full">
             <Link passHref={true} href="/" className="group flex flex-col relative justify-center self-center hover:self-end items-center">
