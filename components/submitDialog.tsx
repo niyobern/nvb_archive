@@ -1,3 +1,4 @@
+import Link from "next/link"
 export default function SubmitDialog( { submit, id }: any){
     return (
         <div className="absolute top-0 left-0 flex flex-col justify-center items-center w-full h-full">
